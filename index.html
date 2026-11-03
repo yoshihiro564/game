@@ -1,11 +1,11 @@
-<!doctype html>
+ <!doctype html>
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>マーブルレース工房</title>
 <style>
 :root{--bg:#0e1020;--panel:#171a33;--line:#2a2f55;--txt:#e8ebff;--sub:#9aa3c7;--acc:#5cc8ff;--acc2:#ffcf4a}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.6 system-ui,-apple-system,"Segoe UI","Hiragino Sans","Yu Gothic UI",sans-serif}
-header{padding:18px 20px 6px}header h1{margin:0;font-size:22px;letter-spacing:.04em}header p{margin:4px 0 0;color:var(--sub);font-size:13px}
-.wrap{display:grid;grid-template-columns:minmax(320px,440px) 1fr;gap:16px;padding:12px 20px 30px;align-items:start}
+header{padding:18px 20px 6px}header h1{margin:0;font-size:22px;letter-spacing:.04em}header h1 span{font-size:12px;color:var(--acc2);border:1px solid var(--acc2);border-radius:6px;padding:1px 6px;margin-left:8px;vertical-align:middle}header p{margin:4px 0 0;color:var(--sub);font-size:13px}
+.wrap{display:grid;grid-template-columns:minmax(320px,460px) 1fr;gap:16px;padding:12px 20px 30px;align-items:start}
 @media(max-width:900px){.wrap{grid-template-columns:1fr;padding:10px 12px}}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 14px 12px;margin-bottom:12px}
 .card h2{font-size:15px;margin:0 0 8px;display:flex;justify-content:space-between;align-items:baseline}.card h2 small{color:var(--sub);font-weight:500;font-size:12px}
@@ -14,22 +14,23 @@ header{padding:18px 20px 6px}header h1{margin:0;font-size:22px;letter-spacing:.0
 .chip{display:flex;align-items:center;gap:6px;background:#0f1230;border:1px solid var(--line);color:var(--sub);border-radius:999px;padding:3px 10px 3px 4px;font-size:12px;cursor:pointer}
 .chip.on{border-color:var(--acc);color:#fff;background:#14305a}.fl{width:20px;height:20px;border-radius:50%;background-size:cover;background-position:center;display:inline-block}
 .stg{display:grid;grid-template-columns:24px 1fr 30px 30px 30px;gap:6px;align-items:center;background:#0f1230;border:1px solid var(--line);border-radius:9px;padding:5px 8px;margin-bottom:5px}
-.stg b{color:var(--acc2)}.stg small{display:block;color:var(--sub);font-size:11px}.stg button{background:#1d2148;border:1px solid var(--line);color:var(--txt);border-radius:7px;height:28px;cursor:pointer}
+.stg b{color:var(--acc2)}.stg i{font-style:normal;font-size:10px;font-weight:800;color:#04122a;background:var(--acc2);border-radius:4px;padding:0 4px;margin-left:4px}.stg small{display:block;color:var(--sub);font-size:11px}.stg button{background:#1d2148;border:1px solid var(--line);color:var(--txt);border-radius:7px;height:28px;cursor:pointer}
 select,input[type=text],input[type=number]{width:100%;background:#0f1230;color:var(--txt);border:1px solid var(--line);border-radius:9px;padding:7px 9px;font:inherit}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.row label{font-size:12px;color:var(--sub)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.row label,.lbl{font-size:12px;color:var(--sub)}
 .btn{display:inline-block;background:#1d2148;border:1px solid var(--line);color:var(--txt);border-radius:10px;padding:9px 14px;font:inherit;font-weight:700;cursor:pointer;text-decoration:none}
 .btn.primary{background:linear-gradient(135deg,#2d7dff,#5cc8ff);border:0;color:#04122a}.btn.gold{background:linear-gradient(135deg,#ffb83d,#ffe17a);border:0;color:#2a1800}.btn:disabled{opacity:.5}
-.bar{height:8px;background:#0f1230;border-radius:9px;overflow:hidden;margin:10px 0 4px}#prog{height:100%;width:0;background:linear-gradient(90deg,#2d7dff,#5cc8ff)}#progTxt,.hint{color:var(--sub);font-size:12px;margin:0}
+.bar{height:8px;background:#0f1230;border-radius:9px;overflow:hidden;margin:10px 0 4px}#prog,#prog2{height:100%;width:0;background:linear-gradient(90deg,#2d7dff,#5cc8ff)}#prog2{background:linear-gradient(90deg,#ffb83d,#ffe17a)}#progTxt,.hint{color:var(--sub);font-size:12px;margin:0}
 table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}th,td{padding:6px 4px;border-bottom:1px solid var(--line);text-align:left}th{color:var(--sub);font-weight:600}tr[data-k]{cursor:pointer}tr.sel{background:#14305a}
 .view{position:sticky;top:10px;display:flex;flex-direction:column;align-items:center;gap:10px}
 canvas{height:min(74vh,960px);aspect-ratio:9/16;border-radius:14px;border:1px solid var(--line);background:#000;max-width:100%}
 @media(max-width:900px){canvas{height:auto;width:100%}}
-.ctrls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}#recState{color:var(--acc2);font-size:13px;min-height:20px}
+.ctrls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}#recState{color:var(--acc2);font-size:13px;min-height:20px;text-align:center}.view .bar{width:min(520px,100%)}
 .tb{background:#0f1230;border:1px solid var(--line);border-radius:10px;margin-top:8px}.tbh{display:flex;justify-content:space-between;align-items:center;padding:6px 10px}.tbh h3{margin:0;font-size:13px}.tbh button{background:#1d2148;border:1px solid var(--line);color:var(--txt);border-radius:7px;padding:3px 10px;cursor:pointer}
 pre{margin:0;padding:0 10px 10px;white-space:pre-wrap;word-break:break-word;font:12px/1.55 ui-monospace,Consolas,monospace;color:#cfd6ff}
-.chk{display:flex;align-items:center;gap:8px;margin-top:8px}
+.chk{display:flex;align-items:center;gap:8px;margin-top:8px}.chk small{color:var(--sub)}
+input[type=range]{accent-color:var(--acc)}
 </style></head><body>
-<header><h1>🏁 マーブルレース工房</h1><p>出場者とステージを選ぶ → 接戦レースを自動で探す → 動画を書き出す。タイトル・説明文・タグも自動で作ります。</p></header>
+<header><h1>🏁 マーブルレース工房<span>v2・60fps</span></h1><p>出場者とステージを選ぶ → 接戦レースを自動で探す → 60fpsのMP4を書き出す。BGM・登録エンドカード・投稿テキストもまとめて作ります。</p></header>
 <div class="wrap">
 <div>
  <div class="card"><h2>① 出場者 <small id="racerCount"></small></h2>
@@ -38,24 +39,32 @@ pre{margin:0;padding:0 10px 10px;white-space:pre-wrap;word-break:break-word;font
  <div class="card"><h2>② ステージ <small id="stageInfo"></small></h2>
   <div id="stages"></div>
   <div class="row"><select id="addStage"></select><button class="btn" id="shuffle">🎲 おまかせ構成</button></div>
+  <p class="hint" style="margin-top:6px">★NEW＝落とし扉・スライドバンパー・コンベア分岐・フリッパー・ブレンダー</p>
   <label class="chk"><input type="checkbox" id="elim"> 脱落制（ステージごとに最下位が脱落、最後は3人で決勝）</label></div>
- <div class="card"><h2>③ 見た目</h2>
-  <div class="row"><div><label>テーマ</label><select id="theme"></select></div><div><label>画面上の見出し</label><input type="text" id="title" value="Which country wins?"></div></div></div>
- <div class="card"><h2>④ レースを探す</h2>
+ <div class="card"><h2>③ 見た目と文言</h2>
+  <div class="row"><div><label>テーマ</label><select id="theme"></select></div><div><label>画面上の見出し</label><input type="text" id="title" value="Which country wins?"></div></div>
+  <div class="row"><div><label>冒頭の呼びかけ</label><input type="text" id="pick" value="PICK YOUR COUNTRY!"></div><div><label>エンドカードの文言</label><input type="text" id="endText" value="Subscribe for the next race!"></div></div></div>
+ <div class="card"><h2>④ 演出とBGM</h2>
+  <label class="chk"><input type="checkbox" id="slowmo" checked> ゴール前スロー <small>接戦のときだけ「PHOTO FINISH」で0.4倍速</small></label>
+  <label class="chk"><input type="checkbox" id="endcard" checked> 登録エンドカード <small>最後に登録ボタンを押す演出＋コメント誘導</small></label>
+  <label class="chk"><input type="checkbox" id="loop" checked> ループつなぎ <small>最後の0.4秒で冒頭画面に溶け込ませる</small></label>
+  <label class="chk"><input type="checkbox" id="bgm" checked> BGM <small>音量</small><input type="range" id="vol" min="0" max="100" value="55" style="flex:1"></label>
+  <p class="hint" style="margin-top:6px">冒頭はカウントダウン＋出場者一覧、途中は首位交代を「NEW LEADER」で表示します。</p></div>
+ <div class="card"><h2>⑤ レースを探す</h2>
   <div class="row"><div><label>試走回数</label><input type="number" id="trials" value="60" min="10" max="400"></div><div><label>動画の最大の長さ（秒）</label><input type="number" id="maxLen" value="58" min="20" max="600"></div></div>
   <div class="row"><div><label>選び方</label><select id="prefer"><option value="close">接戦重視（ゴール差が小さい）</option><option value="swing">逆転重視（首位交代が多い）</option></select></div><div style="display:flex;align-items:end"><button class="btn primary" id="btnSearch" style="width:100%">🔍 レースを探す</button></div></div>
-  <div class="bar"><div id="prog"></div></div><p id="progTxt">Shortsは60秒以内。長いと感じたらステージを減らすか脱落制に。</p>
+  <div class="bar"><div id="prog"></div></div><p id="progTxt">エンドカード込みで60秒以内の候補だけを出します。</p>
   <div id="cands"></div></div>
- <div class="card"><h2>⑤ 投稿用テキスト <small>英語・海外向け</small></h2><div id="textOut"><p class="hint">レースを選ぶと自動で作成されます。</p></div></div>
+ <div class="card"><h2>⑥ 投稿用テキスト <small>英語・海外向け</small></h2><div id="textOut"><p class="hint">レースを選ぶと自動で作成されます。</p></div></div>
 </div>
 <div class="view">
  <canvas id="cv" width="1080" height="1920"></canvas>
- <div class="ctrls"><button class="btn" id="btnPlay">▶ プレビュー</button><button class="btn" id="btnStop">■ 停止</button><button class="btn gold" id="btnRec">⏺ 動画を書き出す</button><label class="chk" style="margin:0"><input type="checkbox" id="mute"> 消音</label></div>
+ <div class="ctrls"><button class="btn" id="btnPlay">▶ プレビュー</button><button class="btn" id="btnStop">■ 停止</button><button class="btn gold" id="btnRec">⏺ MP4を書き出す（60fps）</button><label class="chk" style="margin:0"><input type="checkbox" id="mute"> 消音</label></div>
+ <div class="bar"><div id="prog2"></div></div>
  <div id="recState"></div><div id="dl"></div>
- <p class="hint" style="max-width:520px;text-align:center">書き出しは1コマずつ動画を作る方式なので、PCが遅くても動画は常に正しい速さになります。Chrome/Edgeでは.mp4で保存されます。</p>
+ <p class="hint" style="max-width:540px;text-align:center">書き出しは1コマずつ作るので、PCが遅くても動画は常に60fpsでなめらかです（Chrome / Edge推奨）。非対応のブラウザでは自動でリアルタイム録画に切り替わります。<br><button class="btn" id="btnRT" style="margin-top:6px;padding:5px 10px;font-size:12px">リアルタイム録画で書き出す（予備）</button></p>
 </div></div>
-<script>/*! mp4-muxer & webm-muxer by Vanilagy — MIT License */
-"use strict";
+<script>"use strict";
 var Mp4Muxer = (() => {
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -472,7 +481,46 @@ var Mp4Muxer = (() => {
     i16(65535)
     // Pre-defined
   ], [
-    VIDEO_CODEC_TO_CONFIGURATION_BOX[track.info.codec](track)
+    VIDEO_CODEC_TO_CONFIGURATION_BOX[track.info.codec](track),
+    track.info.decoderConfig.colorSpace ? colr(track) : null
+  ]);
+  var COLOR_PRIMARIES_MAP = {
+    "bt709": 1,
+    // ITU-R BT.709
+    "bt470bg": 5,
+    // ITU-R BT.470BG
+    "smpte170m": 6
+    // ITU-R BT.601 525 - SMPTE 170M
+  };
+  var TRANSFER_CHARACTERISTICS_MAP = {
+    "bt709": 1,
+    // ITU-R BT.709
+    "smpte170m": 6,
+    // SMPTE 170M
+    "iec61966-2-1": 13
+    // IEC 61966-2-1
+  };
+  var MATRIX_COEFFICIENTS_MAP = {
+    "rgb": 0,
+    // Identity
+    "bt709": 1,
+    // ITU-R BT.709
+    "bt470bg": 5,
+    // ITU-R BT.470BG
+    "smpte170m": 6
+    // SMPTE 170M
+  };
+  var colr = (track) => box("colr", [
+    ascii("nclx"),
+    // Colour type
+    u16(COLOR_PRIMARIES_MAP[track.info.decoderConfig.colorSpace.primaries]),
+    // Colour primaries
+    u16(TRANSFER_CHARACTERISTICS_MAP[track.info.decoderConfig.colorSpace.transfer]),
+    // Transfer characteristics
+    u16(MATRIX_COEFFICIENTS_MAP[track.info.decoderConfig.colorSpace.matrix]),
+    // Matrix coefficients
+    u8((track.info.decoderConfig.colorSpace.fullRange ? 1 : 0) << 7)
+    // Full range flag
   ]);
   var avcC = (track) => track.info.decoderConfig && box("avcC", [
     // For AVC, description is an AVCDecoderConfigurationRecord, so nothing else to do here
@@ -899,8 +947,8 @@ var Mp4Muxer = (() => {
       if (options.chunked !== void 0 && typeof options.chunked !== "boolean") {
         throw new TypeError("options.chunked, when provided, must be a boolean.");
       }
-      if (options.chunkSize !== void 0 && (!Number.isInteger(options.chunkSize) || options.chunkSize <= 0)) {
-        throw new TypeError("options.chunkSize, when provided, must be a positive integer.");
+      if (options.chunkSize !== void 0 && (!Number.isInteger(options.chunkSize) || options.chunkSize < 1024)) {
+        throw new TypeError("options.chunkSize, when provided, must be an integer and not smaller than 1024.");
       }
     }
   };
@@ -1054,13 +1102,28 @@ var Mp4Muxer = (() => {
     __privateSet(this, _buffer, newBuffer);
     __privateSet(this, _bytes, newBytes);
   };
-  var _target2, _sections;
+  var DEFAULT_CHUNK_SIZE = 2 ** 24;
+  var MAX_CHUNKS_AT_ONCE = 2;
+  var _target2, _sections, _chunked, _chunkSize, _chunks, _writeDataIntoChunks, writeDataIntoChunks_fn, _insertSectionIntoChunk, insertSectionIntoChunk_fn, _createChunk, createChunk_fn, _flushChunks, flushChunks_fn;
   var StreamTargetWriter = class extends Writer {
     constructor(target) {
       super();
+      __privateAdd(this, _writeDataIntoChunks);
+      __privateAdd(this, _insertSectionIntoChunk);
+      __privateAdd(this, _createChunk);
+      __privateAdd(this, _flushChunks);
       __privateAdd(this, _target2, void 0);
       __privateAdd(this, _sections, []);
+      __privateAdd(this, _chunked, void 0);
+      __privateAdd(this, _chunkSize, void 0);
+      /**
+       * The data is divided up into fixed-size chunks, whose contents are first filled in RAM and then flushed out.
+       * A chunk is flushed if all of its contents have been written.
+       */
+      __privateAdd(this, _chunks, []);
       __privateSet(this, _target2, target);
+      __privateSet(this, _chunked, target.options?.chunked ?? false);
+      __privateSet(this, _chunkSize, target.options?.chunkSize ?? DEFAULT_CHUNK_SIZE);
     }
     write(data) {
       __privateGet(this, _sections).push({
@@ -1097,48 +1160,24 @@ var Mp4Muxer = (() => {
             chunk.data.set(section.data, section.start - chunk.start);
           }
         }
-        __privateGet(this, _target2).options.onData?.(chunk.data, chunk.start);
+        if (__privateGet(this, _chunked)) {
+          __privateMethod(this, _writeDataIntoChunks, writeDataIntoChunks_fn).call(this, chunk.data, chunk.start);
+          __privateMethod(this, _flushChunks, flushChunks_fn).call(this);
+        } else {
+          __privateGet(this, _target2).options.onData?.(chunk.data, chunk.start);
+        }
       }
       __privateGet(this, _sections).length = 0;
     }
     finalize() {
+      if (__privateGet(this, _chunked)) {
+        __privateMethod(this, _flushChunks, flushChunks_fn).call(this, true);
+      }
     }
   };
   _target2 = new WeakMap();
   _sections = new WeakMap();
-  var DEFAULT_CHUNK_SIZE = 2 ** 24;
-  var MAX_CHUNKS_AT_ONCE = 2;
-  var _target3, _chunkSize, _chunks, _writeDataIntoChunks, writeDataIntoChunks_fn, _insertSectionIntoChunk, insertSectionIntoChunk_fn, _createChunk, createChunk_fn, _flushChunks, flushChunks_fn;
-  var ChunkedStreamTargetWriter = class extends Writer {
-    constructor(target) {
-      super();
-      __privateAdd(this, _writeDataIntoChunks);
-      __privateAdd(this, _insertSectionIntoChunk);
-      __privateAdd(this, _createChunk);
-      __privateAdd(this, _flushChunks);
-      __privateAdd(this, _target3, void 0);
-      __privateAdd(this, _chunkSize, void 0);
-      /**
-       * The data is divided up into fixed-size chunks, whose contents are first filled in RAM and then flushed out.
-       * A chunk is flushed if all of its contents have been written.
-       */
-      __privateAdd(this, _chunks, []);
-      __privateSet(this, _target3, target);
-      __privateSet(this, _chunkSize, target.options?.chunkSize ?? DEFAULT_CHUNK_SIZE);
-      if (!Number.isInteger(__privateGet(this, _chunkSize)) || __privateGet(this, _chunkSize) < 2 ** 10) {
-        throw new Error("Invalid StreamTarget options: chunkSize must be an integer not smaller than 1024.");
-      }
-    }
-    write(data) {
-      __privateMethod(this, _writeDataIntoChunks, writeDataIntoChunks_fn).call(this, data, this.pos);
-      __privateMethod(this, _flushChunks, flushChunks_fn).call(this);
-      this.pos += data.byteLength;
-    }
-    finalize() {
-      __privateMethod(this, _flushChunks, flushChunks_fn).call(this, true);
-    }
-  };
-  _target3 = new WeakMap();
+  _chunked = new WeakMap();
   _chunkSize = new WeakMap();
   _chunks = new WeakMap();
   _writeDataIntoChunks = new WeakSet();
@@ -1210,7 +1249,7 @@ var Mp4Muxer = (() => {
       if (!chunk.shouldFlush && !force)
         continue;
       for (let section of chunk.written) {
-        __privateGet(this, _target3).options.onData?.(
+        __privateGet(this, _target2).options.onData?.(
           chunk.data.subarray(section.start, section.end),
           chunk.start + section.start
         );
@@ -1218,7 +1257,7 @@ var Mp4Muxer = (() => {
       __privateGet(this, _chunks).splice(i--, 1);
     }
   };
-  var FileSystemWritableFileStreamTargetWriter = class extends ChunkedStreamTargetWriter {
+  var FileSystemWritableFileStreamTargetWriter = class extends StreamTargetWriter {
     constructor(target) {
       super(new StreamTarget({
         onData: (data, position) => target.stream.write({
@@ -1226,6 +1265,7 @@ var Mp4Muxer = (() => {
           data,
           position
         }),
+        chunked: true,
         chunkSize: target.options?.chunkSize
       }));
     }
@@ -1278,7 +1318,7 @@ var Mp4Muxer = (() => {
       if (options.target instanceof ArrayBufferTarget) {
         __privateSet(this, _writer, new ArrayBufferTargetWriter(options.target));
       } else if (options.target instanceof StreamTarget) {
-        __privateSet(this, _writer, options.target.options?.chunked ? new ChunkedStreamTargetWriter(options.target) : new StreamTargetWriter(options.target));
+        __privateSet(this, _writer, new StreamTargetWriter(options.target));
       } else if (options.target instanceof FileSystemWritableFileStreamTarget) {
         __privateSet(this, _writer, new FileSystemWritableFileStreamTargetWriter(options.target));
       } else {
@@ -1563,6 +1603,9 @@ var Mp4Muxer = (() => {
     } else if (![false, "in-memory", "fragmented"].includes(options.fastStart)) {
       throw new TypeError(`'fastStart' option must be false, 'in-memory', 'fragmented' or an object.`);
     }
+    if (options.minFragmentDuration !== void 0 && (!Number.isFinite(options.minFragmentDuration) || options.minFragmentDuration < 0)) {
+      throw new TypeError(`'minFragmentDuration' must be a non-negative number.`);
+    }
   };
   _writeHeader = new WeakSet();
   writeHeader_fn = function() {
@@ -1773,7 +1816,8 @@ var Mp4Muxer = (() => {
       let currentChunkDuration = sample.presentationTimestamp - track.currentChunk.startTimestamp;
       if (__privateGet(this, _options).fastStart === "fragmented") {
         let mostImportantTrack = __privateGet(this, _videoTrack) ?? __privateGet(this, _audioTrack);
-        if (track === mostImportantTrack && sample.type === "key" && currentChunkDuration >= 1) {
+        const chunkDuration = __privateGet(this, _options).minFragmentDuration ?? 1;
+        if (track === mostImportantTrack && sample.type === "key" && currentChunkDuration >= chunkDuration) {
           beginNewChunk = true;
           __privateMethod(this, _finalizeFragment, finalizeFragment_fn).call(this);
         }
@@ -1924,1513 +1968,55 @@ If you want to offset all timestamps of a track such that the first one is zero,
   return __toCommonJS(src_exports);
 })();
 if (typeof module === "object" && typeof module.exports === "object") Object.assign(module.exports, Mp4Muxer)
-</script><script>"use strict";
-var WebMMuxer = (() => {
-  var __defProp = Object.defineProperty;
-  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-  var __getOwnPropNames = Object.getOwnPropertyNames;
-  var __hasOwnProp = Object.prototype.hasOwnProperty;
-  var __export = (target, all) => {
-    for (var name in all)
-      __defProp(target, name, { get: all[name], enumerable: true });
-  };
-  var __copyProps = (to, from, except, desc) => {
-    if (from && typeof from === "object" || typeof from === "function") {
-      for (let key of __getOwnPropNames(from))
-        if (!__hasOwnProp.call(to, key) && key !== except)
-          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-    }
-    return to;
-  };
-  var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-  var __accessCheck = (obj, member, msg) => {
-    if (!member.has(obj))
-      throw TypeError("Cannot " + msg);
-  };
-  var __privateGet = (obj, member, getter) => {
-    __accessCheck(obj, member, "read from private field");
-    return getter ? getter.call(obj) : member.get(obj);
-  };
-  var __privateAdd = (obj, member, value) => {
-    if (member.has(obj))
-      throw TypeError("Cannot add the same private member more than once");
-    member instanceof WeakSet ? member.add(obj) : member.set(obj, value);
-  };
-  var __privateSet = (obj, member, value, setter) => {
-    __accessCheck(obj, member, "write to private field");
-    setter ? setter.call(obj, value) : member.set(obj, value);
-    return value;
-  };
-  var __privateMethod = (obj, member, method) => {
-    __accessCheck(obj, member, "access private method");
-    return method;
-  };
-
-  // src/index.ts
-  var src_exports = {};
-  __export(src_exports, {
-    ArrayBufferTarget: () => ArrayBufferTarget,
-    FileSystemWritableFileStreamTarget: () => FileSystemWritableFileStreamTarget,
-    Muxer: () => Muxer,
-    StreamTarget: () => StreamTarget,
-    SubtitleEncoder: () => SubtitleEncoder
-  });
-
-  // src/ebml.ts
-  var EBMLFloat32 = class {
-    constructor(value) {
-      this.value = value;
-    }
-  };
-  var EBMLFloat64 = class {
-    constructor(value) {
-      this.value = value;
-    }
-  };
-  var measureUnsignedInt = (value) => {
-    if (value < 1 << 8) {
-      return 1;
-    } else if (value < 1 << 16) {
-      return 2;
-    } else if (value < 1 << 24) {
-      return 3;
-    } else if (value < 2 ** 32) {
-      return 4;
-    } else if (value < 2 ** 40) {
-      return 5;
-    } else {
-      return 6;
-    }
-  };
-  var measureEBMLVarInt = (value) => {
-    if (value < (1 << 7) - 1) {
-      return 1;
-    } else if (value < (1 << 14) - 1) {
-      return 2;
-    } else if (value < (1 << 21) - 1) {
-      return 3;
-    } else if (value < (1 << 28) - 1) {
-      return 4;
-    } else if (value < 2 ** 35 - 1) {
-      return 5;
-    } else if (value < 2 ** 42 - 1) {
-      return 6;
-    } else {
-      throw new Error("EBML VINT size not supported " + value);
-    }
-  };
-
-  // src/misc.ts
-  var readBits = (bytes, start, end) => {
-    let result = 0;
-    for (let i = start; i < end; i++) {
-      let byteIndex = Math.floor(i / 8);
-      let byte = bytes[byteIndex];
-      let bitIndex = 7 - (i & 7);
-      let bit = (byte & 1 << bitIndex) >> bitIndex;
-      result <<= 1;
-      result |= bit;
-    }
-    return result;
-  };
-  var writeBits = (bytes, start, end, value) => {
-    for (let i = start; i < end; i++) {
-      let byteIndex = Math.floor(i / 8);
-      let byte = bytes[byteIndex];
-      let bitIndex = 7 - (i & 7);
-      byte &= ~(1 << bitIndex);
-      byte |= (value & 1 << end - i - 1) >> end - i - 1 << bitIndex;
-      bytes[byteIndex] = byte;
-    }
-  };
-
-  // src/target.ts
-  var isTarget = Symbol("isTarget");
-  var Target = class {
-  };
-  isTarget;
-  var ArrayBufferTarget = class extends Target {
-    constructor() {
-      super(...arguments);
-      this.buffer = null;
-    }
-  };
-  var StreamTarget = class extends Target {
-    constructor(options) {
-      super();
-      this.options = options;
-      if (typeof options !== "object") {
-        throw new TypeError("StreamTarget requires an options object to be passed to its constructor.");
-      }
-      if (options.onData) {
-        if (typeof options.onData !== "function") {
-          throw new TypeError("options.onData, when provided, must be a function.");
-        }
-        if (options.onData.length < 2) {
-          throw new TypeError(
-            "options.onData, when provided, must be a function that takes in at least two arguments (data and position). Ignoring the position argument, which specifies the byte offset at which the data is to be written, can lead to broken outputs."
-          );
-        }
-      }
-      if (options.onHeader && typeof options.onHeader !== "function") {
-        throw new TypeError("options.onHeader, when provided, must be a function.");
-      }
-      if (options.onCluster && typeof options.onCluster !== "function") {
-        throw new TypeError("options.onCluster, when provided, must be a function.");
-      }
-      if (options.chunked !== void 0 && typeof options.chunked !== "boolean") {
-        throw new TypeError("options.chunked, when provided, must be a boolean.");
-      }
-      if (options.chunkSize !== void 0 && (!Number.isInteger(options.chunkSize) || options.chunkSize <= 0)) {
-        throw new TypeError("options.chunkSize, when provided, must be a positive integer.");
-      }
-    }
-  };
-  var FileSystemWritableFileStreamTarget = class extends Target {
-    constructor(stream, options) {
-      super();
-      this.stream = stream;
-      this.options = options;
-      if (!(stream instanceof FileSystemWritableFileStream)) {
-        throw new TypeError("FileSystemWritableFileStreamTarget requires a FileSystemWritableFileStream instance.");
-      }
-      if (options !== void 0 && typeof options !== "object") {
-        throw new TypeError("FileSystemWritableFileStreamTarget's options, when provided, must be an object.");
-      }
-      if (options) {
-        if (options.chunkSize !== void 0 && (!Number.isInteger(options.chunkSize) || options.chunkSize <= 0)) {
-          throw new TypeError("options.chunkSize, when provided, must be a positive integer");
-        }
-      }
-    }
-  };
-
-  // src/writer.ts
-  var _helper, _helperView, _writeByte, writeByte_fn, _writeFloat32, writeFloat32_fn, _writeFloat64, writeFloat64_fn, _writeUnsignedInt, writeUnsignedInt_fn, _writeString, writeString_fn;
-  var Writer = class {
-    constructor() {
-      __privateAdd(this, _writeByte);
-      __privateAdd(this, _writeFloat32);
-      __privateAdd(this, _writeFloat64);
-      __privateAdd(this, _writeUnsignedInt);
-      __privateAdd(this, _writeString);
-      this.pos = 0;
-      __privateAdd(this, _helper, new Uint8Array(8));
-      __privateAdd(this, _helperView, new DataView(__privateGet(this, _helper).buffer));
-      this.offsets = /* @__PURE__ */ new WeakMap();
-      this.dataOffsets = /* @__PURE__ */ new WeakMap();
-    }
-    seek(newPos) {
-      this.pos = newPos;
-    }
-    writeEBMLVarInt(value, width = measureEBMLVarInt(value)) {
-      let pos = 0;
-      switch (width) {
-        case 1:
-          __privateGet(this, _helperView).setUint8(pos++, 1 << 7 | value);
-          break;
-        case 2:
-          __privateGet(this, _helperView).setUint8(pos++, 1 << 6 | value >> 8);
-          __privateGet(this, _helperView).setUint8(pos++, value);
-          break;
-        case 3:
-          __privateGet(this, _helperView).setUint8(pos++, 1 << 5 | value >> 16);
-          __privateGet(this, _helperView).setUint8(pos++, value >> 8);
-          __privateGet(this, _helperView).setUint8(pos++, value);
-          break;
-        case 4:
-          __privateGet(this, _helperView).setUint8(pos++, 1 << 4 | value >> 24);
-          __privateGet(this, _helperView).setUint8(pos++, value >> 16);
-          __privateGet(this, _helperView).setUint8(pos++, value >> 8);
-          __privateGet(this, _helperView).setUint8(pos++, value);
-          break;
-        case 5:
-          __privateGet(this, _helperView).setUint8(pos++, 1 << 3 | value / 2 ** 32 & 7);
-          __privateGet(this, _helperView).setUint8(pos++, value >> 24);
-          __privateGet(this, _helperView).setUint8(pos++, value >> 16);
-          __privateGet(this, _helperView).setUint8(pos++, value >> 8);
-          __privateGet(this, _helperView).setUint8(pos++, value);
-          break;
-        case 6:
-          __privateGet(this, _helperView).setUint8(pos++, 1 << 2 | value / 2 ** 40 & 3);
-          __privateGet(this, _helperView).setUint8(pos++, value / 2 ** 32 | 0);
-          __privateGet(this, _helperView).setUint8(pos++, value >> 24);
-          __privateGet(this, _helperView).setUint8(pos++, value >> 16);
-          __privateGet(this, _helperView).setUint8(pos++, value >> 8);
-          __privateGet(this, _helperView).setUint8(pos++, value);
-          break;
-        default:
-          throw new Error("Bad EBML VINT size " + width);
-      }
-      this.write(__privateGet(this, _helper).subarray(0, pos));
-    }
-    writeEBML(data) {
-      if (data === null)
-        return;
-      if (data instanceof Uint8Array) {
-        this.write(data);
-      } else if (Array.isArray(data)) {
-        for (let elem of data) {
-          this.writeEBML(elem);
-        }
-      } else {
-        this.offsets.set(data, this.pos);
-        __privateMethod(this, _writeUnsignedInt, writeUnsignedInt_fn).call(this, data.id);
-        if (Array.isArray(data.data)) {
-          let sizePos = this.pos;
-          let sizeSize = data.size === -1 ? 1 : data.size ?? 4;
-          if (data.size === -1) {
-            __privateMethod(this, _writeByte, writeByte_fn).call(this, 255);
-          } else {
-            this.seek(this.pos + sizeSize);
-          }
-          let startPos = this.pos;
-          this.dataOffsets.set(data, startPos);
-          this.writeEBML(data.data);
-          if (data.size !== -1) {
-            let size = this.pos - startPos;
-            let endPos = this.pos;
-            this.seek(sizePos);
-            this.writeEBMLVarInt(size, sizeSize);
-            this.seek(endPos);
-          }
-        } else if (typeof data.data === "number") {
-          let size = data.size ?? measureUnsignedInt(data.data);
-          this.writeEBMLVarInt(size);
-          __privateMethod(this, _writeUnsignedInt, writeUnsignedInt_fn).call(this, data.data, size);
-        } else if (typeof data.data === "string") {
-          this.writeEBMLVarInt(data.data.length);
-          __privateMethod(this, _writeString, writeString_fn).call(this, data.data);
-        } else if (data.data instanceof Uint8Array) {
-          this.writeEBMLVarInt(data.data.byteLength, data.size);
-          this.write(data.data);
-        } else if (data.data instanceof EBMLFloat32) {
-          this.writeEBMLVarInt(4);
-          __privateMethod(this, _writeFloat32, writeFloat32_fn).call(this, data.data.value);
-        } else if (data.data instanceof EBMLFloat64) {
-          this.writeEBMLVarInt(8);
-          __privateMethod(this, _writeFloat64, writeFloat64_fn).call(this, data.data.value);
-        }
-      }
-    }
-  };
-  _helper = new WeakMap();
-  _helperView = new WeakMap();
-  _writeByte = new WeakSet();
-  writeByte_fn = function(value) {
-    __privateGet(this, _helperView).setUint8(0, value);
-    this.write(__privateGet(this, _helper).subarray(0, 1));
-  };
-  _writeFloat32 = new WeakSet();
-  writeFloat32_fn = function(value) {
-    __privateGet(this, _helperView).setFloat32(0, value, false);
-    this.write(__privateGet(this, _helper).subarray(0, 4));
-  };
-  _writeFloat64 = new WeakSet();
-  writeFloat64_fn = function(value) {
-    __privateGet(this, _helperView).setFloat64(0, value, false);
-    this.write(__privateGet(this, _helper));
-  };
-  _writeUnsignedInt = new WeakSet();
-  writeUnsignedInt_fn = function(value, width = measureUnsignedInt(value)) {
-    let pos = 0;
-    switch (width) {
-      case 6:
-        __privateGet(this, _helperView).setUint8(pos++, value / 2 ** 40 | 0);
-      case 5:
-        __privateGet(this, _helperView).setUint8(pos++, value / 2 ** 32 | 0);
-      case 4:
-        __privateGet(this, _helperView).setUint8(pos++, value >> 24);
-      case 3:
-        __privateGet(this, _helperView).setUint8(pos++, value >> 16);
-      case 2:
-        __privateGet(this, _helperView).setUint8(pos++, value >> 8);
-      case 1:
-        __privateGet(this, _helperView).setUint8(pos++, value);
-        break;
-      default:
-        throw new Error("Bad UINT size " + width);
-    }
-    this.write(__privateGet(this, _helper).subarray(0, pos));
-  };
-  _writeString = new WeakSet();
-  writeString_fn = function(str) {
-    this.write(new Uint8Array(str.split("").map((x) => x.charCodeAt(0))));
-  };
-  var _target, _buffer, _bytes, _ensureSize, ensureSize_fn;
-  var ArrayBufferTargetWriter = class extends Writer {
-    constructor(target) {
-      super();
-      __privateAdd(this, _ensureSize);
-      __privateAdd(this, _target, void 0);
-      __privateAdd(this, _buffer, new ArrayBuffer(2 ** 16));
-      __privateAdd(this, _bytes, new Uint8Array(__privateGet(this, _buffer)));
-      __privateSet(this, _target, target);
-    }
-    write(data) {
-      __privateMethod(this, _ensureSize, ensureSize_fn).call(this, this.pos + data.byteLength);
-      __privateGet(this, _bytes).set(data, this.pos);
-      this.pos += data.byteLength;
-    }
-    finalize() {
-      __privateMethod(this, _ensureSize, ensureSize_fn).call(this, this.pos);
-      __privateGet(this, _target).buffer = __privateGet(this, _buffer).slice(0, this.pos);
-    }
-  };
-  _target = new WeakMap();
-  _buffer = new WeakMap();
-  _bytes = new WeakMap();
-  _ensureSize = new WeakSet();
-  ensureSize_fn = function(size) {
-    let newLength = __privateGet(this, _buffer).byteLength;
-    while (newLength < size)
-      newLength *= 2;
-    if (newLength === __privateGet(this, _buffer).byteLength)
-      return;
-    let newBuffer = new ArrayBuffer(newLength);
-    let newBytes = new Uint8Array(newBuffer);
-    newBytes.set(__privateGet(this, _bytes), 0);
-    __privateSet(this, _buffer, newBuffer);
-    __privateSet(this, _bytes, newBytes);
-  };
-  var _trackingWrites, _trackedWrites, _trackedStart, _trackedEnd;
-  var BaseStreamTargetWriter = class extends Writer {
-    constructor(target) {
-      super();
-      this.target = target;
-      __privateAdd(this, _trackingWrites, false);
-      __privateAdd(this, _trackedWrites, void 0);
-      __privateAdd(this, _trackedStart, void 0);
-      __privateAdd(this, _trackedEnd, void 0);
-    }
-    write(data) {
-      if (!__privateGet(this, _trackingWrites))
-        return;
-      let pos = this.pos;
-      if (pos < __privateGet(this, _trackedStart)) {
-        if (pos + data.byteLength <= __privateGet(this, _trackedStart))
-          return;
-        data = data.subarray(__privateGet(this, _trackedStart) - pos);
-        pos = 0;
-      }
-      let neededSize = pos + data.byteLength - __privateGet(this, _trackedStart);
-      let newLength = __privateGet(this, _trackedWrites).byteLength;
-      while (newLength < neededSize)
-        newLength *= 2;
-      if (newLength !== __privateGet(this, _trackedWrites).byteLength) {
-        let copy = new Uint8Array(newLength);
-        copy.set(__privateGet(this, _trackedWrites), 0);
-        __privateSet(this, _trackedWrites, copy);
-      }
-      __privateGet(this, _trackedWrites).set(data, pos - __privateGet(this, _trackedStart));
-      __privateSet(this, _trackedEnd, Math.max(__privateGet(this, _trackedEnd), pos + data.byteLength));
-    }
-    startTrackingWrites() {
-      __privateSet(this, _trackingWrites, true);
-      __privateSet(this, _trackedWrites, new Uint8Array(2 ** 10));
-      __privateSet(this, _trackedStart, this.pos);
-      __privateSet(this, _trackedEnd, this.pos);
-    }
-    getTrackedWrites() {
-      if (!__privateGet(this, _trackingWrites)) {
-        throw new Error("Can't get tracked writes since nothing was tracked.");
-      }
-      let slice = __privateGet(this, _trackedWrites).subarray(0, __privateGet(this, _trackedEnd) - __privateGet(this, _trackedStart));
-      let result = {
-        data: slice,
-        start: __privateGet(this, _trackedStart),
-        end: __privateGet(this, _trackedEnd)
-      };
-      __privateSet(this, _trackedWrites, void 0);
-      __privateSet(this, _trackingWrites, false);
-      return result;
-    }
-  };
-  _trackingWrites = new WeakMap();
-  _trackedWrites = new WeakMap();
-  _trackedStart = new WeakMap();
-  _trackedEnd = new WeakMap();
-  var _sections, _lastFlushEnd, _ensureMonotonicity;
-  var StreamTargetWriter = class extends BaseStreamTargetWriter {
-    constructor(target, ensureMonotonicity) {
-      super(target);
-      __privateAdd(this, _sections, []);
-      __privateAdd(this, _lastFlushEnd, 0);
-      __privateAdd(this, _ensureMonotonicity, void 0);
-      __privateSet(this, _ensureMonotonicity, ensureMonotonicity);
-    }
-    write(data) {
-      super.write(data);
-      __privateGet(this, _sections).push({
-        data: data.slice(),
-        start: this.pos
-      });
-      this.pos += data.byteLength;
-    }
-    flush() {
-      if (__privateGet(this, _sections).length === 0)
-        return;
-      let chunks = [];
-      let sorted = [...__privateGet(this, _sections)].sort((a, b) => a.start - b.start);
-      chunks.push({
-        start: sorted[0].start,
-        size: sorted[0].data.byteLength
-      });
-      for (let i = 1; i < sorted.length; i++) {
-        let lastChunk = chunks[chunks.length - 1];
-        let section = sorted[i];
-        if (section.start <= lastChunk.start + lastChunk.size) {
-          lastChunk.size = Math.max(lastChunk.size, section.start + section.data.byteLength - lastChunk.start);
-        } else {
-          chunks.push({
-            start: section.start,
-            size: section.data.byteLength
-          });
-        }
-      }
-      for (let chunk of chunks) {
-        chunk.data = new Uint8Array(chunk.size);
-        for (let section of __privateGet(this, _sections)) {
-          if (chunk.start <= section.start && section.start < chunk.start + chunk.size) {
-            chunk.data.set(section.data, section.start - chunk.start);
-          }
-        }
-        if (__privateGet(this, _ensureMonotonicity) && chunk.start < __privateGet(this, _lastFlushEnd)) {
-          throw new Error("Internal error: Monotonicity violation.");
-        }
-        this.target.options.onData?.(chunk.data, chunk.start);
-        __privateSet(this, _lastFlushEnd, chunk.start + chunk.data.byteLength);
-      }
-      __privateGet(this, _sections).length = 0;
-    }
-    finalize() {
-    }
-  };
-  _sections = new WeakMap();
-  _lastFlushEnd = new WeakMap();
-  _ensureMonotonicity = new WeakMap();
-  var DEFAULT_CHUNK_SIZE = 2 ** 24;
-  var MAX_CHUNKS_AT_ONCE = 2;
-  var _chunkSize, _chunks, _lastFlushEnd2, _ensureMonotonicity2, _writeDataIntoChunks, writeDataIntoChunks_fn, _insertSectionIntoChunk, insertSectionIntoChunk_fn, _createChunk, createChunk_fn, _flushChunks, flushChunks_fn;
-  var ChunkedStreamTargetWriter = class extends BaseStreamTargetWriter {
-    constructor(target, ensureMonotonicity) {
-      super(target);
-      __privateAdd(this, _writeDataIntoChunks);
-      __privateAdd(this, _insertSectionIntoChunk);
-      __privateAdd(this, _createChunk);
-      __privateAdd(this, _flushChunks);
-      __privateAdd(this, _chunkSize, void 0);
-      __privateAdd(this, _chunks, []);
-      __privateAdd(this, _lastFlushEnd2, 0);
-      __privateAdd(this, _ensureMonotonicity2, void 0);
-      __privateSet(this, _chunkSize, target.options?.chunkSize ?? DEFAULT_CHUNK_SIZE);
-      __privateSet(this, _ensureMonotonicity2, ensureMonotonicity);
-      if (!Number.isInteger(__privateGet(this, _chunkSize)) || __privateGet(this, _chunkSize) < 2 ** 10) {
-        throw new Error("Invalid StreamTarget options: chunkSize must be an integer not smaller than 1024.");
-      }
-    }
-    write(data) {
-      super.write(data);
-      __privateMethod(this, _writeDataIntoChunks, writeDataIntoChunks_fn).call(this, data, this.pos);
-      __privateMethod(this, _flushChunks, flushChunks_fn).call(this);
-      this.pos += data.byteLength;
-    }
-    finalize() {
-      __privateMethod(this, _flushChunks, flushChunks_fn).call(this, true);
-    }
-  };
-  _chunkSize = new WeakMap();
-  _chunks = new WeakMap();
-  _lastFlushEnd2 = new WeakMap();
-  _ensureMonotonicity2 = new WeakMap();
-  _writeDataIntoChunks = new WeakSet();
-  writeDataIntoChunks_fn = function(data, position) {
-    let chunkIndex = __privateGet(this, _chunks).findIndex((x) => x.start <= position && position < x.start + __privateGet(this, _chunkSize));
-    if (chunkIndex === -1)
-      chunkIndex = __privateMethod(this, _createChunk, createChunk_fn).call(this, position);
-    let chunk = __privateGet(this, _chunks)[chunkIndex];
-    let relativePosition = position - chunk.start;
-    let toWrite = data.subarray(0, Math.min(__privateGet(this, _chunkSize) - relativePosition, data.byteLength));
-    chunk.data.set(toWrite, relativePosition);
-    let section = {
-      start: relativePosition,
-      end: relativePosition + toWrite.byteLength
-    };
-    __privateMethod(this, _insertSectionIntoChunk, insertSectionIntoChunk_fn).call(this, chunk, section);
-    if (chunk.written[0].start === 0 && chunk.written[0].end === __privateGet(this, _chunkSize)) {
-      chunk.shouldFlush = true;
-    }
-    if (__privateGet(this, _chunks).length > MAX_CHUNKS_AT_ONCE) {
-      for (let i = 0; i < __privateGet(this, _chunks).length - 1; i++) {
-        __privateGet(this, _chunks)[i].shouldFlush = true;
-      }
-      __privateMethod(this, _flushChunks, flushChunks_fn).call(this);
-    }
-    if (toWrite.byteLength < data.byteLength) {
-      __privateMethod(this, _writeDataIntoChunks, writeDataIntoChunks_fn).call(this, data.subarray(toWrite.byteLength), position + toWrite.byteLength);
-    }
-  };
-  _insertSectionIntoChunk = new WeakSet();
-  insertSectionIntoChunk_fn = function(chunk, section) {
-    let low = 0;
-    let high = chunk.written.length - 1;
-    let index = -1;
-    while (low <= high) {
-      let mid = Math.floor(low + (high - low + 1) / 2);
-      if (chunk.written[mid].start <= section.start) {
-        low = mid + 1;
-        index = mid;
-      } else {
-        high = mid - 1;
-      }
-    }
-    chunk.written.splice(index + 1, 0, section);
-    if (index === -1 || chunk.written[index].end < section.start)
-      index++;
-    while (index < chunk.written.length - 1 && chunk.written[index].end >= chunk.written[index + 1].start) {
-      chunk.written[index].end = Math.max(chunk.written[index].end, chunk.written[index + 1].end);
-      chunk.written.splice(index + 1, 1);
-    }
-  };
-  _createChunk = new WeakSet();
-  createChunk_fn = function(includesPosition) {
-    let start = Math.floor(includesPosition / __privateGet(this, _chunkSize)) * __privateGet(this, _chunkSize);
-    let chunk = {
-      start,
-      data: new Uint8Array(__privateGet(this, _chunkSize)),
-      written: [],
-      shouldFlush: false
-    };
-    __privateGet(this, _chunks).push(chunk);
-    __privateGet(this, _chunks).sort((a, b) => a.start - b.start);
-    return __privateGet(this, _chunks).indexOf(chunk);
-  };
-  _flushChunks = new WeakSet();
-  flushChunks_fn = function(force = false) {
-    for (let i = 0; i < __privateGet(this, _chunks).length; i++) {
-      let chunk = __privateGet(this, _chunks)[i];
-      if (!chunk.shouldFlush && !force)
-        continue;
-      for (let section of chunk.written) {
-        if (__privateGet(this, _ensureMonotonicity2) && chunk.start + section.start < __privateGet(this, _lastFlushEnd2)) {
-          throw new Error("Internal error: Monotonicity violation.");
-        }
-        this.target.options.onData?.(
-          chunk.data.subarray(section.start, section.end),
-          chunk.start + section.start
-        );
-        __privateSet(this, _lastFlushEnd2, chunk.start + section.end);
-      }
-      __privateGet(this, _chunks).splice(i--, 1);
-    }
-  };
-  var FileSystemWritableFileStreamTargetWriter = class extends ChunkedStreamTargetWriter {
-    constructor(target, ensureMonotonicity) {
-      super(new StreamTarget({
-        onData: (data, position) => target.stream.write({
-          type: "write",
-          data,
-          position
-        }),
-        chunked: true,
-        chunkSize: target.options?.chunkSize
-      }), ensureMonotonicity);
-    }
-  };
-
-  // src/muxer.ts
-  var VIDEO_TRACK_NUMBER = 1;
-  var AUDIO_TRACK_NUMBER = 2;
-  var SUBTITLE_TRACK_NUMBER = 3;
-  var VIDEO_TRACK_TYPE = 1;
-  var AUDIO_TRACK_TYPE = 2;
-  var SUBTITLE_TRACK_TYPE = 17;
-  var MAX_CHUNK_LENGTH_MS = 2 ** 15;
-  var CODEC_PRIVATE_MAX_SIZE = 2 ** 12;
-  var APP_NAME = "https://github.com/Vanilagy/webm-muxer";
-  var SEGMENT_SIZE_BYTES = 6;
-  var CLUSTER_SIZE_BYTES = 5;
-  var FIRST_TIMESTAMP_BEHAVIORS = ["strict", "offset", "permissive"];
-  var _options, _writer, _segment, _segmentInfo, _seekHead, _tracksElement, _segmentDuration, _colourElement, _videoCodecPrivate, _audioCodecPrivate, _subtitleCodecPrivate, _cues, _currentCluster, _currentClusterTimestamp, _duration, _videoChunkQueue, _audioChunkQueue, _subtitleChunkQueue, _firstVideoTimestamp, _firstAudioTimestamp, _lastVideoTimestamp, _lastAudioTimestamp, _lastSubtitleTimestamp, _colorSpace, _finalized, _validateOptions, validateOptions_fn, _createFileHeader, createFileHeader_fn, _writeEBMLHeader, writeEBMLHeader_fn, _createCodecPrivatePlaceholders, createCodecPrivatePlaceholders_fn, _createColourElement, createColourElement_fn, _createSeekHead, createSeekHead_fn, _createSegmentInfo, createSegmentInfo_fn, _createTracks, createTracks_fn, _createSegment, createSegment_fn, _createCues, createCues_fn, _maybeFlushStreamingTargetWriter, maybeFlushStreamingTargetWriter_fn, _segmentDataOffset, segmentDataOffset_get, _writeVideoDecoderConfig, writeVideoDecoderConfig_fn, _fixVP9ColorSpace, fixVP9ColorSpace_fn, _writeSubtitleChunks, writeSubtitleChunks_fn, _createInternalChunk, createInternalChunk_fn, _validateTimestamp, validateTimestamp_fn, _writeBlock, writeBlock_fn, _createCodecPrivateElement, createCodecPrivateElement_fn, _writeCodecPrivate, writeCodecPrivate_fn, _createNewCluster, createNewCluster_fn, _finalizeCurrentCluster, finalizeCurrentCluster_fn, _ensureNotFinalized, ensureNotFinalized_fn;
-  var Muxer = class {
-    constructor(options) {
-      __privateAdd(this, _validateOptions);
-      __privateAdd(this, _createFileHeader);
-      __privateAdd(this, _writeEBMLHeader);
-      __privateAdd(this, _createCodecPrivatePlaceholders);
-      __privateAdd(this, _createColourElement);
-      __privateAdd(this, _createSeekHead);
-      __privateAdd(this, _createSegmentInfo);
-      __privateAdd(this, _createTracks);
-      __privateAdd(this, _createSegment);
-      __privateAdd(this, _createCues);
-      __privateAdd(this, _maybeFlushStreamingTargetWriter);
-      __privateAdd(this, _segmentDataOffset);
-      __privateAdd(this, _writeVideoDecoderConfig);
-      __privateAdd(this, _fixVP9ColorSpace);
-      __privateAdd(this, _writeSubtitleChunks);
-      __privateAdd(this, _createInternalChunk);
-      __privateAdd(this, _validateTimestamp);
-      __privateAdd(this, _writeBlock);
-      __privateAdd(this, _createCodecPrivateElement);
-      __privateAdd(this, _writeCodecPrivate);
-      __privateAdd(this, _createNewCluster);
-      __privateAdd(this, _finalizeCurrentCluster);
-      __privateAdd(this, _ensureNotFinalized);
-      __privateAdd(this, _options, void 0);
-      __privateAdd(this, _writer, void 0);
-      __privateAdd(this, _segment, void 0);
-      __privateAdd(this, _segmentInfo, void 0);
-      __privateAdd(this, _seekHead, void 0);
-      __privateAdd(this, _tracksElement, void 0);
-      __privateAdd(this, _segmentDuration, void 0);
-      __privateAdd(this, _colourElement, void 0);
-      __privateAdd(this, _videoCodecPrivate, void 0);
-      __privateAdd(this, _audioCodecPrivate, void 0);
-      __privateAdd(this, _subtitleCodecPrivate, void 0);
-      __privateAdd(this, _cues, void 0);
-      __privateAdd(this, _currentCluster, void 0);
-      __privateAdd(this, _currentClusterTimestamp, void 0);
-      __privateAdd(this, _duration, 0);
-      __privateAdd(this, _videoChunkQueue, []);
-      __privateAdd(this, _audioChunkQueue, []);
-      __privateAdd(this, _subtitleChunkQueue, []);
-      __privateAdd(this, _firstVideoTimestamp, void 0);
-      __privateAdd(this, _firstAudioTimestamp, void 0);
-      __privateAdd(this, _lastVideoTimestamp, -1);
-      __privateAdd(this, _lastAudioTimestamp, -1);
-      __privateAdd(this, _lastSubtitleTimestamp, -1);
-      __privateAdd(this, _colorSpace, void 0);
-      __privateAdd(this, _finalized, false);
-      __privateMethod(this, _validateOptions, validateOptions_fn).call(this, options);
-      __privateSet(this, _options, {
-        type: "webm",
-        firstTimestampBehavior: "strict",
-        ...options
-      });
-      this.target = options.target;
-      let ensureMonotonicity = !!__privateGet(this, _options).streaming;
-      if (options.target instanceof ArrayBufferTarget) {
-        __privateSet(this, _writer, new ArrayBufferTargetWriter(options.target));
-      } else if (options.target instanceof StreamTarget) {
-        __privateSet(this, _writer, options.target.options?.chunked ? new ChunkedStreamTargetWriter(options.target, ensureMonotonicity) : new StreamTargetWriter(options.target, ensureMonotonicity));
-      } else if (options.target instanceof FileSystemWritableFileStreamTarget) {
-        __privateSet(this, _writer, new FileSystemWritableFileStreamTargetWriter(options.target, ensureMonotonicity));
-      } else {
-        throw new Error(`Invalid target: ${options.target}`);
-      }
-      __privateMethod(this, _createFileHeader, createFileHeader_fn).call(this);
-    }
-    addVideoChunk(chunk, meta, timestamp) {
-      if (!(chunk instanceof EncodedVideoChunk)) {
-        throw new TypeError("addVideoChunk's first argument (chunk) must be of type EncodedVideoChunk.");
-      }
-      if (meta && typeof meta !== "object") {
-        throw new TypeError("addVideoChunk's second argument (meta), when provided, must be an object.");
-      }
-      if (timestamp !== void 0 && (!Number.isFinite(timestamp) || timestamp < 0)) {
-        throw new TypeError(
-          "addVideoChunk's third argument (timestamp), when provided, must be a non-negative real number."
-        );
-      }
-      let data = new Uint8Array(chunk.byteLength);
-      chunk.copyTo(data);
-      this.addVideoChunkRaw(data, chunk.type, timestamp ?? chunk.timestamp, meta);
-    }
-    addVideoChunkRaw(data, type, timestamp, meta) {
-      if (!(data instanceof Uint8Array)) {
-        throw new TypeError("addVideoChunkRaw's first argument (data) must be an instance of Uint8Array.");
-      }
-      if (type !== "key" && type !== "delta") {
-        throw new TypeError("addVideoChunkRaw's second argument (type) must be either 'key' or 'delta'.");
-      }
-      if (!Number.isFinite(timestamp) || timestamp < 0) {
-        throw new TypeError("addVideoChunkRaw's third argument (timestamp) must be a non-negative real number.");
-      }
-      if (meta && typeof meta !== "object") {
-        throw new TypeError("addVideoChunkRaw's fourth argument (meta), when provided, must be an object.");
-      }
-      __privateMethod(this, _ensureNotFinalized, ensureNotFinalized_fn).call(this);
-      if (!__privateGet(this, _options).video)
-        throw new Error("No video track declared.");
-      if (__privateGet(this, _firstVideoTimestamp) === void 0)
-        __privateSet(this, _firstVideoTimestamp, timestamp);
-      if (meta)
-        __privateMethod(this, _writeVideoDecoderConfig, writeVideoDecoderConfig_fn).call(this, meta);
-      let videoChunk = __privateMethod(this, _createInternalChunk, createInternalChunk_fn).call(this, data, type, timestamp, VIDEO_TRACK_NUMBER);
-      if (__privateGet(this, _options).video.codec === "V_VP9")
-        __privateMethod(this, _fixVP9ColorSpace, fixVP9ColorSpace_fn).call(this, videoChunk);
-      __privateSet(this, _lastVideoTimestamp, videoChunk.timestamp);
-      while (__privateGet(this, _audioChunkQueue).length > 0 && __privateGet(this, _audioChunkQueue)[0].timestamp <= videoChunk.timestamp) {
-        let audioChunk = __privateGet(this, _audioChunkQueue).shift();
-        __privateMethod(this, _writeBlock, writeBlock_fn).call(this, audioChunk, false);
-      }
-      if (!__privateGet(this, _options).audio || videoChunk.timestamp <= __privateGet(this, _lastAudioTimestamp)) {
-        __privateMethod(this, _writeBlock, writeBlock_fn).call(this, videoChunk, true);
-      } else {
-        __privateGet(this, _videoChunkQueue).push(videoChunk);
-      }
-      __privateMethod(this, _writeSubtitleChunks, writeSubtitleChunks_fn).call(this);
-      __privateMethod(this, _maybeFlushStreamingTargetWriter, maybeFlushStreamingTargetWriter_fn).call(this);
-    }
-    addAudioChunk(chunk, meta, timestamp) {
-      if (!(chunk instanceof EncodedAudioChunk)) {
-        throw new TypeError("addAudioChunk's first argument (chunk) must be of type EncodedAudioChunk.");
-      }
-      if (meta && typeof meta !== "object") {
-        throw new TypeError("addAudioChunk's second argument (meta), when provided, must be an object.");
-      }
-      if (timestamp !== void 0 && (!Number.isFinite(timestamp) || timestamp < 0)) {
-        throw new TypeError(
-          "addAudioChunk's third argument (timestamp), when provided, must be a non-negative real number."
-        );
-      }
-      let data = new Uint8Array(chunk.byteLength);
-      chunk.copyTo(data);
-      this.addAudioChunkRaw(data, chunk.type, timestamp ?? chunk.timestamp, meta);
-    }
-    addAudioChunkRaw(data, type, timestamp, meta) {
-      if (!(data instanceof Uint8Array)) {
-        throw new TypeError("addAudioChunkRaw's first argument (data) must be an instance of Uint8Array.");
-      }
-      if (type !== "key" && type !== "delta") {
-        throw new TypeError("addAudioChunkRaw's second argument (type) must be either 'key' or 'delta'.");
-      }
-      if (!Number.isFinite(timestamp) || timestamp < 0) {
-        throw new TypeError("addAudioChunkRaw's third argument (timestamp) must be a non-negative real number.");
-      }
-      if (meta && typeof meta !== "object") {
-        throw new TypeError("addAudioChunkRaw's fourth argument (meta), when provided, must be an object.");
-      }
-      __privateMethod(this, _ensureNotFinalized, ensureNotFinalized_fn).call(this);
-      if (!__privateGet(this, _options).audio)
-        throw new Error("No audio track declared.");
-      if (__privateGet(this, _firstAudioTimestamp) === void 0)
-        __privateSet(this, _firstAudioTimestamp, timestamp);
-      if (meta?.decoderConfig) {
-        if (__privateGet(this, _options).streaming) {
-          __privateSet(this, _audioCodecPrivate, __privateMethod(this, _createCodecPrivateElement, createCodecPrivateElement_fn).call(this, meta.decoderConfig.description));
-        } else {
-          __privateMethod(this, _writeCodecPrivate, writeCodecPrivate_fn).call(this, __privateGet(this, _audioCodecPrivate), meta.decoderConfig.description);
-        }
-      }
-      let audioChunk = __privateMethod(this, _createInternalChunk, createInternalChunk_fn).call(this, data, type, timestamp, AUDIO_TRACK_NUMBER);
-      __privateSet(this, _lastAudioTimestamp, audioChunk.timestamp);
-      while (__privateGet(this, _videoChunkQueue).length > 0 && __privateGet(this, _videoChunkQueue)[0].timestamp <= audioChunk.timestamp) {
-        let videoChunk = __privateGet(this, _videoChunkQueue).shift();
-        __privateMethod(this, _writeBlock, writeBlock_fn).call(this, videoChunk, true);
-      }
-      if (!__privateGet(this, _options).video || audioChunk.timestamp <= __privateGet(this, _lastVideoTimestamp)) {
-        __privateMethod(this, _writeBlock, writeBlock_fn).call(this, audioChunk, !__privateGet(this, _options).video);
-      } else {
-        __privateGet(this, _audioChunkQueue).push(audioChunk);
-      }
-      __privateMethod(this, _writeSubtitleChunks, writeSubtitleChunks_fn).call(this);
-      __privateMethod(this, _maybeFlushStreamingTargetWriter, maybeFlushStreamingTargetWriter_fn).call(this);
-    }
-    addSubtitleChunk(chunk, meta, timestamp) {
-      if (typeof chunk !== "object" || !chunk) {
-        throw new TypeError("addSubtitleChunk's first argument (chunk) must be an object.");
-      } else {
-        if (!(chunk.body instanceof Uint8Array)) {
-          throw new TypeError("body must be an instance of Uint8Array.");
-        }
-        if (!Number.isFinite(chunk.timestamp) || chunk.timestamp < 0) {
-          throw new TypeError("timestamp must be a non-negative real number.");
-        }
-        if (!Number.isFinite(chunk.duration) || chunk.duration < 0) {
-          throw new TypeError("duration must be a non-negative real number.");
-        }
-        if (chunk.additions && !(chunk.additions instanceof Uint8Array)) {
-          throw new TypeError("additions, when present, must be an instance of Uint8Array.");
-        }
-      }
-      if (typeof meta !== "object") {
-        throw new TypeError("addSubtitleChunk's second argument (meta) must be an object.");
-      }
-      __privateMethod(this, _ensureNotFinalized, ensureNotFinalized_fn).call(this);
-      if (!__privateGet(this, _options).subtitles)
-        throw new Error("No subtitle track declared.");
-      if (meta?.decoderConfig) {
-        if (__privateGet(this, _options).streaming) {
-          __privateSet(this, _subtitleCodecPrivate, __privateMethod(this, _createCodecPrivateElement, createCodecPrivateElement_fn).call(this, meta.decoderConfig.description));
-        } else {
-          __privateMethod(this, _writeCodecPrivate, writeCodecPrivate_fn).call(this, __privateGet(this, _subtitleCodecPrivate), meta.decoderConfig.description);
-        }
-      }
-      let subtitleChunk = __privateMethod(this, _createInternalChunk, createInternalChunk_fn).call(this, chunk.body, "key", timestamp ?? chunk.timestamp, SUBTITLE_TRACK_NUMBER, chunk.duration, chunk.additions);
-      __privateSet(this, _lastSubtitleTimestamp, subtitleChunk.timestamp);
-      __privateGet(this, _subtitleChunkQueue).push(subtitleChunk);
-      __privateMethod(this, _writeSubtitleChunks, writeSubtitleChunks_fn).call(this);
-      __privateMethod(this, _maybeFlushStreamingTargetWriter, maybeFlushStreamingTargetWriter_fn).call(this);
-    }
-    finalize() {
-      if (__privateGet(this, _finalized)) {
-        throw new Error("Cannot finalize a muxer more than once.");
-      }
-      while (__privateGet(this, _videoChunkQueue).length > 0)
-        __privateMethod(this, _writeBlock, writeBlock_fn).call(this, __privateGet(this, _videoChunkQueue).shift(), true);
-      while (__privateGet(this, _audioChunkQueue).length > 0)
-        __privateMethod(this, _writeBlock, writeBlock_fn).call(this, __privateGet(this, _audioChunkQueue).shift(), true);
-      while (__privateGet(this, _subtitleChunkQueue).length > 0 && __privateGet(this, _subtitleChunkQueue)[0].timestamp <= __privateGet(this, _duration)) {
-        __privateMethod(this, _writeBlock, writeBlock_fn).call(this, __privateGet(this, _subtitleChunkQueue).shift(), false);
-      }
-      if (__privateGet(this, _currentCluster) && !__privateGet(this, _options).streaming) {
-        __privateMethod(this, _finalizeCurrentCluster, finalizeCurrentCluster_fn).call(this);
-      }
-      __privateGet(this, _writer).writeEBML(__privateGet(this, _cues));
-      if (!__privateGet(this, _options).streaming) {
-        let endPos = __privateGet(this, _writer).pos;
-        let segmentSize = __privateGet(this, _writer).pos - __privateGet(this, _segmentDataOffset, segmentDataOffset_get);
-        __privateGet(this, _writer).seek(__privateGet(this, _writer).offsets.get(__privateGet(this, _segment)) + 4);
-        __privateGet(this, _writer).writeEBMLVarInt(segmentSize, SEGMENT_SIZE_BYTES);
-        __privateGet(this, _segmentDuration).data = new EBMLFloat64(__privateGet(this, _duration));
-        __privateGet(this, _writer).seek(__privateGet(this, _writer).offsets.get(__privateGet(this, _segmentDuration)));
-        __privateGet(this, _writer).writeEBML(__privateGet(this, _segmentDuration));
-        __privateGet(this, _seekHead).data[0].data[1].data = __privateGet(this, _writer).offsets.get(__privateGet(this, _cues)) - __privateGet(this, _segmentDataOffset, segmentDataOffset_get);
-        __privateGet(this, _seekHead).data[1].data[1].data = __privateGet(this, _writer).offsets.get(__privateGet(this, _segmentInfo)) - __privateGet(this, _segmentDataOffset, segmentDataOffset_get);
-        __privateGet(this, _seekHead).data[2].data[1].data = __privateGet(this, _writer).offsets.get(__privateGet(this, _tracksElement)) - __privateGet(this, _segmentDataOffset, segmentDataOffset_get);
-        __privateGet(this, _writer).seek(__privateGet(this, _writer).offsets.get(__privateGet(this, _seekHead)));
-        __privateGet(this, _writer).writeEBML(__privateGet(this, _seekHead));
-        __privateGet(this, _writer).seek(endPos);
-      }
-      __privateMethod(this, _maybeFlushStreamingTargetWriter, maybeFlushStreamingTargetWriter_fn).call(this);
-      __privateGet(this, _writer).finalize();
-      __privateSet(this, _finalized, true);
-    }
-  };
-  _options = new WeakMap();
-  _writer = new WeakMap();
-  _segment = new WeakMap();
-  _segmentInfo = new WeakMap();
-  _seekHead = new WeakMap();
-  _tracksElement = new WeakMap();
-  _segmentDuration = new WeakMap();
-  _colourElement = new WeakMap();
-  _videoCodecPrivate = new WeakMap();
-  _audioCodecPrivate = new WeakMap();
-  _subtitleCodecPrivate = new WeakMap();
-  _cues = new WeakMap();
-  _currentCluster = new WeakMap();
-  _currentClusterTimestamp = new WeakMap();
-  _duration = new WeakMap();
-  _videoChunkQueue = new WeakMap();
-  _audioChunkQueue = new WeakMap();
-  _subtitleChunkQueue = new WeakMap();
-  _firstVideoTimestamp = new WeakMap();
-  _firstAudioTimestamp = new WeakMap();
-  _lastVideoTimestamp = new WeakMap();
-  _lastAudioTimestamp = new WeakMap();
-  _lastSubtitleTimestamp = new WeakMap();
-  _colorSpace = new WeakMap();
-  _finalized = new WeakMap();
-  _validateOptions = new WeakSet();
-  validateOptions_fn = function(options) {
-    if (typeof options !== "object") {
-      throw new TypeError("The muxer requires an options object to be passed to its constructor.");
-    }
-    if (!(options.target instanceof Target)) {
-      throw new TypeError("The target must be provided and an instance of Target.");
-    }
-    if (options.video) {
-      if (typeof options.video.codec !== "string") {
-        throw new TypeError(`Invalid video codec: ${options.video.codec}. Must be a string.`);
-      }
-      if (!Number.isInteger(options.video.width) || options.video.width <= 0) {
-        throw new TypeError(`Invalid video width: ${options.video.width}. Must be a positive integer.`);
-      }
-      if (!Number.isInteger(options.video.height) || options.video.height <= 0) {
-        throw new TypeError(`Invalid video height: ${options.video.height}. Must be a positive integer.`);
-      }
-      if (options.video.frameRate !== void 0) {
-        if (!Number.isFinite(options.video.frameRate) || options.video.frameRate <= 0) {
-          throw new TypeError(
-            `Invalid video frame rate: ${options.video.frameRate}. Must be a positive number.`
-          );
-        }
-      }
-      if (options.video.alpha !== void 0 && typeof options.video.alpha !== "boolean") {
-        throw new TypeError(`Invalid video alpha: ${options.video.alpha}. Must be a boolean.`);
-      }
-    }
-    if (options.audio) {
-      if (typeof options.audio.codec !== "string") {
-        throw new TypeError(`Invalid audio codec: ${options.audio.codec}. Must be a string.`);
-      }
-      if (!Number.isInteger(options.audio.numberOfChannels) || options.audio.numberOfChannels <= 0) {
-        throw new TypeError(
-          `Invalid number of audio channels: ${options.audio.numberOfChannels}. Must be a positive integer.`
-        );
-      }
-      if (!Number.isInteger(options.audio.sampleRate) || options.audio.sampleRate <= 0) {
-        throw new TypeError(
-          `Invalid audio sample rate: ${options.audio.sampleRate}. Must be a positive integer.`
-        );
-      }
-      if (options.audio.bitDepth !== void 0) {
-        if (!Number.isInteger(options.audio.bitDepth) || options.audio.bitDepth <= 0) {
-          throw new TypeError(
-            `Invalid audio bit depth: ${options.audio.bitDepth}. Must be a positive integer.`
-          );
-        }
-      }
-    }
-    if (options.subtitles) {
-      if (typeof options.subtitles.codec !== "string") {
-        throw new TypeError(`Invalid subtitles codec: ${options.subtitles.codec}. Must be a string.`);
-      }
-    }
-    if (options.type !== void 0 && !["webm", "matroska"].includes(options.type)) {
-      throw new TypeError(`Invalid type: ${options.type}. Must be 'webm' or 'matroska'.`);
-    }
-    if (options.firstTimestampBehavior && !FIRST_TIMESTAMP_BEHAVIORS.includes(options.firstTimestampBehavior)) {
-      throw new TypeError(`Invalid first timestamp behavior: ${options.firstTimestampBehavior}`);
-    }
-    if (options.streaming !== void 0 && typeof options.streaming !== "boolean") {
-      throw new TypeError(`Invalid streaming option: ${options.streaming}. Must be a boolean.`);
-    }
-  };
-  _createFileHeader = new WeakSet();
-  createFileHeader_fn = function() {
-    if (__privateGet(this, _writer) instanceof BaseStreamTargetWriter && __privateGet(this, _writer).target.options.onHeader) {
-      __privateGet(this, _writer).startTrackingWrites();
-    }
-    __privateMethod(this, _writeEBMLHeader, writeEBMLHeader_fn).call(this);
-    if (!__privateGet(this, _options).streaming) {
-      __privateMethod(this, _createSeekHead, createSeekHead_fn).call(this);
-    }
-    __privateMethod(this, _createSegmentInfo, createSegmentInfo_fn).call(this);
-    __privateMethod(this, _createCodecPrivatePlaceholders, createCodecPrivatePlaceholders_fn).call(this);
-    __privateMethod(this, _createColourElement, createColourElement_fn).call(this);
-    if (!__privateGet(this, _options).streaming) {
-      __privateMethod(this, _createTracks, createTracks_fn).call(this);
-      __privateMethod(this, _createSegment, createSegment_fn).call(this);
-    } else {
-    }
-    __privateMethod(this, _createCues, createCues_fn).call(this);
-    __privateMethod(this, _maybeFlushStreamingTargetWriter, maybeFlushStreamingTargetWriter_fn).call(this);
-  };
-  _writeEBMLHeader = new WeakSet();
-  writeEBMLHeader_fn = function() {
-    let ebmlHeader = { id: 440786851 /* EBML */, data: [
-      { id: 17030 /* EBMLVersion */, data: 1 },
-      { id: 17143 /* EBMLReadVersion */, data: 1 },
-      { id: 17138 /* EBMLMaxIDLength */, data: 4 },
-      { id: 17139 /* EBMLMaxSizeLength */, data: 8 },
-      { id: 17026 /* DocType */, data: __privateGet(this, _options).type ?? "webm" },
-      { id: 17031 /* DocTypeVersion */, data: 2 },
-      { id: 17029 /* DocTypeReadVersion */, data: 2 }
-    ] };
-    __privateGet(this, _writer).writeEBML(ebmlHeader);
-  };
-  _createCodecPrivatePlaceholders = new WeakSet();
-  createCodecPrivatePlaceholders_fn = function() {
-    __privateSet(this, _videoCodecPrivate, { id: 236 /* Void */, size: 4, data: new Uint8Array(CODEC_PRIVATE_MAX_SIZE) });
-    __privateSet(this, _audioCodecPrivate, { id: 236 /* Void */, size: 4, data: new Uint8Array(CODEC_PRIVATE_MAX_SIZE) });
-    __privateSet(this, _subtitleCodecPrivate, { id: 236 /* Void */, size: 4, data: new Uint8Array(CODEC_PRIVATE_MAX_SIZE) });
-  };
-  _createColourElement = new WeakSet();
-  createColourElement_fn = function() {
-    __privateSet(this, _colourElement, { id: 21936 /* Colour */, data: [
-      { id: 21937 /* MatrixCoefficients */, data: 2 },
-      { id: 21946 /* TransferCharacteristics */, data: 2 },
-      { id: 21947 /* Primaries */, data: 2 },
-      { id: 21945 /* Range */, data: 0 }
-    ] });
-  };
-  _createSeekHead = new WeakSet();
-  createSeekHead_fn = function() {
-    const kaxCues = new Uint8Array([28, 83, 187, 107]);
-    const kaxInfo = new Uint8Array([21, 73, 169, 102]);
-    const kaxTracks = new Uint8Array([22, 84, 174, 107]);
-    let seekHead = { id: 290298740 /* SeekHead */, data: [
-      { id: 19899 /* Seek */, data: [
-        { id: 21419 /* SeekID */, data: kaxCues },
-        { id: 21420 /* SeekPosition */, size: 5, data: 0 }
-      ] },
-      { id: 19899 /* Seek */, data: [
-        { id: 21419 /* SeekID */, data: kaxInfo },
-        { id: 21420 /* SeekPosition */, size: 5, data: 0 }
-      ] },
-      { id: 19899 /* Seek */, data: [
-        { id: 21419 /* SeekID */, data: kaxTracks },
-        { id: 21420 /* SeekPosition */, size: 5, data: 0 }
-      ] }
-    ] };
-    __privateSet(this, _seekHead, seekHead);
-  };
-  _createSegmentInfo = new WeakSet();
-  createSegmentInfo_fn = function() {
-    let segmentDuration = { id: 17545 /* Duration */, data: new EBMLFloat64(0) };
-    __privateSet(this, _segmentDuration, segmentDuration);
-    let segmentInfo = { id: 357149030 /* Info */, data: [
-      { id: 2807729 /* TimestampScale */, data: 1e6 },
-      { id: 19840 /* MuxingApp */, data: APP_NAME },
-      { id: 22337 /* WritingApp */, data: APP_NAME },
-      !__privateGet(this, _options).streaming ? segmentDuration : null
-    ] };
-    __privateSet(this, _segmentInfo, segmentInfo);
-  };
-  _createTracks = new WeakSet();
-  createTracks_fn = function() {
-    let tracksElement = { id: 374648427 /* Tracks */, data: [] };
-    __privateSet(this, _tracksElement, tracksElement);
-    if (__privateGet(this, _options).video) {
-      tracksElement.data.push({ id: 174 /* TrackEntry */, data: [
-        { id: 215 /* TrackNumber */, data: VIDEO_TRACK_NUMBER },
-        { id: 29637 /* TrackUID */, data: VIDEO_TRACK_NUMBER },
-        { id: 131 /* TrackType */, data: VIDEO_TRACK_TYPE },
-        { id: 134 /* CodecID */, data: __privateGet(this, _options).video.codec },
-        __privateGet(this, _videoCodecPrivate),
-        __privateGet(this, _options).video.frameRate ? { id: 2352003 /* DefaultDuration */, data: 1e9 / __privateGet(this, _options).video.frameRate } : null,
-        { id: 224 /* Video */, data: [
-          { id: 176 /* PixelWidth */, data: __privateGet(this, _options).video.width },
-          { id: 186 /* PixelHeight */, data: __privateGet(this, _options).video.height },
-          __privateGet(this, _options).video.alpha ? { id: 21440 /* AlphaMode */, data: 1 } : null,
-          __privateGet(this, _colourElement)
-        ] }
-      ] });
-    }
-    if (__privateGet(this, _options).audio) {
-      __privateSet(this, _audioCodecPrivate, __privateGet(this, _options).streaming ? __privateGet(this, _audioCodecPrivate) || null : { id: 236 /* Void */, size: 4, data: new Uint8Array(CODEC_PRIVATE_MAX_SIZE) });
-      tracksElement.data.push({ id: 174 /* TrackEntry */, data: [
-        { id: 215 /* TrackNumber */, data: AUDIO_TRACK_NUMBER },
-        { id: 29637 /* TrackUID */, data: AUDIO_TRACK_NUMBER },
-        { id: 131 /* TrackType */, data: AUDIO_TRACK_TYPE },
-        { id: 134 /* CodecID */, data: __privateGet(this, _options).audio.codec },
-        __privateGet(this, _audioCodecPrivate),
-        { id: 225 /* Audio */, data: [
-          { id: 181 /* SamplingFrequency */, data: new EBMLFloat32(__privateGet(this, _options).audio.sampleRate) },
-          { id: 159 /* Channels */, data: __privateGet(this, _options).audio.numberOfChannels },
-          __privateGet(this, _options).audio.bitDepth ? { id: 25188 /* BitDepth */, data: __privateGet(this, _options).audio.bitDepth } : null
-        ] }
-      ] });
-    }
-    if (__privateGet(this, _options).subtitles) {
-      tracksElement.data.push({ id: 174 /* TrackEntry */, data: [
-        { id: 215 /* TrackNumber */, data: SUBTITLE_TRACK_NUMBER },
-        { id: 29637 /* TrackUID */, data: SUBTITLE_TRACK_NUMBER },
-        { id: 131 /* TrackType */, data: SUBTITLE_TRACK_TYPE },
-        { id: 134 /* CodecID */, data: __privateGet(this, _options).subtitles.codec },
-        __privateGet(this, _subtitleCodecPrivate)
-      ] });
-    }
-  };
-  _createSegment = new WeakSet();
-  createSegment_fn = function() {
-    let segment = {
-      id: 408125543 /* Segment */,
-      size: __privateGet(this, _options).streaming ? -1 : SEGMENT_SIZE_BYTES,
-      data: [
-        !__privateGet(this, _options).streaming ? __privateGet(this, _seekHead) : null,
-        __privateGet(this, _segmentInfo),
-        __privateGet(this, _tracksElement)
-      ]
-    };
-    __privateSet(this, _segment, segment);
-    __privateGet(this, _writer).writeEBML(segment);
-    if (__privateGet(this, _writer) instanceof BaseStreamTargetWriter && __privateGet(this, _writer).target.options.onHeader) {
-      let { data, start } = __privateGet(this, _writer).getTrackedWrites();
-      __privateGet(this, _writer).target.options.onHeader(data, start);
-    }
-  };
-  _createCues = new WeakSet();
-  createCues_fn = function() {
-    __privateSet(this, _cues, { id: 475249515 /* Cues */, data: [] });
-  };
-  _maybeFlushStreamingTargetWriter = new WeakSet();
-  maybeFlushStreamingTargetWriter_fn = function() {
-    if (__privateGet(this, _writer) instanceof StreamTargetWriter) {
-      __privateGet(this, _writer).flush();
-    }
-  };
-  _segmentDataOffset = new WeakSet();
-  segmentDataOffset_get = function() {
-    return __privateGet(this, _writer).dataOffsets.get(__privateGet(this, _segment));
-  };
-  _writeVideoDecoderConfig = new WeakSet();
-  writeVideoDecoderConfig_fn = function(meta) {
-    if (!meta.decoderConfig)
-      return;
-    if (meta.decoderConfig.colorSpace) {
-      let colorSpace = meta.decoderConfig.colorSpace;
-      __privateSet(this, _colorSpace, colorSpace);
-      __privateGet(this, _colourElement).data = [
-        { id: 21937 /* MatrixCoefficients */, data: {
-          "rgb": 1,
-          "bt709": 1,
-          "bt470bg": 5,
-          "smpte170m": 6
-        }[colorSpace.matrix] },
-        { id: 21946 /* TransferCharacteristics */, data: {
-          "bt709": 1,
-          "smpte170m": 6,
-          "iec61966-2-1": 13
-        }[colorSpace.transfer] },
-        { id: 21947 /* Primaries */, data: {
-          "bt709": 1,
-          "bt470bg": 5,
-          "smpte170m": 6
-        }[colorSpace.primaries] },
-        { id: 21945 /* Range */, data: [1, 2][Number(colorSpace.fullRange)] }
-      ];
-      if (!__privateGet(this, _options).streaming) {
-        let endPos = __privateGet(this, _writer).pos;
-        __privateGet(this, _writer).seek(__privateGet(this, _writer).offsets.get(__privateGet(this, _colourElement)));
-        __privateGet(this, _writer).writeEBML(__privateGet(this, _colourElement));
-        __privateGet(this, _writer).seek(endPos);
-      }
-    }
-    if (meta.decoderConfig.description) {
-      if (__privateGet(this, _options).streaming) {
-        __privateSet(this, _videoCodecPrivate, __privateMethod(this, _createCodecPrivateElement, createCodecPrivateElement_fn).call(this, meta.decoderConfig.description));
-      } else {
-        __privateMethod(this, _writeCodecPrivate, writeCodecPrivate_fn).call(this, __privateGet(this, _videoCodecPrivate), meta.decoderConfig.description);
-      }
-    }
-  };
-  _fixVP9ColorSpace = new WeakSet();
-  fixVP9ColorSpace_fn = function(chunk) {
-    if (chunk.type !== "key")
-      return;
-    if (!__privateGet(this, _colorSpace))
-      return;
-    let i = 0;
-    if (readBits(chunk.data, 0, 2) !== 2)
-      return;
-    i += 2;
-    let profile = (readBits(chunk.data, i + 1, i + 2) << 1) + readBits(chunk.data, i + 0, i + 1);
-    i += 2;
-    if (profile === 3)
-      i++;
-    let showExistingFrame = readBits(chunk.data, i + 0, i + 1);
-    i++;
-    if (showExistingFrame)
-      return;
-    let frameType = readBits(chunk.data, i + 0, i + 1);
-    i++;
-    if (frameType !== 0)
-      return;
-    i += 2;
-    let syncCode = readBits(chunk.data, i + 0, i + 24);
-    i += 24;
-    if (syncCode !== 4817730)
-      return;
-    if (profile >= 2)
-      i++;
-    let colorSpaceID = {
-      "rgb": 7,
-      "bt709": 2,
-      "bt470bg": 1,
-      "smpte170m": 3
-    }[__privateGet(this, _colorSpace).matrix];
-    writeBits(chunk.data, i + 0, i + 3, colorSpaceID);
-  };
-  _writeSubtitleChunks = new WeakSet();
-  writeSubtitleChunks_fn = function() {
-    let lastWrittenMediaTimestamp = Math.min(
-      __privateGet(this, _options).video ? __privateGet(this, _lastVideoTimestamp) : Infinity,
-      __privateGet(this, _options).audio ? __privateGet(this, _lastAudioTimestamp) : Infinity
-    );
-    let queue = __privateGet(this, _subtitleChunkQueue);
-    while (queue.length > 0 && queue[0].timestamp <= lastWrittenMediaTimestamp) {
-      __privateMethod(this, _writeBlock, writeBlock_fn).call(this, queue.shift(), !__privateGet(this, _options).video && !__privateGet(this, _options).audio);
-    }
-  };
-  _createInternalChunk = new WeakSet();
-  createInternalChunk_fn = function(data, type, timestamp, trackNumber, duration, additions) {
-    let adjustedTimestamp = __privateMethod(this, _validateTimestamp, validateTimestamp_fn).call(this, timestamp, trackNumber);
-    let internalChunk = {
-      data,
-      additions,
-      type,
-      timestamp: adjustedTimestamp,
-      duration,
-      trackNumber
-    };
-    return internalChunk;
-  };
-  _validateTimestamp = new WeakSet();
-  validateTimestamp_fn = function(timestamp, trackNumber) {
-    let lastTimestamp = trackNumber === VIDEO_TRACK_NUMBER ? __privateGet(this, _lastVideoTimestamp) : trackNumber === AUDIO_TRACK_NUMBER ? __privateGet(this, _lastAudioTimestamp) : __privateGet(this, _lastSubtitleTimestamp);
-    if (trackNumber !== SUBTITLE_TRACK_NUMBER) {
-      let firstTimestamp = trackNumber === VIDEO_TRACK_NUMBER ? __privateGet(this, _firstVideoTimestamp) : __privateGet(this, _firstAudioTimestamp);
-      if (__privateGet(this, _options).firstTimestampBehavior === "strict" && lastTimestamp === -1 && timestamp !== 0) {
-        throw new Error(
-          `The first chunk for your media track must have a timestamp of 0 (received ${timestamp}). Non-zero first timestamps are often caused by directly piping frames or audio data from a MediaStreamTrack into the encoder. Their timestamps are typically relative to the age of the document, which is probably what you want.
-
-If you want to offset all timestamps of a track such that the first one is zero, set firstTimestampBehavior: 'offset' in the options.
-If you want to allow non-zero first timestamps, set firstTimestampBehavior: 'permissive'.
-`
-        );
-      } else if (__privateGet(this, _options).firstTimestampBehavior === "offset") {
-        timestamp -= firstTimestamp;
-      }
-    }
-    if (timestamp < lastTimestamp) {
-      throw new Error(
-        `Timestamps must be monotonically increasing (went from ${lastTimestamp} to ${timestamp}).`
-      );
-    }
-    if (timestamp < 0) {
-      throw new Error(`Timestamps must be non-negative (received ${timestamp}).`);
-    }
-    return timestamp;
-  };
-  _writeBlock = new WeakSet();
-  writeBlock_fn = function(chunk, canCreateNewCluster) {
-    if (__privateGet(this, _options).streaming && !__privateGet(this, _tracksElement)) {
-      __privateMethod(this, _createTracks, createTracks_fn).call(this);
-      __privateMethod(this, _createSegment, createSegment_fn).call(this);
-    }
-    let msTimestamp = Math.floor(chunk.timestamp / 1e3);
-    let shouldCreateNewClusterFromKeyFrame = canCreateNewCluster && chunk.type === "key" && msTimestamp - __privateGet(this, _currentClusterTimestamp) >= 1e3;
-    if (!__privateGet(this, _currentCluster) || shouldCreateNewClusterFromKeyFrame) {
-      __privateMethod(this, _createNewCluster, createNewCluster_fn).call(this, msTimestamp);
-    }
-    let relativeTimestamp = msTimestamp - __privateGet(this, _currentClusterTimestamp);
-    if (relativeTimestamp < 0) {
-      return;
-    }
-    let clusterIsTooLong = relativeTimestamp >= MAX_CHUNK_LENGTH_MS;
-    if (clusterIsTooLong) {
-      throw new Error(
-        `Current Matroska cluster exceeded its maximum allowed length of ${MAX_CHUNK_LENGTH_MS} milliseconds. In order to produce a correct WebM file, you must pass in a key frame at least every ${MAX_CHUNK_LENGTH_MS} milliseconds.`
-      );
-    }
-    let prelude = new Uint8Array(4);
-    let view = new DataView(prelude.buffer);
-    view.setUint8(0, 128 | chunk.trackNumber);
-    view.setInt16(1, relativeTimestamp, false);
-    if (chunk.duration === void 0 && !chunk.additions) {
-      view.setUint8(3, Number(chunk.type === "key") << 7);
-      let simpleBlock = { id: 163 /* SimpleBlock */, data: [
-        prelude,
-        chunk.data
-      ] };
-      __privateGet(this, _writer).writeEBML(simpleBlock);
-    } else {
-      let msDuration = Math.floor(chunk.duration / 1e3);
-      let blockGroup = { id: 160 /* BlockGroup */, data: [
-        { id: 161 /* Block */, data: [
-          prelude,
-          chunk.data
-        ] },
-        chunk.duration !== void 0 ? { id: 155 /* BlockDuration */, data: msDuration } : null,
-        chunk.additions ? { id: 30113 /* BlockAdditions */, data: chunk.additions } : null
-      ] };
-      __privateGet(this, _writer).writeEBML(blockGroup);
-    }
-    __privateSet(this, _duration, Math.max(__privateGet(this, _duration), msTimestamp));
-  };
-  _createCodecPrivateElement = new WeakSet();
-  createCodecPrivateElement_fn = function(data) {
-    return { id: 25506 /* CodecPrivate */, size: 4, data: new Uint8Array(data) };
-  };
-  _writeCodecPrivate = new WeakSet();
-  writeCodecPrivate_fn = function(element, data) {
-    let endPos = __privateGet(this, _writer).pos;
-    __privateGet(this, _writer).seek(__privateGet(this, _writer).offsets.get(element));
-    let codecPrivateElementSize = 2 + 4 + data.byteLength;
-    let voidDataSize = CODEC_PRIVATE_MAX_SIZE - codecPrivateElementSize;
-    if (voidDataSize < 0) {
-      let newByteLength = data.byteLength + voidDataSize;
-      if (data instanceof ArrayBuffer) {
-        data = data.slice(0, newByteLength);
-      } else {
-        data = data.buffer.slice(0, newByteLength);
-      }
-      voidDataSize = 0;
-    }
-    element = [
-      __privateMethod(this, _createCodecPrivateElement, createCodecPrivateElement_fn).call(this, data),
-      { id: 236 /* Void */, size: 4, data: new Uint8Array(voidDataSize) }
-    ];
-    __privateGet(this, _writer).writeEBML(element);
-    __privateGet(this, _writer).seek(endPos);
-  };
-  _createNewCluster = new WeakSet();
-  createNewCluster_fn = function(timestamp) {
-    if (__privateGet(this, _currentCluster) && !__privateGet(this, _options).streaming) {
-      __privateMethod(this, _finalizeCurrentCluster, finalizeCurrentCluster_fn).call(this);
-    }
-    if (__privateGet(this, _writer) instanceof BaseStreamTargetWriter && __privateGet(this, _writer).target.options.onCluster) {
-      __privateGet(this, _writer).startTrackingWrites();
-    }
-    __privateSet(this, _currentCluster, {
-      id: 524531317 /* Cluster */,
-      size: __privateGet(this, _options).streaming ? -1 : CLUSTER_SIZE_BYTES,
-      data: [
-        { id: 231 /* Timestamp */, data: timestamp }
-      ]
-    });
-    __privateGet(this, _writer).writeEBML(__privateGet(this, _currentCluster));
-    __privateSet(this, _currentClusterTimestamp, timestamp);
-    let clusterOffsetFromSegment = __privateGet(this, _writer).offsets.get(__privateGet(this, _currentCluster)) - __privateGet(this, _segmentDataOffset, segmentDataOffset_get);
-    __privateGet(this, _cues).data.push({ id: 187 /* CuePoint */, data: [
-      { id: 179 /* CueTime */, data: timestamp },
-      __privateGet(this, _options).video ? { id: 183 /* CueTrackPositions */, data: [
-        { id: 247 /* CueTrack */, data: VIDEO_TRACK_NUMBER },
-        { id: 241 /* CueClusterPosition */, data: clusterOffsetFromSegment }
-      ] } : null,
-      __privateGet(this, _options).audio ? { id: 183 /* CueTrackPositions */, data: [
-        { id: 247 /* CueTrack */, data: AUDIO_TRACK_NUMBER },
-        { id: 241 /* CueClusterPosition */, data: clusterOffsetFromSegment }
-      ] } : null
-    ] });
-  };
-  _finalizeCurrentCluster = new WeakSet();
-  finalizeCurrentCluster_fn = function() {
-    let clusterSize = __privateGet(this, _writer).pos - __privateGet(this, _writer).dataOffsets.get(__privateGet(this, _currentCluster));
-    let endPos = __privateGet(this, _writer).pos;
-    __privateGet(this, _writer).seek(__privateGet(this, _writer).offsets.get(__privateGet(this, _currentCluster)) + 4);
-    __privateGet(this, _writer).writeEBMLVarInt(clusterSize, CLUSTER_SIZE_BYTES);
-    __privateGet(this, _writer).seek(endPos);
-    if (__privateGet(this, _writer) instanceof BaseStreamTargetWriter && __privateGet(this, _writer).target.options.onCluster) {
-      let { data, start } = __privateGet(this, _writer).getTrackedWrites();
-      __privateGet(this, _writer).target.options.onCluster(data, start, __privateGet(this, _currentClusterTimestamp));
-    }
-  };
-  _ensureNotFinalized = new WeakSet();
-  ensureNotFinalized_fn = function() {
-    if (__privateGet(this, _finalized)) {
-      throw new Error("Cannot add new video or audio chunks after the file has been finalized.");
-    }
-  };
-
-  // src/subtitles.ts
-  var cueBlockHeaderRegex = /(?:(.+?)\n)?((?:\d{2}:)?\d{2}:\d{2}.\d{3})\s+-->\s+((?:\d{2}:)?\d{2}:\d{2}.\d{3})/g;
-  var preambleStartRegex = /^WEBVTT.*?\n{2}/;
-  var timestampRegex = /(?:(\d{2}):)?(\d{2}):(\d{2}).(\d{3})/;
-  var inlineTimestampRegex = /<(?:(\d{2}):)?(\d{2}):(\d{2}).(\d{3})>/g;
-  var textEncoder = new TextEncoder();
-  var _options2, _config, _preambleSeen, _preambleBytes, _preambleEmitted, _parseTimestamp, parseTimestamp_fn, _formatTimestamp, formatTimestamp_fn;
-  var SubtitleEncoder = class {
-    constructor(options) {
-      __privateAdd(this, _parseTimestamp);
-      __privateAdd(this, _formatTimestamp);
-      __privateAdd(this, _options2, void 0);
-      __privateAdd(this, _config, void 0);
-      __privateAdd(this, _preambleSeen, false);
-      __privateAdd(this, _preambleBytes, void 0);
-      __privateAdd(this, _preambleEmitted, false);
-      __privateSet(this, _options2, options);
-    }
-    configure(config) {
-      if (config.codec !== "webvtt") {
-        throw new Error("Codec must be 'webvtt'.");
-      }
-      __privateSet(this, _config, config);
-    }
-    encode(text) {
-      if (!__privateGet(this, _config)) {
-        throw new Error("Encoder not configured.");
-      }
-      text = text.replace("\r\n", "\n").replace("\r", "\n");
-      cueBlockHeaderRegex.lastIndex = 0;
-      let match;
-      if (!__privateGet(this, _preambleSeen)) {
-        if (!preambleStartRegex.test(text)) {
-          let error = new Error("WebVTT preamble incorrect.");
-          __privateGet(this, _options2).error(error);
-          throw error;
-        }
-        match = cueBlockHeaderRegex.exec(text);
-        let preamble = text.slice(0, match?.index ?? text.length).trimEnd();
-        if (!preamble) {
-          let error = new Error("No WebVTT preamble provided.");
-          __privateGet(this, _options2).error(error);
-          throw error;
-        }
-        __privateSet(this, _preambleBytes, textEncoder.encode(preamble));
-        __privateSet(this, _preambleSeen, true);
-        if (match) {
-          text = text.slice(match.index);
-          cueBlockHeaderRegex.lastIndex = 0;
-        }
-      }
-      while (match = cueBlockHeaderRegex.exec(text)) {
-        let notes = text.slice(0, match.index);
-        let cueIdentifier = match[1] || "";
-        let matchEnd = match.index + match[0].length;
-        let bodyStart = text.indexOf("\n", matchEnd) + 1;
-        let cueSettings = text.slice(matchEnd, bodyStart).trim();
-        let bodyEnd = text.indexOf("\n\n", matchEnd);
-        if (bodyEnd === -1)
-          bodyEnd = text.length;
-        let startTime = __privateMethod(this, _parseTimestamp, parseTimestamp_fn).call(this, match[2]);
-        let endTime = __privateMethod(this, _parseTimestamp, parseTimestamp_fn).call(this, match[3]);
-        let duration = endTime - startTime;
-        let body = text.slice(bodyStart, bodyEnd);
-        let additions = `${cueSettings}
-${cueIdentifier}
-${notes}`;
-        inlineTimestampRegex.lastIndex = 0;
-        body = body.replace(inlineTimestampRegex, (match2) => {
-          let time = __privateMethod(this, _parseTimestamp, parseTimestamp_fn).call(this, match2.slice(1, -1));
-          let offsetTime = time - startTime;
-          return `<${__privateMethod(this, _formatTimestamp, formatTimestamp_fn).call(this, offsetTime)}>`;
-        });
-        text = text.slice(bodyEnd).trimStart();
-        cueBlockHeaderRegex.lastIndex = 0;
-        let chunk = {
-          body: textEncoder.encode(body),
-          additions: additions.trim() === "" ? void 0 : textEncoder.encode(additions),
-          timestamp: startTime * 1e3,
-          duration: duration * 1e3
-        };
-        let meta = {};
-        if (!__privateGet(this, _preambleEmitted)) {
-          meta.decoderConfig = {
-            description: __privateGet(this, _preambleBytes)
-          };
-          __privateSet(this, _preambleEmitted, true);
-        }
-        __privateGet(this, _options2).output(chunk, meta);
-      }
-    }
-  };
-  _options2 = new WeakMap();
-  _config = new WeakMap();
-  _preambleSeen = new WeakMap();
-  _preambleBytes = new WeakMap();
-  _preambleEmitted = new WeakMap();
-  _parseTimestamp = new WeakSet();
-  parseTimestamp_fn = function(string) {
-    let match = timestampRegex.exec(string);
-    if (!match)
-      throw new Error("Expected match.");
-    return 60 * 60 * 1e3 * Number(match[1] || "0") + 60 * 1e3 * Number(match[2]) + 1e3 * Number(match[3]) + Number(match[4]);
-  };
-  _formatTimestamp = new WeakSet();
-  formatTimestamp_fn = function(timestamp) {
-    let hours = Math.floor(timestamp / (60 * 60 * 1e3));
-    let minutes = Math.floor(timestamp % (60 * 60 * 1e3) / (60 * 1e3));
-    let seconds = Math.floor(timestamp % (60 * 1e3) / 1e3);
-    let milliseconds = timestamp % 1e3;
-    return hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0") + "." + milliseconds.toString().padStart(3, "0");
-  };
-  return __toCommonJS(src_exports);
-})();
-if (typeof module === "object" && typeof module.exports === "object") Object.assign(module.exports, WebMMuxer)
 </script><script>// ===== core: course + physics (no DOM) =====
 const MR = (() => {
-const R = 22, G = 1500, VMAX = 1300, XL = 20, XR = 1060;
+const R = 22, G = 1500, VMAX = 1300, XL = 20, XR = 1060, INTRO = 2.2;
+const D2R = Math.PI / 180;
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
-function newCourse(){return {segs:[],circ:[],mills:[],pends:[],rings:[],gates:[],portals:[],stages:[],fin:0,floor:0};}
-function seg(c,ax,ay,bx,by,kind='ramp',e=0.35,mu=0.01){c.segs.push({ax,ay,bx,by,kind,e,mu,y0:Math.min(ay,by)-60,y1:Math.max(ay,by)+60});}
+function newCourse(){return {segs:[],circ:[],mills:[],pends:[],rings:[],gates:[],portals:[],movers:[],flips:[],labels:[],stages:[],fin:0,floor:0};}
+function seg(c,ax,ay,bx,by,kind='ramp',e=0.35,mu=0.01,sv=0){c.segs.push({ax,ay,bx,by,kind,e,mu,sv,y0:Math.min(ay,by)-60,y1:Math.max(ay,by)+60});}
 function funnel(c,y,cx=540,w=70,h=150){seg(c,XL,y,cx-w,y+h);seg(c,XR,y,cx+w,y+h);return y+h;}
 function zig(c,y,n,drop=300,gap=150,inset=170){for(let k=0;k<n;k++){if(k%2==0)seg(c,XL,y,XR-inset,y+drop);else seg(c,XR,y,XL+inset,y+drop);y+=drop+gap;}return y;}
 function pegs(c,y,h,sp=120,r=13,dy=115){let row=0;const y0=y;while(y<y0+h){let x=100+(row%2==0?0:sp/2);while(x<=985){c.circ.push({x,y,r,kind:'peg',kick:0});x+=sp;}y+=dy;row++;}return y;}
-const D2R=Math.PI/180;
 const STAGES={
+ // ---------- new mechanisms ----------
+ trapdoors:{jp:'落とし扉',en:'TRAP DOORS',isNew:1,build(c,y){y+=40;y=pegs(c,y,330,150,13,110)+40;
+   const cups=[[190,0.0],[540,0.85],[890,1.7]];
+   for(const [x,ph] of cups){seg(c,x-170,y,x-42,y+120);seg(c,x+170,y,x+42,y+120);c.gates.push({ax:x-42,ay:y+120,bx:x+42,by:y+120,period:2.55,open:0.6,ph,trap:1});}
+   return funnel(c,y+230,540,90,170);}},
+ sliders:{jp:'スライドバンパー',en:'SLIDING BUMPERS',isNew:1,build(c,y){y+=80;
+   const rows=[[[300,780],0],[[540],1.4],[[300,780],2.6],[[540],0.7]];
+   rows.forEach(([xs,ph],k)=>xs.forEach((x,j)=>c.movers.push({x0:x,y:y+k*230,r:36,ax:190,w:2.1,ph:ph+j*Math.PI,kind:'bumper',kick:430})));
+   for(let k=0;k<4;k++){c.circ.push({x:150,y:y+k*230+115,r:14,kind:'peg',kick:0});c.circ.push({x:930,y:y+k*230+115,r:14,kind:'peg',kick:0});}
+   return funnel(c,y+4*230,540,85,170);}},
+ conveyors:{jp:'コンベア分岐',en:'FAST OR SLOW BELT',isNew:1,build(c,y){y+=60;
+   c.circ.push({x:540,y:y-12,r:18,kind:'peg',kick:0});seg(c,540,y,540,y+960,'wall');c.labels.push({x:280,y:y+30,t:'FAST',col:'#ffcc33'},{x:800,y:y+30,t:'SLOW',col:'#66aaff'});
+   let yy=y+90;
+   for(let k=0;k<3;k++){ // left: fast belts / right: slow belts
+     if(k%2==0){seg(c,XL,yy,440,yy+150,'belt',0.1,0.09,1050);seg(c,XR,yy,640,yy+150,'belt',0.1,0.09,170);}
+     else{seg(c,540,yy,120,yy+150,'belt',0.1,0.09,1050);seg(c,540,yy,960,yy+150,'belt',0.1,0.09,170);}
+     yy+=300;}
+   return funnel(c,y+990,540,90,170);}},
+ flippers:{jp:'フリッパー',en:'FLIPPERS',isNew:1,build(c,y){y+=60;y=pegs(c,y,220,170,13,110)+50;
+   for(let k=0;k<2;k++){const yy=y+k*380;
+     seg(c,XL,yy-170,150,yy-30);seg(c,XR,yy-170,930,yy-30);
+     c.flips.push({x:90,y:yy,L:320,a0:30*D2R,amp:27*D2R,w:3.3,ph:k*1.7,th:12});
+     c.flips.push({x:990,y:yy,L:320,a0:Math.PI-30*D2R,amp:-27*D2R,w:3.3,ph:k*1.7+2.2,th:12});
+     c.circ.push({x:540,y:yy+170,r:28,kind:'bumper',kick:520});}
+   return funnel(c,y+2*380+40,540,90,170);}},
+ blender:{jp:'ブレンダー',en:'THE BLENDER',isNew:1,build(c,y){y+=40;const Rr=300,cy=y+70+Rr;
+   c.rings.push({x:540,y:cy,R:Rr,gap:82*D2R,om:0.9,ph:-90*D2R,th:10});
+   c.mills.push({x:540,y:cy,L:200,om:-2.6,ph:0,arms:2,th:11,full:true});
+   const a=22*D2R,wx=Rr*Math.sin(a),wy=cy-Rr*Math.cos(a);seg(c,540-wx,y-20,540-wx,wy-4,'wall');seg(c,540+wx,y-20,540+wx,wy-4,'wall');
+   seg(c,XL,cy-40,450,cy+Rr+190);seg(c,XR,cy-40,630,cy+Rr+190);return cy+Rr+190;}},
+ // ---------- classic ----------
  bumpers:{jp:'ピンボールバンパー',en:'PINBALL BUMPERS',build(c,y){y+=20;const rows=[[200,420,660,880],[310,540,770],[200,420,660,880],[310,540,770]];rows.forEach((xs,k)=>xs.forEach(x=>c.circ.push({x,y:y+60+k*190,r:34,kind:'bumper',kick:620})));return funnel(c,y+60+4*190,540,75,170);}},
  drum:{jp:'回転ドラム',en:'SPIN DRUM',build(c,y){y+=40;const Rr=250,cy=y+60+Rr;c.rings.push({x:540,y:cy,R:Rr,gap:88*D2R,om:1.5,ph:-90*D2R,th:10});const a=24*D2R,wx=Rr*Math.sin(a),wy=cy-Rr*Math.cos(a);seg(c,540-wx,y-20,540-wx,wy-4,'wall');seg(c,540+wx,y-20,540+wx,wy-4,'wall');seg(c,XL,cy-40,460,cy+Rr+170);seg(c,XR,cy-40,620,cy+Rr+170);return cy+Rr+170;}},
  pendulums:{jp:'振り子',en:'PENDULUMS',build(c,y){y+=60;for(let k=0;k<3;k++){c.pends.push({x:540,y:y+k*420,L:330,amp:68*D2R,w:2.3,ph:k*2.1,bob:42});for(const x of (k%2==0?[180,900]:[120,960]))c.circ.push({x,y:y+k*420+250,r:16,kind:'peg',kick:0});}y+=3*420+40;return funnel(c,y,540,70,180);}},
  wheel:{jp:'水車',en:'PADDLE WHEEL',build(c,y){y+=40;y=funnel(c,y,360,70,160)+40;const cy=y+250;c.mills.push({x:540,y:cy,L:230,om:-1.25,ph:0.3,arms:6,th:9,full:false});seg(c,XL,cy+150,470,cy+420);seg(c,XR,cy+150,610,cy+420);return cy+420;}},
  gate:{jp:'時限ゲート',en:'TIMED GATE',build(c,y){y+=40;y=funnel(c,y,540,75,200);c.gates.push({ax:465,ay:y,bx:615,by:y,period:2.6,open:0.7,ph:0});return y+120;}},
  trampolines:{jp:'トランポリン',en:'TRAMPOLINES',build(c,y){const b=y-80;seg(c,420,b+330,660,b+250,'pad',1.0);seg(c,40,b+520,300,b+620,'pad',1.0);seg(c,780,b+700,1040,b+600,'pad',1.0);c.circ.push({x:540,y:b+560,r:30,kind:'bumper',kick:600});return funnel(c,b+820,540,75,170);}},
- portals:{jp:'ワープ',en:'LUCKY PORTALS',build(c,y){y+=60;const y0=y;const start=c.circ.length;y=pegs(c,y,950,140,14,125);const ey=y+40;c.portals.push({x:230,y:y0+310,r:34,tx:540,ty:ey+20});c.portals.push({x:850,y:y0+560,r:34,tx:540,ty:ey+20});const keep=c.circ.slice(0,start).concat(c.circ.slice(start).filter(p=>!c.portals.slice(-2).some(q=>Math.hypot(p.x-q.x,p.y-q.y)<70)));c.circ=keep;return funnel(c,ey,540,75,170);}},
+ portals:{jp:'ワープ',en:'LUCKY PORTALS',build(c,y){y+=60;const y0=y;const start=c.circ.length;y=pegs(c,y,950,140,14,125);const ey=y+40;c.portals.push({x:230,y:y0+310,r:34,tx:540,ty:ey+20});c.portals.push({x:850,y:y0+560,r:34,tx:540,ty:ey+20});const ps=c.portals.slice(-2);c.circ=c.circ.slice(0,start).concat(c.circ.slice(start).filter(p=>!ps.some(q=>Math.hypot(p.x-q.x,p.y-q.y)<70)));return funnel(c,ey,540,75,170);}},
  twindrums:{jp:'ツインドラム',en:'TWIN DRUMS',build(c,y){y+=60;c.circ.push({x:540,y:y+20,r:26,kind:'bumper',kick:450});seg(c,540,y+60,540,y+260,'wall');const Rr=190,cy=y+420+Rr,a=26*D2R,wx=Rr*Math.sin(a),wy=cy-Rr*Math.cos(a);
    for(const [cx,om] of [[290,1.9],[790,-1.4]]){c.rings.push({x:cx,y:cy,R:Rr,gap:95*D2R,om,ph:-70*D2R,th:10});
      if(cx<540){seg(c,cx-wx,y+215,cx-wx,wy-4,'wall');seg(c,cx+wx,y+330,cx+wx,wy-4,'wall');}else{seg(c,cx-wx,y+330,cx-wx,wy-4,'wall');seg(c,cx+wx,y+215,cx+wx,wy-4,'wall');}}
@@ -3444,20 +2030,23 @@ const STAGES={
  steep:{jp:'急降下',en:'STEEP DROP',build(c,y){y+=40;y=zig(c,y,3,380,170,230);return funnel(c,y,540,90,150);}},
 };
 function buildCourse(ids){
-  const c=newCourse();seg(c,XL,-800,XL,60000,'wall');seg(c,XR,-800,XR,60000,'wall');
-  seg(c,XL,300,470,420);seg(c,XR,300,610,420);c.gates.push({ax:470,ay:420,bx:610,by:420,start:0.6});
+  const c=newCourse();seg(c,XL,-800,XL,80000,'wall');seg(c,XR,-800,XR,80000,'wall');
+  seg(c,XL,300,470,420);seg(c,XR,300,610,420);c.gates.push({ax:470,ay:420,bx:610,by:420,start:INTRO});
   let y=420;
   for(const id of ids){const st=STAGES[id];c.stages.push({y:y+60,id,name:st.en});y=st.build(c,y+40);}
   y+=60;seg(c,440,y,440,y+240,'wall');seg(c,640,y,640,y+240,'wall');c.fin=y+300;c.floor=y+540;seg(c,XL,c.floor,XR,c.floor,'floor',0.2);
   return c;
 }
 function closest(px,py,ax,ay,bx,by){const dx=bx-ax,dy=by-ay,L2=dx*dx+dy*dy;let t=((px-ax)*dx+(py-ay)*dy)/L2;t=t<0?0:t>1?1:t;return [ax+t*dx,ay+t*dy];}
+function flipAng(f,t){return f.a0+f.amp*Math.sin(f.w*t+f.ph);}
+function moverPos(m,t){return m.x0+m.ax*Math.sin(m.w*t+m.ph);}
 class Race{
   constructor(course,n,seed,elim){
     this.c=course;this.n=n;this.rng=mulberry32(seed*7919+13);this.elim=!!elim;
     const order=[...Array(n).keys()];for(let i=n-1;i>0;i--){const j=Math.floor(this.rng()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
     this.m=order.map((i,slot)=>{const row=Math.floor(slot/4),col=slot%4;return {i,x:150+col*120+(row%2?60:0)+(this.rng()-0.5)*16,y:[150,220,80][row]??80,vx:0,vy:0,a:this.rng()*6.28,fin:null,out:false,outOrder:0,tp:0};});
     this.t=0;this.order=[];this.ev=[];this.stageSeen=0;this.outCount=0;this.minAlive=n>=4?3:n;
+    for(const g of course.gates)g.wasClosed=true;
   }
   gateClosed(g){if(g.start!==undefined)return this.t<g.start;return ((this.t+g.ph)%g.period)>g.open;}
   contact(m,cx,cy,rad,svx=0,svy=0,e=0.35,mu=0.01,kind='ramp',kick=0){
@@ -3474,20 +2063,27 @@ class Race{
   }
   step(dt){
     const c=this.c;this.t+=dt;const t=this.t;
-    if(Math.abs(t-0.6)<dt/2+1e-9)this.ev.push({k:'go'});
+    if(Math.abs(t-INTRO)<dt/2+1e-9)this.ev.push({k:'go'});
+    for(const g of c.gates){if(!g.trap)continue;const cl=this.gateClosed(g);if(g.wasClosed&&!cl)this.ev.push({k:'trap',x:(g.ax+g.bx)/2,y:g.ay});g.wasClosed=cl;}
     const dyn=[];
     for(const mi of c.mills)for(let k=0;k<mi.arms;k++){const a=mi.ph+mi.om*t+k*2*Math.PI/mi.arms,ux=Math.cos(a)*mi.L,uy=Math.sin(a)*mi.L;
-      dyn.push([mi.full?mi.x-ux:mi.x,mi.full?mi.y-uy:mi.y,mi.x+ux,mi.y+uy,mi.x,mi.y,mi.om,mi.th,mi.y-mi.L-50,mi.y+mi.L+50]);}
+      dyn.push([mi.full?mi.x-ux:mi.x,mi.full?mi.y-uy:mi.y,mi.x+ux,mi.y+uy,mi.x,mi.y,mi.om,mi.th,mi.y-mi.L-50,mi.y+mi.L+50,'mill']);}
     for(const p of c.pends){const th=p.amp*Math.sin(p.w*t+p.ph),om=p.amp*p.w*Math.cos(p.w*t+p.ph);p.bx=p.x+p.L*Math.sin(th);p.by=p.y+p.L*Math.cos(th);p.om_=om;
-      dyn.push([p.x,p.y,p.bx,p.by,p.x,p.y,-om,10,p.y-40,p.y+p.L+80]);}
+      dyn.push([p.x,p.y,p.bx,p.by,p.x,p.y,-om,10,p.y-40,p.y+p.L+80,'mill']);}
+    for(const f of c.flips){const a=flipAng(f,t),om=f.amp*f.w*Math.cos(f.w*t+f.ph);f.ex=f.x+f.L*Math.cos(a);f.ey=f.y+f.L*Math.sin(a);
+      dyn.push([f.x,f.y,f.ex,f.ey,f.x,f.y,om,f.th,f.y-f.L-50,f.y+f.L+50,'flip']);}
+    for(const mv of c.movers){mv.x=moverPos(mv,t);mv.vx=mv.ax*mv.w*Math.cos(mv.w*t+mv.ph);}
     const act=this.m.filter(m=>!m.out);
     for(const m of act){m.vy+=G*dt;m.x+=m.vx*dt;m.y+=m.vy*dt;}
     for(const m of act){
       const y=m.y;
-      for(const s of c.segs){if(y<s.y0||y>s.y1)continue;const [cx,cy]=closest(m.x,m.y,s.ax,s.ay,s.bx,s.by);this.contact(m,cx,cy,R+4,0,0,s.e,s.mu,s.kind);}
+      for(const s of c.segs){if(y<s.y0||y>s.y1)continue;const [cx,cy]=closest(m.x,m.y,s.ax,s.ay,s.bx,s.by);
+        if(s.sv){const L=Math.hypot(s.bx-s.ax,s.by-s.ay),ux=(s.bx-s.ax)/L,uy=(s.by-s.ay)/L;this.contact(m,cx,cy,R+4,ux*s.sv,uy*s.sv,s.e,s.mu,'belt');}
+        else this.contact(m,cx,cy,R+4,0,0,s.e,s.mu,s.kind);}
       for(const g of c.gates){if(this.gateClosed(g)&&Math.abs(y-g.ay)<60){const [cx,cy]=closest(m.x,m.y,g.ax,g.ay,g.bx,g.by);this.contact(m,cx,cy,R+4);}}
       for(const q of c.circ){if(Math.abs(y-q.y)>70)continue;this.contact(m,q.x,q.y,q.r+R,0,0,0.5,0.01,q.kind,q.kick);}
-      for(const d of dyn){if(y<d[8]||y>d[9])continue;const [cx,cy]=closest(m.x,m.y,d[0],d[1],d[2],d[3]);const rx=cx-d[4],ry=cy-d[5];this.contact(m,cx,cy,R+d[7],-d[6]*ry,d[6]*rx,0.4,0.05,'mill');}
+      for(const mv of c.movers){if(Math.abs(y-mv.y)>70)continue;if(this.contact(m,mv.x,mv.y,mv.r+R,mv.vx,0,0.5,0.01,mv.kind,mv.kick))mv.hit=1;}
+      for(const d of dyn){if(y<d[8]||y>d[9])continue;const [cx,cy]=closest(m.x,m.y,d[0],d[1],d[2],d[3]);const rx=cx-d[4],ry=cy-d[5];this.contact(m,cx,cy,R+d[7],-d[6]*ry,d[6]*rx,d[10]==='flip'?0.5:0.4,0.05,d[10]);}
       for(const p of c.pends){if(Math.abs(y-p.by)<120){const rx=p.bx-p.x,ry=p.by-p.y,om=-p.om_;this.contact(m,p.bx,p.by,R+p.bob,-om*ry,om*rx,0.6,0.01,'pend');}}
       for(const rg of c.rings){const dx=m.x-rg.x,dy=m.y-rg.y,d=Math.hypot(dx,dy);if(Math.abs(d-rg.R)>R+rg.th+2)continue;
         const ang=Math.atan2(dy,dx),gc=rg.ph+rg.om*t;let rel=((ang-gc+Math.PI)%(2*Math.PI)+2*Math.PI)%(2*Math.PI)-Math.PI;
@@ -3500,7 +2096,6 @@ class Race{
         if(rv<0){const j=-1.9*rv/2;A.vx-=j*nx;A.vy-=j*ny;B.vx+=j*nx;B.vy+=j*ny;if(-rv>200)this.ev.push({k:'clack',v:-rv,x:(A.x+B.x)/2,y:(A.y+B.y)/2});}}}
     for(const m of act){const sp=Math.hypot(m.vx,m.vy);if(sp>VMAX){m.vx*=VMAX/sp;m.vy*=VMAX/sp;}m.a+=m.vx/R*dt;m.tp=Math.max(0,m.tp-dt*2);
       if(m.fin===null&&m.y>c.fin){m.fin=t;this.order.push(m.i);this.ev.push({k:'finish',v:this.order.length,i:m.i,x:m.x,y:m.y});}}
-    // stage progress + elimination
     const live=act.filter(m=>m.fin===null);
     if(live.length&&this.order.length===0){const lead=Math.max(...live.map(m=>m.y));
       while(this.stageSeen<c.stages.length&&lead>c.stages[this.stageSeen].y-60){
@@ -3509,17 +2104,21 @@ class Race{
       }}
   }
   done(){return this.m.every(m=>m.out||m.fin!==null);}
+  over(){if(this.done())return true;if(!this.order.length)return false;const f=this.m.find(m=>m.i===this.order[0]).fin;return (this.order.length>=3&&this.t>f+1.5)||this.t>f+6;}
+  leadY(){let y=-1e9;for(const m of this.m)if(!m.out&&m.fin===null&&m.y>y)y=m.y;return y;}
   ranking(){const fin=this.m.filter(m=>!m.out&&m.fin!==null).sort((a,b)=>a.fin-b.fin);const run=this.m.filter(m=>!m.out&&m.fin===null).sort((a,b)=>b.y-a.y);const out=this.m.filter(m=>m.out).sort((a,b)=>b.outOrder-a.outOrder);return fin.concat(run,out).map(m=>m.i);}
 }
-const FPS=30,SUB=10,DT=1/(FPS*SUB);
+const FPS=60,SUB=5,DT=1/(FPS*SUB),SLOW_Y=380;
 function simulate(course,n,seed,elim,maxT){
-  const r=new Race(course,n,seed,elim);let f=0,leaders=[];
-  while(!r.done()&&f<maxT*FPS){for(let k=0;k<SUB;k++)r.step(DT);r.ev.length=0;f++;if(f%15==0)leaders.push(r.ranking()[0]);}
+  const r=new Race(course,n,seed,elim);let f=0,leaders=[],tS=null;
+  while(!r.over()&&f<maxT*FPS){for(let k=0;k<SUB;k++)r.step(DT);r.ev.length=0;f++;
+    if(tS===null&&r.order.length===0&&r.leadY()>course.fin-SLOW_Y)tS=r.t;
+    if(f%30==0&&r.t>INTRO)leaders.push(r.ranking()[0]);}
   let ch=0;for(let k=1;k<leaders.length;k++)if(leaders[k]!==leaders[k-1])ch++;
   const fins=r.m.filter(m=>m.fin!==null).map(m=>m.fin).sort((a,b)=>a-b);
-  return {seed,done:r.done(),T:f/FPS,changes:ch,gap:fins.length>1?fins[1]-fins[0]:99,first:fins[0]??99,order:r.order.slice(),ranking:r.ranking()};
+  return {seed,done:r.over(),T:f/FPS,changes:ch,gap:fins.length>1?fins[1]-fins[0]:99,first:fins[0]??99,second:fins[1]??99,tS:tS??(fins[0]??0),order:r.order.slice(),ranking:r.ranking()};
 }
-return {R,G,XL,XR,STAGES,buildCourse,Race,simulate,FPS,SUB,DT,mulberry32};
+return {R,G,XL,XR,INTRO,STAGES,buildCourse,Race,simulate,FPS,SUB,DT,SLOW_Y,mulberry32,flipAng,moverPos};
 })();
 
 </script><script>// ===== flags & racers =====
@@ -3575,94 +2174,241 @@ function tex(r){if(cache[r.code])return cache[r.code];const c=document.createEle
 return {COUNTRIES,COLORS,tex};
 })();
 </script><script>// ===== renderer =====
-const W=1080,H=1920,$=s=>document.querySelector(s);
+const W=1080,H=1920,FPS=MR.FPS,$=s=>document.querySelector(s);
 const THEMES={
- neon:{name:'ネオン',bg:['#1a1d3a','#0a0c1e'],grid:'#1e2448',ramp:'#78e6ff',glow:'rgba(0,180,255,0.28)',peg:'#ffd75a',pegGlow:'rgba(255,190,40,0.35)',mill:'#ff8240',millGlow:'rgba(255,90,40,0.3)',ring:'#ffbe50',bump:'#ff3cc8',pad:'#78ffaa',stars:false},
- space:{name:'宇宙',bg:['#05040f','#140a2c'],grid:'rgba(0,0,0,0)',ramp:'#c8b4ff',glow:'rgba(140,90,255,0.32)',peg:'#ffffff',pegGlow:'rgba(180,200,255,0.35)',mill:'#7cf0ff',millGlow:'rgba(60,220,255,0.3)',ring:'#ff9ad5',bump:'#ffd35a',pad:'#9cffd0',stars:true},
- sunset:{name:'サンセット',bg:['#2b0f2e','#5a1f3a'],grid:'rgba(255,170,120,0.08)',ramp:'#ffd0a0',glow:'rgba(255,138,80,0.32)',peg:'#fff1b0',pegGlow:'rgba(255,220,120,0.35)',mill:'#ff5f7a',millGlow:'rgba(255,80,120,0.3)',ring:'#ffe066',bump:'#7ad7ff',pad:'#b6ff8a',stars:false},
+ neon:{name:'ネオン',bg:['#1a1d3a','#0a0c1e'],grid:'#1e2448',ramp:'#78e6ff',glow:'rgba(0,180,255,0.28)',peg:'#ffd75a',pegGlow:'rgba(255,190,40,0.35)',mill:'#ff8240',millGlow:'rgba(255,90,40,0.3)',ring:'#ffbe50',bump:'#ff3cc8',pad:'#78ffaa',flip:'#ff5ad2',stars:false},
+ space:{name:'宇宙',bg:['#05040f','#140a2c'],grid:'rgba(0,0,0,0)',ramp:'#c8b4ff',glow:'rgba(140,90,255,0.32)',peg:'#ffffff',pegGlow:'rgba(180,200,255,0.35)',mill:'#7cf0ff',millGlow:'rgba(60,220,255,0.3)',ring:'#ff9ad5',bump:'#ffd35a',pad:'#9cffd0',flip:'#7cf0ff',stars:true},
+ sunset:{name:'サンセット',bg:['#2b0f2e','#5a1f3a'],grid:'rgba(255,170,120,0.08)',ramp:'#ffd0a0',glow:'rgba(255,138,80,0.32)',peg:'#fff1b0',pegGlow:'rgba(255,220,120,0.35)',mill:'#ff5f7a',millGlow:'rgba(255,80,120,0.3)',ring:'#ffe066',bump:'#7ad7ff',pad:'#b6ff8a',flip:'#ffe066',stars:false},
+ ocean:{name:'オーシャン',bg:['#04263a','#021320'],grid:'rgba(120,220,255,0.07)',ramp:'#8ff0e0',glow:'rgba(40,220,200,0.28)',peg:'#fff6d0',pegGlow:'rgba(255,240,180,0.3)',mill:'#ffb35c',millGlow:'rgba(255,160,60,0.3)',ring:'#5cd0ff',bump:'#ff6b8b',pad:'#c0ff7a',flip:'#ffb35c',stars:false},
 };
 const MEDAL=['#FFD700','#D2D2DC','#CD7F32'];
+const FONT='system-ui,-apple-system,"Segoe UI",Roboto,sans-serif';
 let shadeImg=null;
 function getShade(sz){const c=document.createElement('canvas');c.width=c.height=sz;const g=c.getContext('2d');let gr=g.createRadialGradient(sz/2,sz/2,0,sz/2,sz/2,sz/2);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(0.75,'rgba(0,0,0,0.08)');gr.addColorStop(1,'rgba(0,0,0,0.5)');g.fillStyle=gr;g.beginPath();g.arc(sz/2,sz/2,sz/2,0,7);g.fill();
  gr=g.createRadialGradient(sz*0.34,sz*0.3,0,sz*0.34,sz*0.3,sz*0.28);gr.addColorStop(0,'rgba(255,255,255,0.85)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,sz,sz);return c;}
-const discCache={};
-function disc(r){if(discCache[r.code])return discCache[r.code];const S=96,c=document.createElement('canvas');c.width=c.height=S;const g=c.getContext('2d');g.beginPath();g.arc(S/2,S/2,S/2,0,7);g.clip();g.drawImage(FLAGS.tex(r),-S*0.025,-S*0.025,S*1.05,S*1.05);return discCache[r.code]=c;}
-function drawMarble(g,racer,x,y,r,a){const d=disc(racer);if(a){g.save();g.translate(x,y);g.rotate(a);g.drawImage(d,-r,-r,r*2,r*2);g.restore();}else g.drawImage(d,x-r,y-r,r*2,r*2);
- if(!shadeImg)shadeImg=getShade(96);g.drawImage(shadeImg,x-r,y-r,r*2,r*2);}
+function drawMarble(g,racer,x,y,r,a){g.save();g.translate(x,y);g.beginPath();g.arc(0,0,r,0,7);g.clip();g.rotate(a);g.drawImage(FLAGS.tex(racer),-r*1.05,-r*1.05,r*2.1,r*2.1);g.restore();
+ if(!shadeImg)shadeImg=getShade(128);g.drawImage(shadeImg,x-r,y-r,r*2,r*2);}
 function line(g,ax,ay,bx,by,w,col){g.strokeStyle=col;g.lineWidth=w;g.beginPath();g.moveTo(ax,ay);g.lineTo(bx,by);g.stroke();}
-function ctext(g,t,size,y,col,stroke=0,x=W/2){g.font=`800 ${size}px system-ui,-apple-system,"Segoe UI",sans-serif`;g.textAlign='center';g.textBaseline='top';if(stroke){g.lineWidth=stroke;g.strokeStyle='#000';g.lineJoin='round';g.strokeText(t,x,y);}g.fillStyle=col;g.fillText(t,x,y);}
+function ctext(g,t,size,y,col,stroke=0,x=W/2,weight=900){g.font=`${weight} ${size}px ${FONT}`;g.textAlign='center';g.textBaseline='top';if(stroke){g.lineWidth=stroke;g.strokeStyle='#000';g.lineJoin='round';g.strokeText(t,x,y);}g.fillStyle=col;g.fillText(t,x,y);}
+function rrect(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
+const ease=t=>t<0?0:t>1?1:1-Math.pow(1-t,3);
+const popS=t=>{t=Math.max(0,Math.min(1,t));return t<0.6?ease(t/0.6)*1.15:1.15-0.15*ease((t-0.6)/0.4);};
 const starField=[...Array(140)].map((_,i)=>({x:(i*397)%W,y:(i*733)%2600,s:(i%3)+1}));
-function render(g,S){ // S: {race,course,racers,cam,theme,fi,overlay}
- const {race,course:c,racers,cam,theme:T}=S,t=race.t;g.lineCap='round';
- if(!T._gr){T._gr=g.createLinearGradient(0,0,0,H);T._gr.addColorStop(0,T.bg[0]);T._gr.addColorStop(1,T.bg[1]);}g.fillStyle=T._gr;g.fillRect(0,0,W,H);
+function drawCrown(g,x,y,s){g.fillStyle='#FFD34A';g.strokeStyle='#7a5200';g.lineWidth=s*0.06;g.beginPath();g.moveTo(x-s,y+s*0.45);g.lineTo(x-s,y-s*0.2);g.lineTo(x-s*0.5,y+s*0.1);g.lineTo(x,y-s*0.45);g.lineTo(x+s*0.5,y+s*0.1);g.lineTo(x+s,y-s*0.2);g.lineTo(x+s,y+s*0.45);g.closePath();g.fill();g.stroke();
+ for(const dx of [-1,0,1]){g.fillStyle='#ff4d6d';g.beginPath();g.arc(x+dx*s*0.55,y+s*0.25,s*0.1,0,7);g.fill();}}
+function drawBell(g,x,y,s,rot){g.save();g.translate(x,y);g.rotate(rot);g.fillStyle='#fff';g.beginPath();g.moveTo(-s*0.55,s*0.35);g.quadraticCurveTo(-s*0.5,-s*0.55,0,-s*0.6);g.quadraticCurveTo(s*0.5,-s*0.55,s*0.55,s*0.35);g.lineTo(s*0.7,s*0.5);g.lineTo(-s*0.7,s*0.5);g.closePath();g.fill();g.beginPath();g.arc(0,s*0.62,s*0.14,0,7);g.fill();g.beginPath();g.arc(0,-s*0.66,s*0.1,0,7);g.fill();g.restore();}
+function drawHand(g,x,y,s){g.save();g.translate(x,y);g.scale(s,s);g.fillStyle='#fff';g.strokeStyle='#111';g.lineWidth=4;g.beginPath();
+ g.moveTo(0,0);g.lineTo(0,62);g.lineTo(15,48);g.lineTo(27,74);g.lineTo(39,68);g.lineTo(27,43);g.lineTo(46,43);g.closePath();g.fill();g.stroke();g.restore();}
+
+function drawWorld(g,P,T){
+ const {race,c}=P,t=race.t,cam=P.cam;g.lineCap='round';
+ let gr=g.createLinearGradient(0,0,0,H);gr.addColorStop(0,T.bg[0]);gr.addColorStop(1,T.bg[1]);g.fillStyle=gr;g.fillRect(0,0,W,H);
  if(T.stars){g.fillStyle='rgba(255,255,255,0.7)';for(const s of starField){const y=((s.y-cam*0.3)%2600+2600)%2600;if(y<H)g.fillRect(s.x,y,s.s,s.s);}}
  else{g.strokeStyle=T.grid;g.lineWidth=1;const off=((cam*0.5)%120+120)%120;g.beginPath();for(let y=-off;y<H;y+=120){g.moveTo(0,y);g.lineTo(W,y);}for(let x=0;x<W;x+=120){g.moveTo(x,0);g.lineTo(x,H);}g.stroke();}
  g.save();g.translate(0,-cam);const vis=(y,p=300)=>y>cam-p&&y<cam+H+p;
+ for(const lb of c.labels){if(!vis(lb.y))continue;g.font=`900 54px ${FONT}`;g.textAlign='center';g.textBaseline='middle';g.fillStyle=lb.col;g.globalAlpha=0.85;g.fillText(lb.t,lb.x,lb.y);g.globalAlpha=1;}
  for(const s of c.segs){if(Math.max(s.ay,s.by)<cam-50||Math.min(s.ay,s.by)>cam+H+50)continue;
    if(s.kind==='wall'&&(s.ax===MR.XL||s.ax===MR.XR)&&s.ax===s.bx){line(g,s.ax,s.ay,s.bx,s.by,4,'rgba(110,130,200,0.5)');continue;}
    if(s.kind==='pad'){line(g,s.ax,s.ay,s.bx,s.by,34,'rgba(60,255,140,0.25)');line(g,s.ax,s.ay,s.bx,s.by,14,T.pad);continue;}
+   if(s.sv){const fast=s.sv>500,col=fast?'#ffcc33':'#66aaff';line(g,s.ax,s.ay,s.bx,s.by,30,fast?'rgba(255,200,40,0.25)':'rgba(90,160,255,0.25)');line(g,s.ax,s.ay,s.bx,s.by,16,'#1a1f3a');
+     const L=Math.hypot(s.bx-s.ax,s.by-s.ay),ux=(s.bx-s.ax)/L,uy=(s.by-s.ay)/L,nx=-uy,ny=ux;const off=(t*s.sv*0.35)%50;g.strokeStyle=col;g.lineWidth=4;
+     for(let d=off;d<L-6;d+=50){const px=s.ax+ux*d,py=s.ay+uy*d;g.beginPath();g.moveTo(px-ux*8+nx*6,py-uy*8+ny*6);g.lineTo(px,py);g.lineTo(px-ux*8-nx*6,py-uy*8-ny*6);g.stroke();}continue;}
    line(g,s.ax,s.ay,s.bx,s.by,28,T.glow);line(g,s.ax,s.ay,s.bx,s.by,12,s.kind==='floor'?'#fff':T.ramp);}
- for(const gt of c.gates){if(!vis(gt.ay))continue;if(race.gateClosed(gt)){line(g,gt.ax,gt.ay,gt.bx,gt.by,30,'rgba(255,40,40,0.3)');line(g,gt.ax,gt.ay,gt.bx,gt.by,12,'#ff5050');}else{for(const [x,y] of [[gt.ax,gt.ay],[gt.bx,gt.by]]){g.fillStyle='#50ff78';g.beginPath();g.arc(x,y,10,0,7);g.fill();}}}
+ for(const gt of c.gates){if(!vis(gt.ay))continue;if(race.gateClosed(gt)){line(g,gt.ax,gt.ay,gt.bx,gt.by,30,'rgba(255,40,40,0.3)');line(g,gt.ax,gt.ay,gt.bx,gt.by,12,'#ff5050');}
+   else if(gt.trap){line(g,gt.ax,gt.ay,gt.ax+6,gt.ay+44,10,'#50ff78');line(g,gt.bx,gt.by,gt.bx-6,gt.by+44,10,'#50ff78');}
+   else{for(const [x,y] of [[gt.ax,gt.ay],[gt.bx,gt.by]]){g.fillStyle='#50ff78';g.beginPath();g.arc(x,y,10,0,7);g.fill();}}}
+ const bumper=(x,y,r,f)=>{g.fillStyle=T.bump;g.globalAlpha=0.25+0.4*f;g.beginPath();g.arc(x,y,r+10+12*f,0,7);g.fill();g.globalAlpha=1;
+     g.fillStyle='#2d0c3c';g.beginPath();g.arc(x,y,r,0,7);g.fill();g.strokeStyle=f>0.3?'#fff':T.bump;g.lineWidth=6;g.stroke();g.fillStyle=f>0.3?'#fff':T.bump;g.beginPath();g.arc(x,y,r*0.4,0,7);g.fill();};
  for(const q of c.circ){if(!vis(q.y))continue;
-   if(q.kind==='bumper'){const f=Math.max(0,(q.flash||0));g.fillStyle=T.bump;g.globalAlpha=0.25+0.4*f;g.beginPath();g.arc(q.x,q.y,q.r+10+12*f,0,7);g.fill();g.globalAlpha=1;
-     g.fillStyle='#2d0c3c';g.beginPath();g.arc(q.x,q.y,q.r,0,7);g.fill();g.strokeStyle=f>0.3?'#fff':T.bump;g.lineWidth=6;g.stroke();g.fillStyle=f>0.3?'#fff':T.bump;g.beginPath();g.arc(q.x,q.y,q.r*0.4,0,7);g.fill();}
+   if(q.kind==='bumper')bumper(q.x,q.y,q.r,q.flash||0);
    else{g.fillStyle=T.pegGlow;g.beginPath();g.arc(q.x,q.y,q.r+8,0,7);g.fill();g.fillStyle=T.peg;g.beginPath();g.arc(q.x,q.y,q.r,0,7);g.fill();}}
+ for(const mv of c.movers){if(!vis(mv.y))continue;const x=MR.moverPos(mv,t);line(g,mv.x0-mv.ax,mv.y,mv.x0+mv.ax,mv.y,6,'rgba(255,255,255,0.12)');bumper(x,mv.y,mv.r,mv.flash||0);}
  for(const p of c.portals){for(const [x,y,col] of [[p.x,p.y,'#a05aff'],[p.tx,p.ty,'#ff9628']]){if(!vis(y))continue;g.fillStyle=col;g.globalAlpha=0.3;g.beginPath();g.arc(x,y,p.r+22,0,7);g.fill();g.globalAlpha=1;g.fillStyle='#0a0519';g.beginPath();g.arc(x,y,p.r,0,7);g.fill();g.strokeStyle=col;g.lineWidth=5;for(let k=0;k<3;k++){const a0=t*4+k*2.094;g.beginPath();g.arc(x,y,p.r-4,a0,a0+1.2);g.stroke();}}}
  for(const rg of c.rings){if(!vis(rg.y,400))continue;const gc=rg.ph+rg.om*t;g.strokeStyle='rgba(255,140,0,0.3)';g.lineWidth=30;g.beginPath();g.arc(rg.x,rg.y,rg.R,gc+rg.gap/2,gc+2*Math.PI-rg.gap/2);g.stroke();g.strokeStyle=T.ring;g.lineWidth=16;g.stroke();
    g.fillStyle='rgba(120,60,0,0.9)';for(let k=0;k<12;k++){const a=gc+rg.gap/2+(2*Math.PI-rg.gap)*(k+0.5)/12;g.beginPath();g.arc(rg.x+rg.R*Math.cos(a),rg.y+rg.R*Math.sin(a),4,0,7);g.fill();}}
  for(const mi of c.mills){if(!vis(mi.y,400))continue;for(let k=0;k<mi.arms;k++){const a=mi.ph+mi.om*t+k*2*Math.PI/mi.arms,ux=Math.cos(a)*mi.L,uy=Math.sin(a)*mi.L,ax=mi.full?mi.x-ux:mi.x,ay=mi.full?mi.y-uy:mi.y;line(g,ax,ay,mi.x+ux,mi.y+uy,28,T.millGlow);line(g,ax,ay,mi.x+ux,mi.y+uy,mi.th*1.6,T.mill);}
    if(!mi.full){g.strokeStyle='rgba(255,140,80,0.35)';g.lineWidth=2;g.beginPath();g.arc(mi.x,mi.y,mi.L,0,7);g.stroke();}g.fillStyle='#fff0c8';g.beginPath();g.arc(mi.x,mi.y,18,0,7);g.fill();}
+ for(const f of c.flips){if(!vis(f.y,400))continue;const a=MR.flipAng(f,t),ex=f.x+f.L*Math.cos(a),ey=f.y+f.L*Math.sin(a);line(g,f.x,f.y,ex,ey,36,'rgba(255,90,210,0.25)');line(g,f.x,f.y,ex,ey,f.th*2,T.flip);g.fillStyle='#fff';g.beginPath();g.arc(f.x,f.y,14,0,7);g.fill();}
  for(const p of c.pends){if(!vis(p.y,500)||p.bx===undefined)continue;line(g,p.x,p.y,p.bx,p.by,10,'#c8cdd8');g.fillStyle='#e6e6f0';g.beginPath();g.arc(p.x,p.y,12,0,7);g.fill();g.fillStyle='rgba(255,60,60,0.3)';g.beginPath();g.arc(p.bx,p.by,p.bob+16,0,7);g.fill();g.fillStyle='#e63c46';g.beginPath();g.arc(p.bx,p.by,p.bob,0,7);g.fill();g.fillStyle='rgba(255,180,180,0.9)';g.beginPath();g.arc(p.bx-12,p.by-12,10,0,7);g.fill();}
  if(vis(c.fin)){for(let k=0;k<10;k++)for(let j=0;j<2;j++){g.fillStyle=(k+j)%2?'#141414':'#fff';g.fillRect(440+k*20,c.fin-20+j*20,20,20);}}
- for(const m of race.m){if(m.out)continue;if(m.tp>0){g.fillStyle=`rgba(255,150,40,${0.5*m.tp})`;g.beginPath();g.arc(m.x,m.y,MR.R+30*m.tp,0,7);g.fill();}drawMarble(g,racers[m.i],m.x,m.y,MR.R,m.a);}
- for(const p of S.pops){g.strokeStyle=`rgba(255,80,80,${p.life})`;g.lineWidth=6;g.beginPath();g.arc(p.x,p.y,MR.R+(1-p.life)*90,0,7);g.stroke();}
+ // trails then marbles
+ for(const m of race.m){if(m.out)continue;const tr=P.trails[m.i];if(!tr)continue;const col=P.racers[m.i].main;g.fillStyle=col;
+   for(let k=0;k<tr.length;k++){const f=(k+1)/(tr.length+1);g.globalAlpha=0.22*f;g.beginPath();g.arc(tr[k][0],tr[k][1],MR.R*(0.45+0.5*f),0,7);g.fill();}g.globalAlpha=1;}
+ for(const m of race.m){if(m.out)continue;if(m.tp>0){g.fillStyle=`rgba(255,150,40,${0.5*m.tp})`;g.beginPath();g.arc(m.x,m.y,MR.R+30*m.tp,0,7);g.fill();}
+   if(P.leaderI===m.i&&race.t>MR.INTRO+0.5&&!race.order.length){g.strokeStyle='rgba(255,215,0,0.9)';g.lineWidth=5;g.beginPath();g.arc(m.x,m.y,MR.R+8,0,7);g.stroke();}
+   drawMarble(g,P.racers[m.i],m.x,m.y,MR.R,m.a);}
+ for(const p of P.pops){g.strokeStyle=`rgba(255,80,80,${p.life})`;g.lineWidth=6;g.beginPath();g.arc(p.x,p.y,MR.R+(1-p.life)*90,0,7);g.stroke();}
  g.restore();
- // HUD
- const rk=S.rk||race.ranking(),show=S.fi>=36,n=racers.length,rowH=n>8?32:38;
- if(show){g.fillStyle='rgba(8,10,24,0.62)';g.fillRect(14,250,300,n*rowH+14);
+}
+function drawHUD(g,P,S){
+ const {race,c,racers}=P,fi=P.fi,n=racers.length,rowH=n>8?32:38,introF=MR.INTRO*FPS;
+ if(fi>=introF-10&&P.resF===null){const rk=race.ranking();g.fillStyle='rgba(8,10,24,0.62)';rrect(g,14,250,300,n*rowH+14,12);g.fill();
    rk.forEach((i,pos)=>{const y=258+pos*rowH,m=race.m.find(mm=>mm.i===i);drawMarble(g,racers[i],50,y+rowH/2-2,rowH*0.38,0);
-     g.font=`800 ${rowH*0.62}px system-ui,sans-serif`;g.textAlign='left';g.textBaseline='middle';g.fillStyle=m.out?'#ff6b6b':(pos<3?MEDAL[pos]:'#dce1f0');g.fillText(`${pos+1}`,22,y+rowH/2);g.fillText(m.out?racers[i].name+' ✕':racers[i].name,80,y+rowH/2);});
+     g.font=`800 ${rowH*0.62}px ${FONT}`;g.textAlign='left';g.textBaseline='middle';g.fillStyle=m.out?'#ff6b6b':(pos<3?MEDAL[pos]:'#dce1f0');g.fillText(`${pos+1}`,22,y+rowH/2);g.fillText(m.out?racers[i].name+' ✕':racers[i].name,80,y+rowH/2);});
    line(g,1040,300,1040,1700,6,'rgba(60,70,120,0.9)');line(g,1022,1700,1058,1700,4,'#fff');
    for(const m of [...race.m].sort((a,b)=>a.y-b.y)){if(m.out)continue;const pr=Math.min(1,Math.max(0,m.y/c.fin));drawMarble(g,racers[m.i],1040,300+pr*1400,15,0);}}
- ctext(g,S.title,56,60,'#fff',8);ctext(g,S.subtitle,38,140,'#a0b4dc',6);
- const o=S.overlay;
- if(o.go)ctext(g,'GO!',170,820,'#ffe650',12);
- if(o.stage)ctext(g,o.stage,58,640,'#fff',10);
- if(o.elim)ctext(g,o.elim,64,740,'#ff5a5a',10);
- if(o.win){ctext(g,o.win.text,84,760,o.win.col,10);if(o.win.sub)ctext(g,o.win.sub,42,862,'#fff',6);}
- if(o.results){g.fillStyle='rgba(8,10,24,0.88)';const top=520,rowR=Math.min(98,900/n);g.fillRect(110,top,860,120+n*rowR);ctext(g,'FINAL RESULTS',46,top+28,'#fff');
-   o.results.forEach((r,pos)=>{const y=top+105+pos*rowR;const col=r.out?'#ff7b7b':(pos<3?MEDAL[pos]:'#dce1f0');drawMarble(g,racers[r.i],270,y+rowR*0.38,rowR*0.3,0);
-     g.font=`800 ${Math.min(44,rowR*0.45)}px system-ui,sans-serif`;g.textAlign='left';g.textBaseline='middle';g.fillStyle=col;g.fillText(`${pos+1}.`,160,y+rowR*0.38);g.fillText(racers[r.i].name,320,y+rowR*0.38);
-     g.textAlign='right';g.fillStyle='#a0aac8';g.font=`700 ${Math.min(38,rowR*0.4)}px system-ui,sans-serif`;g.fillText(r.out?`OUT (ST ${r.stage+1})`:`${r.time.toFixed(2)}s`,940,y+rowR*0.38);});
-   ctext(g,o.results.cta,40,top+150+n*rowR,'#fff',6);}
+ ctext(g,S.title,56,60,'#fff',8);ctext(g,S.subtitle,38,140,'#a0b4dc',6,W/2,800);
 }
-// ===== audio =====
-function makeNoise(ctx){const len=ctx.sampleRate;const b=ctx.createBuffer(1,len,ctx.sampleRate);const d=b.getChannelData(0);for(let i=0;i<len;i++)d[i]=Math.random()*2-1;return b;}
-function sfx(ctx,out,nb,evs,t0){
- const tone=(f,dur,amp,dec=10,type='sine',delay=0)=>{const t=t0+delay,o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(amp,t);g.gain.exponentialRampToValueAtTime(0.0001,t+Math.max(0.03,Math.min(dur,4/dec)));o.connect(g);g.connect(out);o.start(t);o.stop(t+dur+0.05);};
- const noise=(dur,amp,freq=2000,delay=0)=>{const t=t0+delay,s=ctx.createBufferSource(),f=ctx.createBiquadFilter(),g=ctx.createGain();s.buffer=nb;f.type='lowpass';f.frequency.value=freq;g.gain.setValueAtTime(amp,t);g.gain.exponentialRampToValueAtTime(0.0001,t+dur);s.connect(f);f.connect(g);g.connect(out);s.start(t,Math.random()*0.5);s.stop(t+dur+0.02);};
- const cnt={};for(const e of evs){cnt[e.k]=(cnt[e.k]||0)+1;if(cnt[e.k]>3)continue;const a=Math.min(1,Math.max(0.3,(e.v||600)/900));
-   switch(e.k){case'clack':tone(2400+Math.random()*600,0.05,0.25*a,60,'triangle');break;
-    case'ramp':case'wall':case'floor':noise(0.06,0.25*a,900);break;
-    case'peg':tone(1600+Math.random()*800,0.07,0.16*a,40);break;
-    case'bumper':tone(700+Math.floor(Math.random()*3)*120,0.16,0.22,14,'triangle');noise(0.04,0.15,4000);break;
-    case'pad':tone(300,0.25,0.28,8,'triangle');tone(600,0.2,0.18,10,'sine',0.02);break;
-    case'mill':case'ring':noise(0.08,0.3*a,1200);tone(150,0.08,0.18*a,30);break;
-    case'pend':tone(110,0.25,0.35,10,'triangle');noise(0.1,0.3,1500);break;
-    case'portal':for(let j=0;j<4;j++)tone(500+j*250,0.2,0.15,12,'sine',j*0.03);break;
-    case'go':tone(880,0.4,0.3,6,'square');break;
-    case'stage':tone(659.25,0.25,0.15,10,'triangle');tone(987.77,0.4,0.15,8,'triangle',0.11);break;
-    case'elim':tone(330,0.3,0.25,8,'sawtooth');tone(220,0.4,0.25,6,'sawtooth',0.12);break;
-    case'finish':if(e.v===1){[523.25,659.25,783.99,1046.5].forEach((f,j)=>tone(f,1.2,0.18,3,'triangle',j*0.06));noise(2.2,0.35,1200,0.05);}else tone(e.v<=3?1046.5:784,0.35,0.14,8,'triangle');break;}}}
-const AU={ctx:null,master:null,muted:false,
- init(){if(this.ctx)return;this.ctx=new (window.AudioContext||window.webkitAudioContext)();this.master=this.ctx.createGain();this.master.gain.value=0.6;this.master.connect(this.ctx.destination);this.dest=this.ctx.createMediaStreamDestination();this.master.connect(this.dest);this.nb=makeNoise(this.ctx);},
- play(evs){if(!this.ctx||this.muted||!evs.length)return;sfx(this.ctx,this.master,this.nb,evs,this.ctx.currentTime);}};
+function drawOverlays(g,P,S){
+ const {race,racers}=P,fi=P.fi,n=racers.length,introF=MR.INTRO*FPS,tsec=fi/FPS;
+ // --- intro: pick your country + lineup + countdown
+ if(fi<introF){const a=fi<introF-12?1:(introF-fi)/12;g.globalAlpha=a;
+   const cols=n>8?4:n>4?3:2,rows=Math.ceil(n/cols),cw=900/cols,ch=110,top=980;
+   g.fillStyle='rgba(6,8,22,0.82)';rrect(g,70,top-130,940,rows*ch+170,28);g.fill();
+   const pulse=1+0.04*Math.sin(fi*0.35);g.save();g.translate(W/2,top-90);g.scale(pulse,pulse);ctext(g,S.pickText,66,-36,'#ffe650',10,0);g.restore();
+   racers.forEach((r,k)=>{const cx=90+cw*(k%cols)+cw/2,cy=top+40+Math.floor(k/cols)*ch,sc=popS((fi+12-k*0.8)/14);if(sc<=0)return;
+     drawMarble(g,r,cx-cw/2+52,cy+10,34*sc,0);g.font=`800 ${Math.min(36,cw/7)}px ${FONT}`;g.textAlign='left';g.textBaseline='middle';g.fillStyle='#fff';g.fillText(r.name,cx-cw/2+98,cy+10);});
+   ctext(g,'Comment your pick before it starts!',36,top+rows*ch+2,'#a8f0ff',6,W/2,800);g.globalAlpha=1;
+   for(const [k,t0] of [[3,0.4],[2,1.0],[1,1.6]]){const u=(tsec-t0)/0.6;if(u>=0&&u<1){const s=popS(u*1.6);g.save();g.translate(W/2,720);g.scale(s,s);g.globalAlpha=1-Math.max(0,u-0.7)/0.3;ctext(g,String(k),200,-110,'#fff',14,0);g.restore();g.globalAlpha=1;}}}
+ const u=(fi-introF)/FPS;if(u>=0&&u<0.7){const s=popS(u/0.45);g.save();g.translate(W/2,760);g.scale(s,s);g.globalAlpha=1-Math.max(0,u-0.45)/0.25;ctext(g,'GO!',190,-100,'#ffe650',14,0);g.restore();g.globalAlpha=1;}
+ // --- race overlays
+ if(P.resF===null){
+   if(P.stage&&fi-P.stageF<60){const v=(fi-P.stageF)/60,x=W/2+(v<0.15?(1-ease(v/0.15))*-900:v>0.85?ease((v-0.85)/0.15)*900:0);g.fillStyle='rgba(8,10,24,0.7)';rrect(g,x-440,620,880,96,20);g.fill();ctext(g,P.stage,52,640,'#fff',8,x);}
+   if(P.elim&&fi-P.elimF<50)ctext(g,P.elim,62,740,'#ff5a5a',10);
+   if(P.leadF!==null&&fi-P.leadF<55&&P.winF===null&&!P.slowNow){const v=(fi-P.leadF)/55,sy=1580+(v<0.12?(1-ease(v/0.12))*120:0),al=v>0.8?1-(v-0.8)/0.2:1;g.globalAlpha=al;
+     g.fillStyle='rgba(255,215,0,0.92)';rrect(g,W/2-330,sy,660,92,46);g.fill();drawMarble(g,racers[P.leadI],W/2-270,sy+46,32,0);
+     g.font=`900 44px ${FONT}`;g.textAlign='left';g.textBaseline='middle';g.fillStyle='#1a1200';g.fillText(`NEW LEADER: ${racers[P.leadI].name}`,W/2-222,sy+48);g.globalAlpha=1;}
+   if(P.slowNow){g.fillStyle='rgba(0,0,0,0.18)';g.fillRect(0,0,W,H);const bl=Math.floor(fi/12)%2;ctext(g,'PHOTO FINISH',72,1520,'#ffffff',10);g.fillStyle=bl?'#ff3b3b':'rgba(255,59,59,0.4)';g.beginPath();g.arc(W/2-290,1558,15,0,7);g.fill();ctext(g,'SLOW MOTION ×0.4',36,1610,'#ffd0d0',6,W/2,800);}
+   if(P.winF!==null){const v=fi-P.winF;if(v<90){const wi=race.order[0],w=racers[wi];const s=popS(v/18);g.save();g.translate(W/2,820);g.scale(s,s);
+     ctext(g,`${w.name} WINS!`,92,-60,w.main,12,0);g.restore();if(P.winGap!==null&&v>10)ctext(g,P.winGap<0.005?'by a hair!':`by ${P.winGap.toFixed(2)}s!`,46,860,'#fff',7);}}
+ }
+ // --- results
+ if(P.resF!==null&&(P.subF===null||fi<P.subF+12)){const v=fi-P.resF;g.fillStyle=`rgba(4,6,18,${Math.min(0.88,v/12*0.88)})`;g.fillRect(0,0,W,H);
+   const rk=P.results,top=330,rowR=Math.min(100,1000/n);ctext(g,'FINAL RESULTS',60,top,'#fff',8);
+   rk.forEach((r,pos)=>{const rv=v-8-pos*5;if(rv<0)return;const x=(1-ease(rv/10))*600;const y=top+110+pos*rowR,col=r.out?'#ff7b7b':(pos<3?MEDAL[pos]:'#dce1f0');
+     g.save();g.translate(x,0);if(pos<3){g.fillStyle=`rgba(255,255,255,${0.07})`;rrect(g,110,y-4,860,rowR*0.84,16);g.fill();}
+     drawMarble(g,racers[r.i],270,y+rowR*0.38,rowR*0.32,0);if(pos===0)drawCrown(g,270,y+rowR*0.38-rowR*0.42,rowR*0.24);
+     g.font=`900 ${Math.min(46,rowR*0.46)}px ${FONT}`;g.textAlign='left';g.textBaseline='middle';g.fillStyle=col;g.fillText(`${pos+1}.`,150,y+rowR*0.38);g.fillText(racers[r.i].name,330,y+rowR*0.38);
+     g.textAlign='right';g.fillStyle='#a0aac8';g.font=`700 ${Math.min(38,rowR*0.4)}px ${FONT}`;g.fillText(r.out?`OUT (ST ${r.stage+1})`:r.time!==null?`${r.time.toFixed(2)}s`:'—',950,y+rowR*0.38);g.restore();});
+   const cy=top+130+n*rowR;if(v>30)ctext(g,S.mode==='country'?'Did your country win?':'Did your color win?',44,cy,'#ffe650',7);}
+ // --- end card
+ if(P.subF!==null&&fi>=P.subF){const v=fi-P.subF,al=Math.min(1,v/12);g.globalAlpha=al;g.fillStyle='rgba(6,4,16,0.94)';g.fillRect(0,0,W,H);
+   const wi=P.results[0].i,w=racers[wi];const bob=Math.sin(v*0.12)*10;
+   g.fillStyle=w.main;g.globalAlpha=al*0.25;g.beginPath();g.arc(W/2,520+bob,190,0,7);g.fill();g.globalAlpha=al;
+   drawMarble(g,w,W/2,520+bob,140,v*0.05);drawCrown(g,W/2,350+bob,80);
+   ctext(g,`CHAMPION: ${w.name}`,58,700,'#FFD34A',8);
+   ctext(g,S.endText,54,830,'#fff',8);
+   const clickF=70,clicked=v>=clickF+2,press=v>=clickF&&v<clickF+8?0.94:1;const bw=640,bh=150,bx=W/2-bw/2,by=1000;
+   g.save();g.translate(W/2,by+bh/2);g.scale(press,press);g.translate(-W/2,-(by+bh/2));
+   g.fillStyle=clicked?'#3a3a44':'#FF0033';rrect(g,bx,by,bw,bh,75);g.fill();if(!clicked){g.strokeStyle=`rgba(255,255,255,${0.35+0.35*Math.sin(v*0.3)})`;g.lineWidth=6;g.stroke();}
+   ctext(g,clicked?'SUBSCRIBED ✓':'SUBSCRIBE',64,by+40,'#fff',0,W/2-(clicked?0:20));g.restore();
+   const ring=clicked&&v<clickF+60?Math.sin((v-clickF)*0.8)*0.5*(1-(v-clickF)/60):0;drawBell(g,bx+bw+80,by+bh/2,70,ring);
+   if(v<clickF+20){const p=ease(Math.min(1,v/clickF));const hx=900+(W/2+90-900)*p,hy=1560+(by+bh/2+10-1560)*p;drawHand(g,hx,hy,press<1?1.25:1.4);}
+   if(clicked&&v<clickF+30){const r=(v-clickF)*14;g.strokeStyle=`rgba(255,255,255,${1-(v-clickF)/30})`;g.lineWidth=8;rrect(g,bx-r/2,by-r/2,bw+r,bh+r,75+r/2);g.stroke();}
+   const ay=1330+Math.abs(Math.sin(v*0.15))*24;ctext(g,S.mode==='country'?'Comment the next country 👇':'Comment the next color 👇',48,1260,'#a8f0ff',7);
+   g.fillStyle='#a8f0ff';g.beginPath();g.moveTo(W/2-40,ay+30);g.lineTo(W/2+40,ay+30);g.lineTo(W/2,ay+80);g.closePath();g.fill();
+   g.globalAlpha=1;}
+ // --- loop fade into the opening frame
+ if(S.loopImg&&P.endF!==null&&fi>=P.endF-24){g.globalAlpha=(fi-(P.endF-24))/24;g.drawImage(S.loopImg,0,0);g.globalAlpha=1;}
+}
+function draw(g,P,S){drawWorld(g,P,THEMES[S.theme]);drawHUD(g,P,S);drawOverlays(g,P,S);}
+
+// ===== session (deterministic frame stepper) =====
+function newSession(chosen,opts){const c=MR.buildCourse(opts.stages);const rs=opts.racers;
+ return {c,racers:rs,race:new MR.Race(c,rs.length,chosen.seed,opts.elim),cam:-330,fi:0,pops:[],trails:{},stage:null,stageF:0,elim:null,elimF:0,
+  leaderI:null,leadI:null,leadF:null,winF:null,winGap:null,resF:null,results:null,subF:null,endF:null,slowNow:false,slowF:[],
+  slowOK:!!(opts.slowmo&&chosen.gap<0.6&&(chosen.second-chosen.tS)<3.2),endcard:opts.endcard,log:null,finalF:null};}
+function step(P){const {race,c}=P,rs=P.racers,fi=P.fi;const ev=[];
+ if(P.resF===null){
+   const slow=P.slowOK&&race.order.length<2&&race.leadY()>c.fin-MR.SLOW_Y;P.slowNow=slow;if(slow)P.slowF.push(fi);
+   const nsub=slow?2:MR.SUB;for(let k=0;k<nsub;k++)race.step(MR.DT);ev.push(...race.ev.splice(0));
+   for(const e of ev){if(e.k==='bumper'){const q=c.circ.find(q=>q.x===e.x&&q.y===e.y);if(q)q.flash=1;}
+     if(e.k==='stage'){P.stage=`STAGE ${e.si+1}: ${e.name}`;P.stageF=fi;if(e.si===c.stages.length-1)P.finalF=fi;}
+     if(e.k==='elim'){P.elim=`${rs[e.i].name} ELIMINATED!`;P.elimF=fi;P.pops.push({x:e.x,y:e.y,life:1});}
+     if(e.k==='finish'&&e.v===1)P.winF=fi;
+     if(e.k==='finish'&&e.v===2){const fm={};race.m.forEach(m=>fm[m.i]=m.fin);P.winGap=fm[race.order[1]]-fm[race.order[0]];}}
+   for(const mv of c.movers){if(mv.hit){mv.flash=1;mv.hit=0;}if(mv.flash)mv.flash=Math.max(0,mv.flash-0.12);}
+   for(const q of c.circ)if(q.flash)q.flash=Math.max(0,q.flash-0.08);
+   if(race.t>MR.INTRO+1&&!race.order.length){const ld=race.ranking()[0];if(ld!==P.leaderI){if(P.leaderI!==null&&(P.leadF===null||fi-P.leadF>75)){P.leadF=fi;P.leadI=ld;ev.push({k:'lead'});}P.leaderI=ld;}}
+   else if(P.leaderI===null)P.leaderI=race.ranking()[0];
+   const live=race.m.filter(m=>!m.out&&m.fin===null);const lead=live.length?Math.max(...live.map(m=>m.y)):c.floor;
+   let tgt=race.order.length?c.floor+80-H:lead-1150;tgt=Math.max(-330,Math.min(tgt,c.floor+80-H));P.cam+=(tgt-P.cam)*0.075;
+   for(const m of race.m){const tr=P.trails[m.i]||(P.trails[m.i]=[]);tr.push([m.x,m.y]);if(tr.length>7)tr.shift();}
+   if(race.over()&&P.winF!==null&&fi-P.winF>=80){P.resF=fi+1;
+     const rk=race.ranking();P.results=rk.map(i=>{const m=race.m.find(mm=>mm.i===i);return {i,out:m.out,stage:m.outStage,time:m.fin!==null?m.fin-MR.INTRO:null};});
+     P.subF=P.endcard?P.resF+150:null;P.endF=P.endcard?P.subF+210:P.resF+170;ev.push({k:'results'});}
+ }
+ for(const p of P.pops)p.life-=0.025;P.pops=P.pops.filter(p=>p.life>0);
+ if(P.subF!==null&&fi===P.subF)ev.push({k:'whoosh'});if(P.subF!==null&&fi===P.subF+70)ev.push({k:'click'});
+ if(P.resF!==null&&fi>=P.resF)for(let k=0;k<P.results.length;k++)if(fi===P.resF+8+k*5)ev.push({k:'tick',v:k});
+ if(P.log)P.log[fi]=ev;
+ P.fi++;return P.endF!==null&&P.fi>=P.endF;}
+
+// ===== audio (offline synthesis: BGM + SFX on one timeline) =====
+async function buildAudio(TL){
+ const SR=48000,dur=TL.N/FPS+0.3,ctx=new OfflineAudioContext(2,Math.ceil(dur*SR),SR);
+ const nb=ctx.createBuffer(1,SR,SR);{const d=nb.getChannelData(0);for(let i=0;i<SR;i++)d[i]=Math.random()*2-1;}
+ const comp=ctx.createDynamicsCompressor();comp.threshold.value=-14;comp.ratio.value=4;comp.connect(ctx.destination);
+ const master=ctx.createGain();master.gain.value=0.9;master.connect(comp);master.gain.setValueAtTime(0.9,Math.max(0,dur-0.75));master.gain.linearRampToValueAtTime(0.0001,dur-0.3);
+ const bgmLP=ctx.createBiquadFilter();bgmLP.type='lowpass';bgmLP.frequency.value=18000;bgmLP.connect(master);
+ const bgm=ctx.createGain();bgm.gain.value=TL.bgm?TL.vol:0;bgm.connect(bgmLP);
+ const dl=ctx.createDelay(1);const BPM=128,b=60/BPM;dl.delayTime.value=b*0.75;const fb=ctx.createGain();fb.gain.value=0.32;dl.connect(fb).connect(dl);dl.connect(bgm);const arpBus=ctx.createGain();arpBus.connect(bgm);arpBus.connect(dl);
+ const sfx=ctx.createGain();sfx.gain.value=TL.sfxVol;sfx.connect(master);
+ function tone(dest,f,t,dur,amp,type='sine',att=0.003,f2=null,lp=null){const o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+dur);
+   g.gain.setValueAtTime(0.0001,t);g.gain.linearRampToValueAtTime(amp,t+att);g.gain.exponentialRampToValueAtTime(0.0001,t+att+dur);let n=o;if(lp){const fl=ctx.createBiquadFilter();fl.type='lowpass';fl.frequency.value=lp;o.connect(fl);n=fl;}n.connect(g).connect(dest);o.start(t);o.stop(t+att+dur+0.02);}
+ function noise(dest,t,dur,amp,type='lowpass',freq=2000,f2=null,att=0.002){const s=ctx.createBufferSource(),f=ctx.createBiquadFilter(),g=ctx.createGain();s.buffer=nb;f.type=type;f.frequency.setValueAtTime(freq,t);if(f2)f.frequency.exponentialRampToValueAtTime(f2,t+dur);
+   g.gain.setValueAtTime(0.0001,t);g.gain.linearRampToValueAtTime(amp,t+att);g.gain.exponentialRampToValueAtTime(0.0001,t+att+dur);s.connect(f).connect(g).connect(dest);s.start(t,Math.random()*0.5);s.stop(t+att+dur+0.02);}
+ const kick=(t,a=1)=>{tone(bgm,150,t,0.28,0.9*a,'sine',0.002,42);noise(bgm,t,0.02,0.25*a,'highpass',3000);};
+ const clap=(t,a=1)=>{noise(bgm,t,0.16,0.32*a,'bandpass',1700);};
+ const hat=(t,a=1,open=false)=>{noise(bgm,t,open?0.12:0.035,0.16*a,'highpass',8000);};
+ const CH=[[220,261.63,329.63],[174.61,220,261.63],[130.81,164.81,196],[196,246.94,293.66]],ROOT=[55,43.65,65.41,49];
+ const pad=(t,ch,d,a=1)=>{for(const f of ch)for(const det of [-4,4])tone(bgm,f*Math.pow(2,det/1200),t,d,0.028*a,'sawtooth',0.08,null,1400);};
+ const T=f=>f/FPS,goT=MR.INTRO,winT=TL.winF!==null?T(TL.winF):T(TL.N),resT=TL.resF!==null?T(TL.resF):T(TL.N),endT=T(TL.N),finT=TL.finalF!==null?T(TL.finalF):1e9;
+ // intro riser + countdown
+ noise(bgm,0.05,goT-0.05,0.18,'bandpass',300,5000,goT-0.3);pad(0.05,CH[0],goT,0.6);
+ for(const t0 of [0.4,1.0,1.6])tone(sfx,660,t0,0.16,0.3,'square',0.003,null,3000);
+ // race loop
+ let n16=0;for(let t=goT;t<winT-0.01;t+=b/4,n16++){const s=n16%16,bar=Math.floor(n16/16),ch=CH[bar%4],hot=t>=finT,lvl=bar>=1;
+   if(s%4===0)kick(t);if(lvl&&(s===4||s===12))clap(t);if(lvl&&s%2===0)hat(t,0.8,s%4===2);if(hot&&s%2===1)hat(t,0.5);
+   if(s%2===0){const f=ROOT[bar%4]*(s%4===2?2:1);tone(bgm,f,t,b/2*0.9,0.32,'sawtooth',0.004,null,hot?900:600);}
+   if(s===0&&lvl)pad(t,ch,b*4-0.05,hot?1.2:1);
+   if(bar>=2){const pat=[0,1,2,3,2,1,0,1,0,1,2,3,2,3,1,2],notes=[ch[0],ch[1],ch[2],ch[0]*2];tone(arpBus,notes[pat[s]]*2*(hot?2:1),t,0.11,hot?0.09:0.07,'square',0.003,null,hot?4200:2600);}
+   if(hot&&s===0)noise(bgm,t,1.2,0.12,'highpass',6000);}
+ // slow-mo: muffle music
+ if(TL.slow.length){const s0=T(TL.slow[0]),s1=T(TL.slow[TL.slow.length-1]+1);bgmLP.frequency.setValueAtTime(18000,s0);bgmLP.frequency.exponentialRampToValueAtTime(520,s0+0.25);bgmLP.frequency.setValueAtTime(520,s1);bgmLP.frequency.exponentialRampToValueAtTime(18000,s1+0.2);
+   for(let t=s0;t<s1;t+=0.75){tone(bgm,55,t,0.35,0.7,'sine',0.004,40);tone(bgm,55,t+0.22,0.3,0.45,'sine',0.004,40);}}
+ // win fanfare
+ if(TL.winF!==null){[523.25,659.25,783.99,1046.5,1318.5].forEach((f,j)=>tone(bgm,f,winT+j*0.07,1.3,0.13,'triangle'));noise(bgm,winT,2.2,0.3,'highpass',5000);kick(winT,1.2);}
+ // outro groove (results + end card)
+ let k=0;for(let t=resT;t<endT-0.2;t+=b,k++){kick(t,0.5);if(k%2===1)clap(t,0.5);hat(t+b/2,0.6,true);if(k%4===0)pad(t,CH[(Math.floor(k/4)+2)%4],b*4-0.05,0.8);tone(bgm,ROOT[(Math.floor(k/4)+2)%4]*2,t,b*0.8,0.22,'sawtooth',0.004,null,700);}
+ // sfx from the event log
+ const last={};const gapK={clack:0.02,ramp:0.035,wall:0.035,floor:0.05,peg:0.025,belt:0.06,mill:0.04,ring:0.04,flip:0.05};
+ for(let f=0;f<TL.N;f++){const evs=TL.log[f];if(!evs||!evs.length)continue;const t=T(f),cnt={};
+   for(const e of evs){cnt[e.k]=(cnt[e.k]||0)+1;if(cnt[e.k]>3)continue;if(gapK[e.k]&&last[e.k]!==undefined&&t-last[e.k]<gapK[e.k])continue;last[e.k]=t;const a=Math.min(1,Math.max(0.3,(e.v||600)/900));
+   switch(e.k){case'clack':tone(sfx,2400+Math.random()*600,t,0.05,0.2*a,'triangle');break;
+    case'ramp':case'wall':case'floor':noise(sfx,t,0.06,0.2*a,'lowpass',900);break;
+    case'peg':tone(sfx,1600+Math.random()*800,t,0.07,0.13*a);break;
+    case'bumper':tone(sfx,700+Math.floor(Math.random()*3)*120,t,0.16,0.2,'triangle');noise(sfx,t,0.04,0.12,'highpass',4000);break;
+    case'pad':tone(sfx,300,t,0.25,0.25,'triangle');tone(sfx,600,t+0.02,0.2,0.15);break;
+    case'mill':case'ring':noise(sfx,t,0.08,0.25*a,'lowpass',1200);tone(sfx,150,t,0.08,0.15*a);break;
+    case'flip':tone(sfx,190,t,0.12,0.3,'triangle',0.002,120);noise(sfx,t,0.05,0.2,'bandpass',2200);break;
+    case'belt':noise(sfx,t,0.05,0.1,'lowpass',500);break;
+    case'trap':tone(sfx,95,t,0.22,0.35,'sine',0.002,60);noise(sfx,t,0.08,0.18,'lowpass',800);break;
+    case'pend':tone(sfx,110,t,0.25,0.3,'triangle');noise(sfx,t,0.1,0.25,'lowpass',1500);break;
+    case'portal':for(let j=0;j<4;j++)tone(sfx,500+j*250,t+j*0.03,0.2,0.13);break;
+    case'go':tone(sfx,1320,t,0.45,0.28,'square',0.003,null,4000);noise(sfx,t,1.2,0.25,'highpass',5000);break;
+    case'stage':tone(sfx,659.25,t,0.25,0.14,'triangle');tone(sfx,987.77,t+0.11,0.4,0.14,'triangle');break;
+    case'elim':tone(sfx,330,t,0.3,0.2,'sawtooth',0.003,null,2000);tone(sfx,220,t+0.12,0.4,0.2,'sawtooth',0.003,null,2000);break;
+    case'lead':tone(sfx,420,t,0.22,0.12,'sine',0.01,1300);noise(sfx,t,0.25,0.1,'bandpass',800,4000,0.05);break;
+    case'finish':if(e.v>1)tone(sfx,e.v<=3?1046.5:784,t,0.35,0.13,'triangle');break;
+    case'results':noise(sfx,t,0.5,0.15,'bandpass',500,3000,0.1);break;
+    case'tick':tone(sfx,900+e.v*60,t,0.06,0.1,'triangle');break;
+    case'whoosh':noise(sfx,t,0.45,0.25,'bandpass',300,3500,0.12);break;
+    case'click':noise(sfx,t,0.03,0.4,'highpass',3000);tone(sfx,2000,t,0.03,0.2,'triangle');tone(sfx,1318.5,t+0.05,1.4,0.18);tone(sfx,2637,t+0.05,0.9,0.08);tone(sfx,1318.5,t+0.3,1.2,0.12);break;}}}
+ return await ctx.startRendering();
+}
+
 // ===== app state =====
-const ST={mode:'country',selected:['JP','US','ID','IN','VN','BR','DE','FR'],colorsN:8,stages:['bumpers','drum','pendulums','wheel','gate','trampolines','portals','twindrums','windmills'],elim:false,theme:'neon',title:'Which country wins?',trials:60,maxLen:58,prefer:'close',chosen:null,results:[]};
+const ST={mode:'country',selected:['JP','US','ID','IN','VN','BR','DE','FR'],colorsN:8,stages:['bumpers','trapdoors','sliders','drum','flippers','conveyors','portals','blender','windmills'],elim:false,theme:'neon',title:'Which country wins?',
+ pickText:'PICK YOUR COUNTRY!',endText:'Subscribe for the next race!',slowmo:true,endcard:true,loop:true,bgm:true,vol:0.55,sfxVol:0.85,trials:60,maxLen:58,prefer:'close',chosen:null,results:[],TL:null,audio:null};
 const ALL_STAGES=Object.keys(MR.STAGES);
 function racers(){return ST.mode==='country'?ST.selected.map(c=>FLAGS.COUNTRIES.find(x=>x.code===c)):FLAGS.COLORS.slice(0,ST.colorsN);}
-function course(){return MR.buildCourse(ST.stages);}
 function subtitle(){const n=racers().length;return ST.mode==='country'?`${n} countries · ${ST.stages.length} stages · 1 winner`:`${n} marbles · ${ST.stages.length} stages · 1 winner`;}
+function sopts(){return {stages:ST.stages,racers:racers(),elim:ST.elim,slowmo:ST.slowmo,endcard:ST.endcard};}
+function drawState(withLoop=true){return {theme:ST.theme,title:ST.title,subtitle:subtitle(),pickText:ST.pickText,endText:ST.endText,mode:ST.mode,loopImg:ST.loop&&withLoop?loopImg():null};}
+let _loopImg=null,_loopKey='';
+function loopImg(){if(!ST.chosen)return null;const key=JSON.stringify([ST.chosen.seed,ST.stages,ST.selected,ST.colorsN,ST.mode,ST.theme,ST.title,ST.pickText]);if(_loopImg&&_loopKey===key)return _loopImg;
+ const cv=document.createElement('canvas');cv.width=W;cv.height=H;const P=newSession(ST.chosen,sopts());draw(cv.getContext('2d'),P,drawState(false));_loopImg=cv;_loopKey=key;return cv;}
 // --- settings UI ---
 function renderRacerUI(){const box=$('#racers');box.innerHTML='';
  if(ST.mode==='country'){FLAGS.COUNTRIES.forEach(r=>{const on=ST.selected.includes(r.code);const b=document.createElement('button');b.className='chip'+(on?' on':'');b.innerHTML=`<span class="fl" style="background-image:url(${FLAGS.tex(r).toDataURL()})"></span>${r.name}`;
@@ -3670,129 +2416,119 @@ function renderRacerUI(){const box=$('#racers');box.innerHTML='';
    $('#racerCount').textContent=`${ST.selected.length} / 12 か国（2〜12）`;}
  else{const s=document.createElement('input');s.type='range';s.min=2;s.max=12;s.value=ST.colorsN;s.oninput=()=>{ST.colorsN=+s.value;$('#racerCount').textContent=`${ST.colorsN} 色`;invalidate();};box.appendChild(s);$('#racerCount').textContent=`${ST.colorsN} 色`;}}
 function renderStageUI(){const box=$('#stages');box.innerHTML='';
- ST.stages.forEach((id,k)=>{const d=document.createElement('div');d.className='stg';d.innerHTML=`<b>${k+1}</b><span>${MR.STAGES[id].jp}<small>${MR.STAGES[id].en}</small></span><button title="上へ">↑</button><button title="下へ">↓</button><button title="外す">✕</button>`;
+ ST.stages.forEach((id,k)=>{const st=MR.STAGES[id];const d=document.createElement('div');d.className='stg';d.innerHTML=`<b>${k+1}</b><span>${st.jp}${st.isNew?' <i>NEW</i>':''}<small>${st.en}</small></span><button title="上へ">↑</button><button title="下へ">↓</button><button title="外す">✕</button>`;
    const [up,dn,rm]=d.querySelectorAll('button');up.onclick=()=>{if(k>0){[ST.stages[k-1],ST.stages[k]]=[ST.stages[k],ST.stages[k-1]];renderStageUI();invalidate();}};
    dn.onclick=()=>{if(k<ST.stages.length-1){[ST.stages[k+1],ST.stages[k]]=[ST.stages[k],ST.stages[k+1]];renderStageUI();invalidate();}};
    rm.onclick=()=>{if(ST.stages.length>1){ST.stages.splice(k,1);renderStageUI();invalidate();}};box.appendChild(d);});
- const add=$('#addStage');add.innerHTML='<option value="">＋ ステージを追加…</option>'+ALL_STAGES.map(id=>`<option value="${id}">${MR.STAGES[id].jp}（${MR.STAGES[id].en}）</option>`).join('');
+ $('#addStage').innerHTML='<option value="">＋ ステージを追加…</option>'+ALL_STAGES.map(id=>`<option value="${id}">${MR.STAGES[id].isNew?'★ ':''}${MR.STAGES[id].jp}（${MR.STAGES[id].en}）</option>`).join('');
  $('#stageInfo').textContent=`${ST.stages.length} ステージ`;}
-function invalidate(){ST.chosen=null;ST.results=[];$('#cands').innerHTML='<p class="hint">設定を変えたので、もう一度「レースを探す」を押してください。</p>';$('#textOut').innerHTML='';drawStill();}
+function invalidate(){stop();ST.chosen=null;ST.results=[];ST.TL=null;ST.audio=null;$('#cands').innerHTML='<p class="hint">設定を変えたので、もう一度「レースを探す」を押してください。</p>';$('#textOut').innerHTML='<p class="hint">レースを選ぶと自動で作成されます。</p>';$('#dl').innerHTML='';drawStill();}
+function softInvalidate(){stop();ST.TL=null;ST.audio=null;$('#dl').innerHTML='';drawStill();}
 // --- search ---
 let searching=false;
+function estLen(r){const slowOK=ST.slowmo&&r.gap<0.6&&(r.second-r.tS)<3.2;return Math.max(r.T,r.first+1.35)+(slowOK?(r.second-r.tS)*1.5:0)+2.5+(ST.endcard?3.5:0.35);}
 async function search(){if(searching)return;const rs=racers();if(rs.length<2){alert('出場者を2つ以上選んでください');return;}
- searching=true;const btn=$('#btnSearch');btn.disabled=true;const c=course();const N=ST.trials,maxT=ST.maxLen-3;const base=Math.floor(Math.random()*1e6);const out=[];
- for(let k=0;k<N;k++){const r=MR.simulate(c,rs.length,base+k,ST.elim,maxT);if(r.done)out.push(r);
-   $('#prog').style.width=`${(k+1)/N*100}%`;$('#progTxt').textContent=`${k+1} / ${N} レース試走（成立 ${out.length}）`;if(k%2==1)await new Promise(res=>setTimeout(res,0));}
+ stop();searching=true;const btn=$('#btnSearch');btn.disabled=true;const c=MR.buildCourse(ST.stages);const N=ST.trials,maxT=ST.maxLen;const base=Math.floor(Math.random()*1e6);const out=[];
+ for(let k=0;k<N;k++){const r=MR.simulate(c,rs.length,base+k,ST.elim,maxT);r.len=estLen(r);if(r.done&&r.len<=ST.maxLen)out.push(r);
+   $('#prog').style.width=`${(k+1)/N*100}%`;$('#progTxt').textContent=`${k+1} / ${N} レース試走（条件に合うもの ${out.length}）`;if(k%2==1)await new Promise(res=>setTimeout(res,0));}
  const score=r=>ST.prefer==='close'?(-r.gap*20+r.changes*0.5):(r.changes*2-r.gap*4);
  out.sort((a,b)=>score(b)-score(a));ST.results=out.slice(0,10);searching=false;btn.disabled=false;showCands();if(ST.results.length)choose(0);else $('#cands').innerHTML='<p class="hint">条件内で完走するレースが見つかりませんでした。ステージを減らすか、最大の長さを延ばしてください。</p>';}
-function showCands(){const rs=racers();$('#cands').innerHTML=`<table><thead><tr><th>#</th><th>優勝</th><th>2位との差</th><th>首位交代</th><th>動画の長さ</th></tr></thead><tbody>${ST.results.map((r,k)=>`<tr data-k="${k}" class="${ST.chosen===r?'sel':''}"><td>${k+1}</td><td>${rs[r.order[0]].emoji||''} ${rs[r.order[0]].name}</td><td>${r.gap.toFixed(2)}秒</td><td>${r.changes}回</td><td>${(r.T+3).toFixed(0)}秒</td></tr>`).join('')}</tbody></table>`;
+function showCands(){const rs=racers();$('#cands').innerHTML=`<table><thead><tr><th>#</th><th>優勝</th><th>2位との差</th><th>首位交代</th><th>長さ</th></tr></thead><tbody>${ST.results.map((r,k)=>`<tr data-k="${k}" class="${ST.chosen===r?'sel':''}"><td>${k+1}</td><td>${rs[r.order[0]].emoji||''} ${rs[r.order[0]].name}</td><td>${r.gap.toFixed(2)}秒${r.gap<0.6&&ST.slowmo&&(r.second-r.tS)<3.2?' 🎬':''}</td><td>${r.changes}回</td><td>約${r.len.toFixed(0)}秒</td></tr>`).join('')}</tbody></table><p class="hint">🎬＝ゴール前がスロー演出になる接戦</p>`;
  $('#cands').querySelectorAll('tr[data-k]').forEach(tr=>tr.onclick=()=>choose(+tr.dataset.k));}
-function choose(k){ST.chosen=ST.results[k];showCands();genText();drawStill();}
+function choose(k){stop();ST.chosen=ST.results[k];ST.TL=null;ST.audio=null;$('#dl').innerHTML='';showCands();genText();drawStill();}
 // --- text generation ---
 const cap=s=>s.charAt(0)+s.slice(1).toLowerCase();
-function genText(){const r=ST.chosen,rs=racers();if(!r)return;const w=rs[r.order[0]],s2=rs[r.order[1]];const isC=ST.mode==='country';const nm=x=>isC?cap(x.name==='USA'?'USA':x.name==='UK'?'UK':x.name):cap(x.name);
- const nmx=x=>(x.name==='USA'||x.name==='UK')?x.name:nm(x);
- const ems=rs.map(x=>x.emoji).join('');const stg=ST.stages.map(id=>MR.STAGES[id].en.toLowerCase());
- const hl=ST.stages.slice(0,4).map(id=>({bumpers:'bumpers',drum:'spin drums',pendulums:'pendulums',wheel:'a paddle wheel',gate:'a timed gate',trampolines:'trampolines',portals:'lucky portals',twindrums:'twin drums',windmills:'windmills',pegs:'a peg forest',split:'split paths',zigzag:'zigzags',steep:'steep drops'}[id]));
- const subj=isC?'country':'color';
+function genText(){const r=ST.chosen,rs=racers();if(!r)return;const w=rs[r.order[0]],s2=rs[r.order[1]];const isC=ST.mode==='country';
+ const nmx=x=>(x.name==='USA'||x.name==='UK')?x.name:cap(x.name);
+ const ems=rs.map(x=>x.emoji).join('');
+ const HL={bumpers:'bumpers',drum:'spin drums',pendulums:'pendulums',wheel:'a paddle wheel',gate:'a timed gate',trampolines:'trampolines',portals:'lucky portals',twindrums:'twin drums',windmills:'windmills',pegs:'a peg forest',split:'split paths',zigzag:'zigzags',steep:'steep drops',trapdoors:'trap doors',sliders:'sliding bumpers',conveyors:'fast & slow belts',flippers:'flippers',blender:'THE BLENDER'};
+ const hl=ST.stages.slice(0,4).map(id=>HL[id]);const subj=isC?'country':'color';const up=t=>t.charAt(0).toUpperCase()+t.slice(1);
  const title=`${ST.stages.length}-stage marble race${ST.elim?' (elimination)':''} — which ${subj} wins? ${isC?'🌍':'🎨'} #shorts #marblerace`;
- const desc=`${rs.length} ${isC?'countries':'marbles'}. ${ST.stages.length} stages. Only 1 winner.\n${(t=>t.charAt(0).toUpperCase()+t.slice(1))(hl.join(', '))}${ST.elim?' — and the last place is eliminated every stage!':'…'}\nPick your ${subj} BEFORE it starts 👇\n${ems}\n\nWhich ${subj} should join the next race? Comment below!\n\n#shorts #marblerace #marblerun ${isC?'#countryballs ':''}#satisfying #simulation`;
- const tags=['marble race','marble run',isC?'country marble race':'color marble race',`which ${subj} wins`,isC?'flag race':'color race',isC?'countries race':'marble race colors',...(ST.elim?['elimination marble race']:[]),...stg.slice(0,3).map(s=>'marble race '+s),...rs.slice(0,6).map(x=>nmx(x).toLowerCase()),'satisfying','simulation','shorts'];
- const pin=`${w.emoji||''} ${nmx(w)} won by ${r.gap.toFixed(2)}s over ${s2.emoji||''} ${nmx(s2)}${r.changes>=5?` — the lead changed ${r.changes} times 😱`:' 😱'}\nWhich stage was the craziest? 👇\nMost requested ${subj} joins the next race!`;
+ const desc=`${rs.length} ${isC?'countries':'marbles'}. ${ST.stages.length} stages. Only 1 winner.\n${up(hl.join(', '))}${ST.elim?' — and the last place is eliminated every stage!':'…'}\nPick your ${subj} BEFORE it starts 👇\n${ems}\n\nWhich ${subj} should join the next race? Comment below!\nSubscribe so you don't miss the next race 🔔\n\n#shorts #marblerace #marblerun ${isC?'#countryballs ':''}#satisfying #simulation`;
+ const tags=['marble race','marble run',isC?'country marble race':'color marble race',`which ${subj} wins`,isC?'flag race':'color race',isC?'countries race':'marble race colors',...(ST.elim?['elimination marble race']:[]),'marble race simulation','photo finish',...rs.slice(0,6).map(x=>nmx(x).toLowerCase()),'satisfying','simulation','shorts'];
+ const pin=`${w.emoji||''} ${nmx(w)} won by ${r.gap<0.005?'a hair':r.gap.toFixed(2)+'s'} over ${s2.emoji||''} ${nmx(s2)}${r.changes>=5?` — the lead changed ${r.changes} times 😱`:' 😱'}\nWhich ${subj} should race next? 👇 Most requested joins!\nSubscribe for the next race 🔔`;
  const blocks=[['タイトル',title],['説明文',desc],['タグ',[...new Set(tags)].join(', ')],['固定コメント',pin]];
  $('#textOut').innerHTML=blocks.map(([h,b],k)=>`<div class="tb"><div class="tbh"><h3>${h}</h3><button data-k="${k}">コピー</button></div><pre>${b.replace(/</g,'&lt;')}</pre></div>`).join('')+`<div class="tb"><div class="tbh"><h3>Markdown一式</h3><button data-k="all">コピー</button></div></div>`;
  const md=blocks.map(([h,b])=>`## ${h}\n\`\`\`\n${b}\n\`\`\``).join('\n\n');
  $('#textOut').querySelectorAll('button').forEach(bt=>bt.onclick=()=>{const txt=bt.dataset.k==='all'?md:blocks[+bt.dataset.k][1];navigator.clipboard.writeText(txt).then(()=>{bt.textContent='コピー済み';setTimeout(()=>bt.textContent='コピー',1200);});});}
-// --- playback / recording ---
-const cv=$('#cv'),g=cv.getContext('2d');let play=null;
-function newSession(seed){const c=course();return {c,race:new MR.Race(c,racers().length,seed,ST.elim),cam:-330,fi:0,pops:[],stage:null,stageF:0,elim:null,elimF:0,winF:null,resF:null};}
-function frame(P,draw=true){const {race,c}=P;const rs=racers();
- if(P.resF===null){for(let k=0;k<MR.SUB;k++)race.step(MR.DT);const ev=race.ev.splice(0);if(P.sink)P.sink(ev,P.fi);else AU.play(ev);
-   for(const e of ev){if(e.k==='bumper'){const q=c.circ.find(q=>q.x===e.x&&q.y===e.y);if(q)q.flash=1;}
-     if(e.k==='stage'){P.stage=`STAGE ${e.si+1}: ${e.name}`;P.stageF=P.fi;}
-     if(e.k==='elim'){P.elim=`${rs[e.i].name} ELIMINATED!`;P.elimF=P.fi;P.pops.push({x:e.x,y:e.y,life:1});}
-     if(e.k==='finish'&&e.v===1)P.winF=P.fi;}
-   for(const q of c.circ)if(q.flash)q.flash=Math.max(0,q.flash-0.15);
-   const live=race.m.filter(m=>!m.out&&m.fin===null);const lead=live.length?Math.max(...live.map(m=>m.y)):c.floor;
-   let tgt=race.order.length?c.floor+80-H:lead-1150;tgt=Math.max(-330,Math.min(tgt,c.floor+80-H));P.cam+=(tgt-P.cam)*0.12;
-   if(race.done())P.resF=P.fi;}
- for(const p of P.pops)p.life-=0.04;P.pops=P.pops.filter(p=>p.life>0);
- const ov={};if(P.fi>=18&&P.fi<40)ov.go=1;if(P.stage&&P.fi-P.stageF<45)ov.stage=P.stage;if(P.elim&&P.fi-P.elimF<40)ov.elim=P.elim;
- if(P.winF!==null&&P.fi-P.winF<75&&P.resF===null){const wi=race.order[0],w=rs[wi];const fm={};race.m.forEach(m=>fm[m.i]=m.fin);ov.win={text:`${w.name} WINS!`,col:w.main,sub:race.order.length>1?`by ${(fm[race.order[1]]-fm[wi]).toFixed(2)}s!`:''};}
- if(P.resF!==null){const rk=race.ranking();ov.results=rk.map(i=>{const m=race.m.find(mm=>mm.i===i);return {i,out:m.out,stage:m.outStage,time:(m.fin||0)-0.6};});ov.results.cta=ST.mode==='country'?'Did your country win? Comment below':'Did your color win? Comment below';}
- if(draw)render(g,{race,course:c,rk:race.ranking(),racers:rs,cam:P.cam,theme:THEMES[ST.theme],fi:P.fi,overlay:ov,pops:P.pops,title:ST.title,subtitle:subtitle()});
- P.fi++;return P.resF!==null&&P.fi-P.resF>=90;}
-function drawStill(){const P=newSession(ST.chosen?ST.chosen.seed:1);render(g,{race:P.race,course:P.c,racers:racers(),cam:-330,theme:THEMES[ST.theme],fi:0,overlay:{},pops:[],title:ST.title,subtitle:subtitle()});}
-function start(){if(!ST.chosen){alert('先に「レースを探す」で候補を選んでください');return;}stop();AU.init();AU.ctx.resume();const P=newSession(ST.chosen.seed);
- let last=performance.now(),acc=0;play={raf:0};
- const loop=now=>{acc+=Math.min(0.5,(now-last)/1000);last=now;let done=false,n=Math.floor(acc*30);acc-=n/30;
-   for(let k=0;k<n&&!done;k++)done=frame(P,k===n-1);if(done){play=null;return;}play.raf=requestAnimationFrame(loop);};
+// --- timeline + audio preparation ---
+async function prepare(){if(ST.TL&&ST.audio)return;setState('準備中：レースの全コマを計算しています…');await new Promise(r=>setTimeout(r,20));
+ const P=newSession(ST.chosen,sopts());P.log=[];let guard=0;while(!step(P)&&guard++<FPS*600){}
+ ST.TL={N:P.fi,log:P.log,winF:P.winF,resF:P.resF,finalF:P.finalF,slow:P.slowF,bgm:ST.bgm,vol:ST.vol,sfxVol:ST.sfxVol};
+ setState('準備中：BGMと効果音を合成しています…');await new Promise(r=>setTimeout(r,20));ST.audio=await buildAudio(ST.TL);
+ setState(`準備完了：${(ST.TL.N/FPS).toFixed(1)}秒（${ST.TL.N}コマ・60fps）`);}
+function setState(t){$('#recState').textContent=t;}
+// --- preview (audio-clock synced, fixed 60fps steps) ---
+const cv=$('#cv'),g=cv.getContext('2d');let play=null,actx=null;
+async function preview(record){if(!ST.chosen){alert('先に「レースを探す」で候補を選んでください');return;}stop();
+ actx=actx||new (window.AudioContext||window.webkitAudioContext)();await actx.resume();await prepare();
+ const P=newSession(ST.chosen,sopts()),S=drawState();const src=actx.createBufferSource();src.buffer=ST.audio;const gain=actx.createGain();gain.gain.value=$('#mute').checked?0:1;src.connect(gain).connect(actx.destination);
+ let rec=null,chunks=[];
+ if(record){const dest=actx.createMediaStreamDestination();src.connect(dest);const vs=cv.captureStream(60);const ms=new MediaStream([...vs.getVideoTracks(),...dest.stream.getAudioTracks()]);
+   const types=['video/mp4;codecs=avc1.640028,mp4a.40.2','video/mp4','video/webm;codecs=vp9,opus','video/webm'];const mime=types.find(t=>window.MediaRecorder&&MediaRecorder.isTypeSupported(t))||'';
+   rec=new MediaRecorder(ms,{mimeType:mime,videoBitsPerSecond:14_000_000});rec.ondataavailable=e=>e.data.size&&chunks.push(e.data);
+   rec.onstop=()=>{const type=rec.mimeType||mime||'video/webm';const blob=new Blob(chunks,{type});offerDownload(blob,type.includes('mp4')?'mp4':'webm');};rec.start(1000);setState('● 録画中（リアルタイム方式）… このタブを表示したままお待ちください');}
+ const t0=actx.currentTime+0.05;src.start(t0);play={raf:0,rec,src,done:false};
+ const loop=()=>{const target=Math.floor((actx.currentTime-t0)*FPS);let end=false;while(P.fi<=target&&!end)end=step(P);if(P.fi>0){P.fi--;draw(g,P,S);P.fi++;}
+   if(end){play.done=true;if(rec)setTimeout(()=>{rec.stop();setState('✓ 書き出し完了');},150);play=null;return;}play.raf=requestAnimationFrame(loop);};
  play.raf=requestAnimationFrame(loop);}
-let exporting=false;
+function stop(){if(play){cancelAnimationFrame(play.raf);try{play.src.stop();}catch(e){}if(play.rec&&play.rec.state!=='inactive'){play.rec.stop();setState('録画を中断しました');}play=null;}}
+function drawStill(){if(!ST.chosen){const P=newSession({seed:1,gap:9,second:0,tS:0},sopts());draw(g,P,drawState(false));return;}const P=newSession(ST.chosen,sopts());draw(g,P,drawState(false));}
+function offerDownload(blob,ext){const url=URL.createObjectURL(blob);const name=`marble_race_${ST.chosen.seed}.${ext}`;$('#dl').innerHTML=`<a class="btn primary" href="${url}" download="${name}">⬇ ${name} を保存（${(blob.size/1e6).toFixed(1)}MB）</a>`;window.__lastBlob=blob;}
+// --- frame-exact export: WebCodecs + MP4 ---
 async function pickCodecs(){
- if(!('VideoEncoder' in window)||!('AudioEncoder' in window))return null;
- const vbase={width:W,height:H,bitrate:12_000_000,framerate:30};
- for(const codec of ['avc1.640028','avc1.4d0028','avc1.42e028']){const v=await VideoEncoder.isConfigSupported({...vbase,codec,avc:{format:'avc'}}).catch(()=>({supported:false}));
-   if(v.supported){const a=await AudioEncoder.isConfigSupported({codec:'mp4a.40.2',sampleRate:48000,numberOfChannels:1,bitrate:160000}).catch(()=>({supported:false}));
-     if(a.supported)return {fmt:'mp4',v:{...vbase,codec,avc:{format:'avc'}},a:{codec:'mp4a.40.2',sampleRate:48000,numberOfChannels:1,bitrate:160000}};}}
- for(const codec of ['vp09.00.40.08','vp8']){const v=await VideoEncoder.isConfigSupported({...vbase,codec}).catch(()=>({supported:false}));
-   if(v.supported){const a=await AudioEncoder.isConfigSupported({codec:'opus',sampleRate:48000,numberOfChannels:1,bitrate:128000}).catch(()=>({supported:false}));
-     if(a.supported)return {fmt:'webm',v:{...vbase,codec},a:{codec:'opus',sampleRate:48000,numberOfChannels:1,bitrate:128000}};}}
- return null;}
-async function exportVideo(){
- if(!ST.chosen){alert('先に「レースを探す」で候補を選んでください');return;}if(exporting)return;stop();
- const cfg=await pickCodecs();if(!cfg){exportRealtime();return;}
- exporting=true;$('#btnRec').disabled=true;$('#dl').innerHTML='';const st=$('#recState');
- try{
-  const isMp4=cfg.fmt==='mp4';
-  const muxer=isMp4?new Mp4Muxer.Muxer({target:new Mp4Muxer.ArrayBufferTarget(),video:{codec:'avc',width:W,height:H,frameRate:30},audio:{codec:'aac',sampleRate:48000,numberOfChannels:1},fastStart:'in-memory'})
-                   :new WebMMuxer.Muxer({target:new WebMMuxer.ArrayBufferTarget(),video:{codec:cfg.v.codec.startsWith('vp09')?'V_VP9':'V_VP8',width:W,height:H,frameRate:30},audio:{codec:'A_OPUS',sampleRate:48000,numberOfChannels:1}});
-  let err=null;const ve=new VideoEncoder({output:(c,m)=>muxer.addVideoChunk(c,m),error:e=>err=e});ve.configure(cfg.v);
-  const log=[];const P=newSession(ST.chosen.seed);P.sink=(ev,fi)=>{if(ev.length)log.push([fi,ev]);};
-  const est=Math.round((ST.chosen.T+3)*30);let fi=0,done=false;const t0=performance.now();
-  while(!done){done=frame(P,true);const vf=new VideoFrame(cv,{timestamp:Math.round(fi*1e6/30),duration:Math.round(1e6/30)});ve.encode(vf,{keyFrame:fi%60===0});vf.close();fi++;
-    if(err)throw err;
-    while(ve.encodeQueueSize>6)await new Promise(r=>setTimeout(r,2));
-    if(fi%6===0){const pct=Math.min(99,fi/est*100);st.textContent=`書き出し中… ${pct.toFixed(0)}%（映像 ${fi}/${est}コマ）`;await new Promise(r=>setTimeout(r,0));}}
-  await ve.flush();ve.close();
-  st.textContent='音声を合成中…';
-  const dur=fi/30,sr=48000,oc=new OfflineAudioContext(1,Math.ceil(dur*sr),sr),mg=oc.createGain();mg.gain.value=0.6;mg.connect(oc.destination);const nb=makeNoise(oc);
-  for(const [f,ev] of log)sfx(oc,mg,nb,ev,f/30);
-  const buf=await oc.startRendering();const pcm=buf.getChannelData(0);
-  const ae=new AudioEncoder({output:(c,m)=>muxer.addAudioChunk(c,m),error:e=>err=e});ae.configure(cfg.a);
-  const CH=4800;for(let i=0;i<pcm.length;i+=CH){const n=Math.min(CH,pcm.length-i);const ad=new AudioData({format:'f32-planar',sampleRate:sr,numberOfFrames:n,numberOfChannels:1,timestamp:Math.round(i/sr*1e6),data:pcm.slice(i,i+n)});ae.encode(ad);ad.close();if(err)throw err;}
-  await ae.flush();ae.close();muxer.finalize();
-  const blob=new Blob([muxer.target.buffer],{type:isMp4?'video/mp4':'video/webm'});const url=URL.createObjectURL(blob);const name=`marble_race_${ST.chosen.seed}.${cfg.fmt}`;
-  $('#dl').innerHTML=`<a class="btn primary" href="${url}" download="${name}">⬇ ${name} を保存（${(blob.size/1e6).toFixed(1)}MB）</a>`;
-  st.textContent=`✓ 書き出し完了（${dur.toFixed(1)}秒の動画を ${((performance.now()-t0)/1000).toFixed(0)}秒で作成・常に正しい速さ）`;
- }catch(e){console.error(e);st.textContent='この環境では高速書き出しに失敗したため、録画方式で書き出します…';exporting=false;$('#btnRec').disabled=false;exportRealtime();return;}
- exporting=false;$('#btnRec').disabled=false;}
-function exportRealtime(){ // fallback: MediaRecorder, sim advances by wall-clock so speed stays correct
- stop();AU.init();AU.ctx.resume();const P=newSession(ST.chosen.seed);const chunks=[];
- const ms=new MediaStream([...cv.captureStream(30).getVideoTracks(),...AU.dest.stream.getAudioTracks()]);
- const types=['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/mp4','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'];const mime=types.find(t=>window.MediaRecorder&&MediaRecorder.isTypeSupported(t))||'';
- const rec=new MediaRecorder(ms,{mimeType:mime,videoBitsPerSecond:10_000_000});rec.ondataavailable=e=>e.data.size&&chunks.push(e.data);
- rec.onstop=()=>{const type=rec.mimeType||mime||'video/webm';const blob=new Blob(chunks,{type});const ext=type.includes('mp4')?'mp4':'webm';const name=`marble_race_${ST.chosen.seed}.${ext}`;$('#dl').innerHTML=`<a class="btn primary" href="${URL.createObjectURL(blob)}" download="${name}">⬇ ${name} を保存（${(blob.size/1e6).toFixed(1)}MB）</a>`;};
- rec.start(1000);$('#recState').textContent='● 録画方式で書き出し中…（このタブを前面のまま）';
- let last=performance.now(),acc=0;play={raf:0,rec};
- const loop=now=>{acc+=Math.min(0.5,(now-last)/1000);last=now;let done=false,n=Math.floor(acc*30);acc-=n/30;
-   for(let k=0;k<n&&!done;k++)done=frame(P,k===n-1);if(done){rec.stop();$('#recState').textContent='✓ 書き出し完了';play=null;return;}play.raf=requestAnimationFrame(loop);};
- play.raf=requestAnimationFrame(loop);}
-function stop(){if(play){cancelAnimationFrame(play.raf);if(play.rec&&play.rec.state!=='inactive'){play.rec.stop();$('#recState').textContent='録画を中断しました';}play=null;}}
+ const vc=[['avc1.64002A','avc'],['avc1.640033','avc'],['avc1.4D402A','avc'],['vp09.00.41.08','vp9'],['av01.0.09M.08','av1']];let v=null,a=null;
+ for(const [codec,m] of vc){const cfg={codec,width:W,height:H,bitrate:14_000_000,framerate:FPS,...(m==='avc'?{avc:{format:'avc'}}:{})};try{const s=await VideoEncoder.isConfigSupported(cfg);if(s.supported){v={cfg,m};break;}}catch(e){}}
+ if(window.AudioEncoder)for(const [codec,m] of [['mp4a.40.2','aac'],['opus','opus']]){const cfg={codec,sampleRate:48000,numberOfChannels:2,bitrate:192000};try{const s=await AudioEncoder.isConfigSupported(cfg);if(s.supported){a={cfg,m};break;}}catch(e){}}
+ return {v,a};}
+let exporting=false;
+async function exportVideo(){if(!ST.chosen){alert('先に「レースを探す」で候補を選んでください');return;}if(exporting)return;stop();
+ if(!window.VideoEncoder||!window.Mp4Muxer){setState('このブラウザはコマ単位の書き出しに非対応のため、リアルタイム録画で書き出します');return preview(true);}
+ const {v,a}=await pickCodecs();if(!v){setState('対応する動画形式が見つからないため、リアルタイム録画で書き出します');return preview(true);}
+ exporting=true;$('#btnRec').disabled=true;$('#dl').innerHTML='';
+ try{await prepare();const TL=ST.TL,buf=ST.audio;
+  const muxer=new Mp4Muxer.Muxer({target:new Mp4Muxer.ArrayBufferTarget(),video:{codec:v.m,width:W,height:H,frameRate:FPS},...(a?{audio:{codec:a.m,numberOfChannels:2,sampleRate:48000}}:{}),fastStart:'in-memory',firstTimestampBehavior:'offset'});
+  let err=null;
+  if(a){const ae=new AudioEncoder({output:(c,m)=>muxer.addAudioChunk(c,m),error:e=>err=e});ae.configure(a.cfg);
+   const n=Math.min(buf.length,Math.round(TL.N/FPS*48000)),L=buf.getChannelData(0),Rr=buf.getChannelData(1),CH=4800;
+   for(let i=0;i<n;i+=CH){const m=Math.min(CH,n-i),d=new Float32Array(m*2);d.set(L.subarray(i,i+m),0);d.set(Rr.subarray(i,i+m),m);
+     const ad=new AudioData({format:'f32-planar',sampleRate:48000,numberOfFrames:m,numberOfChannels:2,timestamp:Math.round(i/48000*1e6),data:d});ae.encode(ad);ad.close();}
+   await ae.flush();ae.close();}
+  const ve=new VideoEncoder({output:(c,m)=>muxer.addVideoChunk(c,m),error:e=>err=e});ve.configure(v.cfg);
+  const P=newSession(ST.chosen,sopts()),S=drawState();const t0=performance.now();
+  for(let f=0;f<TL.N;f++){if(err)throw err;step(P);P.fi--;draw(g,P,S);P.fi++;
+   const vf=new VideoFrame(cv,{timestamp:Math.round(f*1e6/FPS),duration:Math.round(1e6/FPS)});ve.encode(vf,{keyFrame:f%120===0});vf.close();
+   if(ve.encodeQueueSize>6)await new Promise(r=>{const chk=()=>ve.encodeQueueSize<=2?r():setTimeout(chk,2);chk();});
+   if(f%10===0){const p=(f+1)/TL.N;$('#prog2').style.width=`${p*100}%`;const el=(performance.now()-t0)/1000;setState(`書き出し中 ${f+1} / ${TL.N} コマ（残り約${Math.max(0,el/p-el).toFixed(0)}秒）`);await new Promise(r=>setTimeout(r,0));}}
+  await ve.flush();ve.close();if(err)throw err;muxer.finalize();
+  const blob=new Blob([muxer.target.buffer],{type:'video/mp4'});$('#prog2').style.width='100%';offerDownload(blob,'mp4');
+  setState(`✓ 書き出し完了：MP4・60fps・${(TL.N/FPS).toFixed(1)}秒（映像 ${v.m.toUpperCase()}${a?` / 音声 ${a.m.toUpperCase()}`:' / 音声なし'}）`);}
+ catch(e){console.error(e);setState('書き出しに失敗しました：'+(e.message||e)+'。リアルタイム録画を試してください。');}
+ finally{exporting=false;$('#btnRec').disabled=false;}}
 // --- wire ---
 function wire(){
- document.querySelectorAll('input[name=mode]').forEach(r=>r.onchange=()=>{ST.mode=r.value;if(ST.mode==='color'&&ST.title==='Which country wins?')ST.title='Which color wins?';if(ST.mode==='country'&&ST.title==='Which color wins?')ST.title='Which country wins?';$('#title').value=ST.title;renderRacerUI();invalidate();});
+ document.querySelectorAll('input[name=mode]').forEach(r=>r.onchange=()=>{ST.mode=r.value;
+   const sw=(a,b)=>{if(ST.title===a)ST.title=b;};if(ST.mode==='color'){sw('Which country wins?','Which color wins?');if(ST.pickText==='PICK YOUR COUNTRY!')ST.pickText='PICK YOUR COLOR!';}else{sw('Which color wins?','Which country wins?');if(ST.pickText==='PICK YOUR COLOR!')ST.pickText='PICK YOUR COUNTRY!';}
+   $('#title').value=ST.title;$('#pick').value=ST.pickText;renderRacerUI();invalidate();});
  $('#addStage').onchange=e=>{if(e.target.value){ST.stages.push(e.target.value);renderStageUI();invalidate();}};
- $('#shuffle').onclick=()=>{const n=Math.max(3,ST.stages.length);const ids=[...ALL_STAGES].filter(i=>i!=='zigzag'&&i!=='steep').sort(()=>Math.random()-0.5);ST.stages=ids.slice(0,Math.min(n,ids.length));renderStageUI();invalidate();};
+ $('#shuffle').onclick=()=>{const n=Math.max(4,ST.stages.length);const fresh=ALL_STAGES.filter(i=>MR.STAGES[i].isNew).sort(()=>Math.random()-0.5);const old=ALL_STAGES.filter(i=>!MR.STAGES[i].isNew&&i!=='zigzag'&&i!=='steep').sort(()=>Math.random()-0.5);
+   const pick=fresh.slice(0,Math.min(fresh.length,Math.ceil(n/2))).concat(old).slice(0,n);ST.stages=pick.sort(()=>Math.random()-0.5);renderStageUI();invalidate();};
  $('#elim').onchange=e=>{ST.elim=e.target.checked;invalidate();};
- $('#theme').onchange=e=>{ST.theme=e.target.value;drawStill();};
- $('#title').oninput=e=>{ST.title=e.target.value;drawStill();};
+ $('#theme').innerHTML=Object.entries(THEMES).map(([k,v])=>`<option value="${k}">${v.name}</option>`).join('');
+ $('#theme').onchange=e=>{ST.theme=e.target.value;softInvalidate();};
+ $('#title').oninput=e=>{ST.title=e.target.value;softInvalidate();};
+ $('#pick').oninput=e=>{ST.pickText=e.target.value;softInvalidate();};
+ $('#endText').oninput=e=>{ST.endText=e.target.value;softInvalidate();};
+ $('#slowmo').onchange=e=>{ST.slowmo=e.target.checked;softInvalidate();if(ST.results.length){ST.results.forEach(r=>r.len=estLen(r));showCands();}};
+ $('#endcard').onchange=e=>{ST.endcard=e.target.checked;softInvalidate();if(ST.results.length){ST.results.forEach(r=>r.len=estLen(r));showCands();}};
+ $('#loop').onchange=e=>{ST.loop=e.target.checked;softInvalidate();};
+ $('#bgm').onchange=e=>{ST.bgm=e.target.checked;ST.audio=null;ST.TL=null;};
+ $('#vol').oninput=e=>{ST.vol=+e.target.value/100;ST.audio=null;ST.TL=null;};
  $('#trials').onchange=e=>ST.trials=Math.max(10,Math.min(400,+e.target.value||60));
  $('#maxLen').onchange=e=>{ST.maxLen=Math.max(20,Math.min(600,+e.target.value||58));};
- $('#prefer').onchange=e=>{ST.prefer=e.target.value;if(ST.results.length){search();}};
- $('#btnSearch').onclick=search;$('#btnPlay').onclick=()=>start();$('#btnStop').onclick=stop;$('#btnRec').onclick=exportVideo;
- $('#mute').onchange=e=>AU.muted=e.target.checked;
- $('#theme').innerHTML=Object.entries(THEMES).map(([k,v])=>`<option value="${k}">${v.name}</option>`).join('');
+ $('#prefer').onchange=e=>{ST.prefer=e.target.value;if(ST.results.length)search();};
+ $('#btnSearch').onclick=search;$('#btnPlay').onclick=()=>preview(false);$('#btnStop').onclick=stop;$('#btnRec').onclick=exportVideo;$('#btnRT').onclick=()=>preview(true);
+ $('#mute').onchange=()=>{};
  renderRacerUI();renderStageUI();drawStill();}
 wire();
 </script>
